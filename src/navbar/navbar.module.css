@@ -1,0 +1,103 @@
+.wrapper {
+  background-color: black;
+  display: flex;
+  flex-flow: column;
+}
+
+.container {
+  max-width: 1024px;
+  margin: auto;
+}
+
+.extraNav {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-areas: ". . . . . . register register register . telephone telephone";
+  height: 40px;
+  align-items: center;
+  text-transform: capitalize;
+  font-weight: lighter;
+}
+
+.register {
+  grid-area: register;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  list-style: none;
+  margin: 0;
+  color: white;
+}
+
+.signIn {
+  border: 1px solid white;
+  text-align: center;
+  margin-right: 1rem;
+}
+
+.signUp {
+  white-space: nowrap;
+  max-width: 13ch;
+  padding: 0 1rem;
+  overflow: hidden;
+}
+
+.tel {
+  font-size: 1rem;
+  color: gold;
+  grid-area: telephone;
+  font-weight: bolder;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.tel a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.mainNav {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  text-transform: capitalize;
+  color: white;
+  align-items: center;
+}
+
+.nav {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  flex-grow: 2;
+  font-weight: lighter;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.logoContainer {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.logo {
+  grid-area: logo;
+  text-align: center;
+}
+
+.cc7 {
+  font-size: 1.2rem;
+  font-weight: bolder;
+}
+
+.shoppingCart {
+  grid-area: shopping-cart;
+  font-size: 1.7rem;
+  font-weight: bold;
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+}
