@@ -1,0 +1,84 @@
+.container {
+  margin: 3rem;
+}
+
+.container h3 {
+  margin: .5rem 1rem;
+}
+
+@media screen and (max-width: 500px) {
+  .container {
+    margin: 3rem 0;
+  }
+}
+
+.imageContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.image {
+  border-radius: 5px;
+  width: 100%;
+  position: relative;
+}
+
+@media screen and (max-width: 500px) {
+  .image{
+    border-radius: 0;
+  }
+}
+
+.text {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.712);
+  padding: 5rem;
+  top: 0;
+  color: white;
+  opacity: 0;
+  transition: 1s;
+  text-align: justify;
+}
+
+.text p {
+  width: 100%;
+}
+
+.btns {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.wishlist,
+.add2cart {
+  text-transform: capitalize;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  box-shadow: 1px 1px 10px black;
+  width: 8rem;
+  height: 3rem;
+}
+
+.wishlist {
+  background-color: chocolate;
+}
+
+.add2cart {
+  background-color: rgb(41, 128, 0);
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: .1rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
