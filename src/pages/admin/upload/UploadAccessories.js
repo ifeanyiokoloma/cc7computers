@@ -135,7 +135,7 @@ const UploadAccessories = () => {
   const handleChange = (e) => {
     if (name && brand && model) {
       const id = `${name}-${brand}-${model}`.replace(/\s+/g, "");
-      setUploads((newUpload) => ({ ...newUpload, id, type: "accessory" }));
+      setUploads((newUpload) => ({ ...newUpload, id, type: "accessory", timestamp: Date.now() }));
     }
     const element = e.target;
     if (element.type === "text" || element.type === "number") {

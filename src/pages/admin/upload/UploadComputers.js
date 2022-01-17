@@ -136,7 +136,7 @@ const UploadComputers = () => {
   const handleChange = (e) => {
     if (brand && model) {
       const id = `${brand}-${model}`.replace(/\s+/g, "");
-      setUploads({ ...uploads, id, type: "computer" });
+      setUploads({ ...uploads, id, type: "computer", timestamp: Date.now() });
     }
     const element = e.target;
     if (element.type === "text" || element.type === "number") {
