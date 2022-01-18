@@ -1,0 +1,42 @@
+.nav {
+  display: flex;
+  flex-flow: column;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(85, 84, 84);
+}
+
+.active {
+  border-bottom: 2px solid var(--pri-color);
+  color: var(--pri-color);
+  transition: .2s;
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: flex-start;
+  width: 50px;
+  position: relative;
+}
+
+.logo {
+  grid-area: logo;
+  text-align: center;
+  width: 100%;
+}
+
+.shoppingCart {
+  grid-area: shopping-cart;
+  font-size: 2rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+
+.searchIcon {
+  cursor: pointer;
+  font-size: 1.7rem;
+}
