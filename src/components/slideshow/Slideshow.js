@@ -5,20 +5,29 @@ import useAdvancedFetch from "../../hooks/useAdvancedFetch";
 import { Paper, Skeleton } from "@mui/material";
 
 const Slideshow = () => {
-  const [computers] = useAdvancedFetch("products", "computer", "timestamp", 5, []);
+  const [computers] = useAdvancedFetch(
+    "products",
+    "computer",
+    "timestamp",
+    5,
+    []
+  );
   return (
     <div className={styles.container}>
-      <Paper sx={{ padding: "1rem", bgcolor: "#2e2fe3", color: "white", borderRadius: 0 }} elevation={2}>
-        <h3>Just Arrived: Computers</h3>
-      </Paper>
       {computers.length > 0 ? (
         <Splide
           options={{
+            mediaQuery: "max",
+            breakpoints: {
+              500: {
+                height: "50%",
+              },
+            },
             rewind: true,
             autoplay: true,
             width: "100%",
             gap: "1rem",
-            height: "50vh",
+            height: "80vh",
             pauseOnHover: true,
             speed: 2000,
             interval: 4000,
@@ -64,7 +73,7 @@ const Slideshow = () => {
         </Splide>
       ) : (
         <Skeleton
-          sx={{ bgcolor: "black", borderRadius: "5px" }}
+          sx={{ bgcolor: "black"}}
           variant="rectangular"
           width="100%"
           height="80vh"
