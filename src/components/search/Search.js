@@ -2,7 +2,6 @@ import styles from "./search.module.css";
 import { BsSearch } from "react-icons/bs";
 import { GrClose } from "react-icons/gr";
 import { AnimatePresence, motion } from "framer-motion";
-import { useLocation, useNavigate } from "react-router-dom";
 
 const Search = ({ isSearch, handleTyped, closeSearch }) => {
   const handleSubmit = (e) => {

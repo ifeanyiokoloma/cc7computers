@@ -30,7 +30,7 @@ const Navbar = ({ isSearch, setIsSearch }) => {
     const typed = e.target.value;
     filtered = products.filter((product) => {
       if (typed === "") {
-        setDialogue((newDialogue) => (newDialogue = noSearch));
+        return setDialogue((newDialogue) => (newDialogue = noSearch));
       } else if (
         product.brand.toLowerCase().includes(typed.toLowerCase()) ||
         product.model.toLowerCase().includes(typed.toLowerCase()) ||
@@ -39,7 +39,7 @@ const Navbar = ({ isSearch, setIsSearch }) => {
       ) {
         return product;
       } else {
-        setDialogue(
+        return setDialogue(
           (newDialogue) =>
             (newDialogue = "no product's name, brand, model or type found")
         );

@@ -12,10 +12,10 @@ import { db } from "../firebase/FirebaseApp";
 const useAdvancedFetch = (dir, productType, order, reach, initialValue) => {
   const [data, setData] = useState(initialValue);
 
-  let unSubcribe;
-
+  
   useEffect(() => {
-    let q;
+    let unSubcribe, q;
+
     if (reach && productType) {
       console.info("rc && pt");
       q = query(
@@ -47,6 +47,7 @@ const useAdvancedFetch = (dir, productType, order, reach, initialValue) => {
     return () => {
       unSubcribe();
     };
+    // eslint-disable-next-line
   }, []);
 
   return [data];

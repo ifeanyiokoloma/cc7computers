@@ -2,7 +2,7 @@ import styles from "./slideshow.module.css";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
 import useAdvancedFetch from "../../hooks/useAdvancedFetch";
-import { Paper, Skeleton } from "@mui/material";
+import { Skeleton } from "@mui/material";
 import { Link } from "react-router-dom";
 
 const Slideshow = ({ itemType, dir, order, limit, header }) => {

@@ -5,9 +5,9 @@ import { db } from "../firebase/FirebaseApp";
 const useFetchLive = (dir, initialValue) => {
   const [data, setData] = useState(initialValue);
 
-  let unSubcribe;
-
+  
   useEffect(() => {
+    let unSubcribe;
     const q = query(collection(db, dir));
     unSubcribe = onSnapshot(q, (querySnapshot) => {
       const newData = querySnapshot.docs.map((doc) => {
@@ -16,9 +16,9 @@ const useFetchLive = (dir, initialValue) => {
       setData((item) => (item = [...newData]));
     });
     return () => {
-      unSubcribe()
-    }
-    
+      unSubcribe();
+    };
+    // eslint-disable-next-line
   }, []);
 
   return [data];

@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { employees } from "../../data/data";
 import styles from "./footer.module.css";
 
 const Footer = () => {

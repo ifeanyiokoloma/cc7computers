@@ -1,5 +1,4 @@
 import Footer from "./components/footer/Footer";
-import styles from "./app.module.css";
 import Navbar from "./components/navbar/Navbar";
 import Pages from "./pages/Pages";
 import "./cors.json";
