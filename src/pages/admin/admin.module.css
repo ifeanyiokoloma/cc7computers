@@ -1,0 +1,40 @@
+.container {
+  padding: 1rem;
+  overflow: auto;
+}
+
+.header {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.nav a {
+  font-size: 1rem;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 0.5rem;
+}
+
+.active {
+  border: none !important;
+  background-color: var(--pri-color);
+  color: white;
+  transition: 0.5s;
+}
+
+.nav a:hover {
+  border: none !important;
+  background-color: var(--pri-color);
+  color: white;
+  transition: 0.5s;
+}

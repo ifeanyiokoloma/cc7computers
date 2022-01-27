@@ -1,7 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { SearchContext } from "../../WebContext";
 import styles from "./search.module.css";
 
 const SearchResult = ({ filteredProducts, closeSearch, dialogue }) => {
@@ -22,7 +20,7 @@ const SearchResult = ({ filteredProducts, closeSearch, dialogue }) => {
                       closeSearch();
                     }}
                   >
-                    <Link to={`/shop/${product.id}`}>
+                    <Link to={`/shop/${product.type}/${product.id}`}>
                       <div
                         key={`${product.id}`}
                         className={styles.imgContainer}

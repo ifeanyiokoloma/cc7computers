@@ -1,0 +1,109 @@
+.container {
+  margin: 3rem;
+}
+
+@media screen and (max-width: 800px) {
+  .container {
+    margin: 0;
+  }
+}
+
+.content {
+  display: flex;
+  flex-flow: row;
+}
+
+@media screen and (max-width: 800px) {
+  .content {
+    flex-flow: column;
+  }
+}
+
+.container h1 {
+  text-transform: uppercase;
+  font-weight: bolder;
+  font-size: 3rem;
+}
+
+@media screen and (max-width: 800px) {
+  .container h1 {
+    margin: 1rem;
+    font-size: 2rem;
+  }
+}
+
+.imgContainer {
+  width: 50%;
+}
+
+@media screen and (max-width: 800px) {
+  .imgContainer {
+    width: 100%
+  }
+}
+
+.imgContainer img {
+  width: 100%;
+}
+
+.descContainer {
+  width: 50%;
+  padding: 0 3rem;
+}
+
+@media screen and (max-width: 800px) {
+  .descContainer {
+    width: 100%;
+    padding: 3rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .descContainer {
+    width: 100%;
+    padding: 1rem;
+  }
+}
+
+.desc p span {
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.desc p {
+  text-transform: capitalize;
+  font-size: 1rem;
+}
+
+.desc > h6 {
+  font-size: 1.5rem;
+}
+
+.btns {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+}
+
+.wishlist,
+.add2cart {
+  border: none;
+  color: white;
+  width: 8rem;
+  height: 3rem;
+}
+
+.wishlist {
+  background-color: chocolate;
+}
+
+.add2cart {
+  background-color: rgb(41, 128, 0);
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: 0.1rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+}

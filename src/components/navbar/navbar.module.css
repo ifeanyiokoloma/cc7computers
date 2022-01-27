@@ -3,6 +3,25 @@
   flex-flow: column;
 }
 
+.content {
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid black;
+}
+
+.navList {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-transform: capitalize;
+  list-style: none;
+  width: 80%;
+  margin: 0;
+}
+
 a {
   text-decoration: none;
   color: rgb(85, 84, 84);
@@ -11,20 +30,7 @@ a {
 .active {
   border-bottom: 2px solid var(--pri-color);
   color: var(--pri-color);
-  transition: .2s;
-}
-
-.logoContainer {
-  display: flex;
-  justify-content: flex-start;
-  width: 50px;
-  position: relative;
-}
-
-.logo {
-  grid-area: logo;
-  text-align: center;
-  width: 100%;
+  transition: 0.2s;
 }
 
 .shoppingCart {
@@ -36,7 +42,48 @@ a {
   cursor: pointer;
 }
 
-.searchIcon {
-  cursor: pointer;
-  font-size: 1.7rem;
+.menu {
+  display: none;
+}
+
+@media screen and (max-width: 800px) {
+  .hamburgerMenu {
+    display: inline-block;
+  }
+
+  .menu {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .navList {
+    display: none;
+  }
+
+  .mobileNav {
+    flex-flow: column;
+    justify-content: space-evenly;
+    list-style: none;
+    text-transform: capitalize;
+    padding: 0;
+    margin: 0;
+  }
+
+  .mobileNav li {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    text-align: center;
+  }
+  
+  .mobileNav li a {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .mobileNav {
+    width: 100%;
+  }
 }

@@ -4,7 +4,7 @@ import styles from "./hero.module.css";
 
 const Hero = () => {
   return (
-    <div className={styles.hero}>
+    <section className={styles.container}>
       <picture>
         <source
           className={styles.img}
@@ -31,8 +31,8 @@ const Hero = () => {
           alt="Computer Operator"
         />
       </picture>
-      <div className={styles.container}>
-        <div className={styles.text}>
+      <div className={styles.content}>
+        <article className={styles.text}>
           <h1>Your Computer Support Center</h1>
           <p>
             CC7 Computers offers everything computer related: computer sales,
@@ -42,9 +42,9 @@ const Hero = () => {
             <button className={styles.shop}><Link to="/shop">shop</Link></button>
             <button className={styles.contact}><Link to="/contact">contact us</Link></button>
           </div>
-        </div>
+        </article>
       </div>
-    </div>
+    </section>
   );
 };
 

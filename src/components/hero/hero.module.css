@@ -1,7 +1,13 @@
-.hero {
-  height: calc(100vh - 60px);
+.container {
+  height: calc(100vh - 120px);
   position: relative;
-  margin-bottom: 3rem;
+  margin-bottom: 60px;
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    height: calc(100vh - 60px);
+  }
 }
 
 .img {
@@ -9,12 +15,12 @@
   width: 100%;
 }
 
-.container {
+.content {
   position: absolute;
   height: 100%;
   width: 100%;
   top: 0;
-  background-color: rgba(0, 0, 0, 0.699);
+  background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,12 +42,18 @@
   font-weight: lighter;
 }
 
+@media screen and (max-width: 600px) {
+  .text p {
+    font-size: 1rem;
+    letter-spacing: .1rem;
+  }
+}
+
 .buttons {
   display: flex;
   flex-flow: row;
   justify-content: center;
   gap: 1rem;
-  margin-top: 1rem;
 }
 
 .contact,
@@ -52,7 +64,12 @@
   box-shadow: 1px 1px 5px black;
   text-transform: capitalize;
   width: 120px;
-  height: 50px;
+}
+
+@media screen and (max-width: 600px) {
+  .contact, .shop {
+    padding: .3rem;
+  }
 }
 
 .shop {

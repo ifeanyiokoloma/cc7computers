@@ -4,21 +4,18 @@ import { BsCart3, BsSearch } from "react-icons/bs";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Search from "../search/Search";
-import cc7Logo from "../../data/images/cc7.jpg";
 import { links } from "../../data/data";
 import { AnimatePresence, motion } from "framer-motion";
 import SearchResult from "../search/SearchResult";
 import useFetchLive from "../../hooks/useFetchLive";
+import HamburgerIcon from "../HamburgerIcon/HamburgerIcon";
+import Logo from "../logo/Logo";
 
 const Navbar = ({ isSearch, setIsSearch }) => {
   const [mobileNav, setMobileNav] = useState(false);
 
   const activateSearch = (e) => {
     setIsSearch((search) => (search = true));
-  };
-
-  const toggleHamburger = () => {
-    return setMobileNav(!mobileNav);
   };
 
   // Search Functionalities
@@ -61,21 +58,16 @@ const Navbar = ({ isSearch, setIsSearch }) => {
 
   return (
     <nav className={styles.nav}>
-      <div className="nav-row">
+      <div className={styles.content}>
         <AnimatePresence exitBeforeEnter>
           {!isSearch && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ ease: "easeInOut", delay: 0.5 }}
-              // style={{ display: isSearch && "none" }}
               className={styles.logoContainer}
             >
-              <NavLink to="/">
-                <span>
-                  <img className={styles.logo} src={cc7Logo} alt="cc7 logo" />
-                </span>
-              </NavLink>
+              <Logo />
             </motion.div>
           )}
           {!isSearch && (
@@ -83,37 +75,18 @@ const Navbar = ({ isSearch, setIsSearch }) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ ease: "easeInOut", delay: 0.5 }}
-              // style={{ display: isSearch && "none" }}
-              className="menu"
+              className={styles.menu}
             >
-              <div
-                className={styles.searchIcon}
+              <BsSearch
                 onClick={() => activateSearch()}
-              >
-                <BsSearch />
-              </div>
-              <div className="hamburger-menu" onClick={toggleHamburger}>
-                <div
-                  style={{
-                    transform: mobileNav
-                      ? "rotate(-45deg) translate(-9px, 6px)"
-                      : "unset",
-                  }}
-                  className="bar1"
-                ></div>
-                <div
-                  style={{ opacity: mobileNav ? 0 : "unset" }}
-                  className="bar2"
-                ></div>
-                <div
-                  style={{
-                    transform: mobileNav
-                      ? "rotate(45deg) translate(-8px, -8px)"
-                      : "unset",
-                  }}
-                  className="bar3"
-                ></div>
-              </div>
+                size="1.7rem"
+                style={{ cursor: "pointer" }}
+              />
+              <HamburgerIcon
+                setMenu={setMobileNav}
+                isMenu={mobileNav}
+                bgColor={"black"}
+              />
             </motion.div>
           )}
           {!isSearch && (
@@ -121,7 +94,7 @@ const Navbar = ({ isSearch, setIsSearch }) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ ease: "easeInOut", delay: 0.5 }}
-              className="nav-list"
+              className={styles.navList}
             >
               {links.map((link) => (
                 <>
@@ -137,11 +110,12 @@ const Navbar = ({ isSearch, setIsSearch }) => {
                   </li>
                 </>
               ))}
-              <li
-                className={styles.searchIcon}
-                onClick={() => activateSearch()}
-              >
-                <BsSearch />
+              <li>
+                <BsSearch
+                  size="1.7rem"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => activateSearch()}
+                />
               </li>
               <li className={styles.shoppingCart}>
                 <BsCart3 />
@@ -167,7 +141,7 @@ const Navbar = ({ isSearch, setIsSearch }) => {
               delay: 0.5,
             }}
             exit={{ opacity: 0 }}
-            className="mobile-nav"
+            className={styles.mobileNav}
           >
             {links.map((link) => (
               <>
