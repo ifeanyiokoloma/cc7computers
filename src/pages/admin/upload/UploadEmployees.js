@@ -97,39 +97,43 @@ const UploadEmployees = () => {
     );
   };
 
-  useEffect(() => {
-    if (imgSrc) {
-      const Ref = doc(db, "employees", id);
+  useEffect(
+    () => {
+      if (imgSrc) {
+        const Ref = doc(db, "employees", id);
 
-      setDoc(Ref, uploads).then(() => {
-        setDialogues((newStatus) => ({
-          ...newStatus,
-          status: "inputs uploaded",
-        }));
-      });
+        setDoc(Ref, uploads).then(() => {
+          setDialogues((newStatus) => ({
+            ...newStatus,
+            status: "inputs uploaded",
+          }));
+        });
 
-      updateDoc(Ref, { imgSrc: imgSrc }).then(() => {
-        setDialogues((newStatus) => ({
-          ...newStatus,
-          status: "image added to inputs",
-        }));
-        setDialogues((newStatus) => ({
-          ...newStatus,
-          status: "upload completed",
-        }));
-      });
-    }
-    setImgSrc("");
+        updateDoc(Ref, { imgSrc: imgSrc }).then(() => {
+          setDialogues((newStatus) => ({
+            ...newStatus,
+            status: "image added to inputs",
+          }));
+          setDialogues((newStatus) => ({
+            ...newStatus,
+            status: "upload completed",
+          }));
+        });
+      }
+      setImgSrc("");
 
-    setTimeout(() => {
-      setDialogues((newDialogue) => ({
-        ...newDialogue,
-        progress: 0,
-        status: "",
-      }));
-      setImgProps({});
-    }, 3000);
-  }, [imgSrc]);
+      setTimeout(() => {
+        setDialogues((newDialogue) => ({
+          ...newDialogue,
+          progress: 0,
+          status: "",
+        }));
+        setImgProps({});
+      }, 3000);
+    },
+    // eslint-disable-next-line
+    [imgSrc]
+  );
 
   const handleChange = (e) => {
     if (names) {

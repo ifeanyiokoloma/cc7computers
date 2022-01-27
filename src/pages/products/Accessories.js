@@ -1,7 +1,7 @@
 import styles from "./products.module.css";
 import { Link } from "react-router-dom";
 import useAdvancedFetch from "../../hooks/useAdvancedFetch";
-import { Paper, Skeleton } from "@mui/material";
+import { Skeleton } from "@mui/material";
 import { motion } from "framer-motion";
 
 const Accessories = ({ limit, header = "Accessories" }) => {

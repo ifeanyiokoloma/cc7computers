@@ -130,6 +130,7 @@ const UploadAccessories = () => {
       }));
       setImgProps({});
     }, 3000);
+    // eslint-disable-next-line
   }, [imgSrc]);
 
   const handleChange = (e) => {

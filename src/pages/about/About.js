@@ -1,4 +1,3 @@
-import { Paper } from "@mui/material";
 import styles from "./about.module.css";
 import Employees from "./Employees";
 

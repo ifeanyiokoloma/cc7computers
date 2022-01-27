@@ -129,8 +129,9 @@ const UploadComputers = () => {
         progress: 0,
         status: "",
       }));
-      setImgProps({})
+      setImgProps({});
     }, 3000);
+    // eslint-disable-next-line
   }, [imgSrc]);
 
   const handleChange = (e) => {

@@ -2,7 +2,6 @@ import styles from "./products.module.css";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import useAdvancedFetch from "../../hooks/useAdvancedFetch";
-import { Paper } from "@mui/material";
 import { motion } from "framer-motion";
 
 const Computers = ({ limit, header = "Computers" }) => {

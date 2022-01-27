@@ -11,7 +11,7 @@ import UploadEmployees from "../pages/admin/upload/UploadEmployees";
 import UploadAccessories from "../pages/admin/upload/UploadAccessories";
 import Computers from "../pages/products/Computers";
 import Accessories from "../pages/products/Accessories";
-import Login from "../pages/Login";
+// import Login from "../pages/Login";
 import ManageAccessory from "./admin/manage/ManageAccessory";
 import ManageComputer from "./admin/manage/ManageComputer";
 import ManageEmployee from "./admin/manage/ManageEmployee";
@@ -27,7 +27,7 @@ const Pages = () => {
     <>
       <Routes>
         <Route index path="/" caseSensitive={true} element={<Home />} />
-        <Route index path="/login" caseSensitive={true} element={<Login />} />
+        {/* <Route index path="/login" caseSensitive={true} element={<Login />} /> */}
         <Route path="/shop" caseSensitive={true} element={<Shop />} />
         <Route path="/about" caseSensitive={true} element={<About />} />
         <Route path="/contact" caseSensitive={true} element={<Contact />} />

@@ -1,4 +1,3 @@
-import { Paper } from "@mui/material";
 import styles from "./contact.module.css";
 
 const Contact = () => {

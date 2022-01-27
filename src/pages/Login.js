@@ -1,14 +1,14 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+// import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const location = useLocation();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [dialog, setDialog] = useState("");
-  const navigate = useNavigate();
-  let from = location.state?.from?.pathname || "/";
+  // const location = useLocation();
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [dialog, setDialog] = useState("");
+  // const navigate = useNavigate();
+  // let from = location.state?.from?.pathname || "/";
 
   const handleChange = (e) => {
     const input = e.target;

@@ -3,7 +3,7 @@ import Computers from "../products/Computers";
 import Accessories from "../products/Accessories";
 import PropTypes from "prop-types";
 import { Paper } from "@mui/material";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 // import HamburgerIcon from "../../components/HamburgerIcon";
 
 const Shop = () => {
