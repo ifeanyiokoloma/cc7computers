@@ -6,7 +6,7 @@ const Employee = ({ employee }) => {
       <h1>{employee.names}</h1>
       <div className={styles.grid}>
         <div className={styles.imgContainer}>
-          <img className={styles.img} src={employee.imgSrc} />
+          <img className={styles.img} src={employee.imgSrc} alt={employee.names} />
         </div>
         <div className={styles.text}>
           <p>
