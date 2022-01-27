@@ -20,7 +20,7 @@ const SearchResult = ({ filteredProducts, closeSearch, dialogue }) => {
                       closeSearch();
                     }}
                   >
-                    <Link to={`/shop/${product.type}/${product.id}`}>
+                    <Link to={`/${product.type}/${product.id}`}>
                       <div
                         key={`${product.id}`}
                         className={styles.imgContainer}

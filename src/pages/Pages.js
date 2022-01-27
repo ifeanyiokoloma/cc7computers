@@ -20,9 +20,11 @@ import About from "./about/About.js";
 import Contact from "./contact/Contact.js";
 import Services from "./services/Services";
 import Employees from "./about/Employees";
+import Employee from "./employee/Employee";
 
 const Pages = () => {
   const [products] = useFetchLive("products", []);
+  const [employees] = useFetchLive("employees", []);
   return (
     <>
       <Routes>
@@ -81,9 +83,20 @@ const Pages = () => {
             <Route
               key={product.id}
               product={product}
-              path={`/shop/${product.type}/${product.id}`}
+              path={`/${product.type}/${product.id}`}
               caseSensitive={true}
               element={<Product product={product} />}
+            />
+          );
+        })}
+        {employees.map((employee) => {
+          return (
+            <Route
+              key={employee.id}
+              employee={employee}
+              path={`/${employee.type}/${employee.id}`}
+              caseSensitive={true}
+              element={<Employee employee={employee} />}
             />
           );
         })}

@@ -47,7 +47,7 @@ const Slideshow = ({ itemType, dir, order, limit, header }) => {
                       cursor: "pointer",
                     }}
                     className="paper"
-                    to={`/shop/${item.type}/${item.id}`}
+                    to={`/${item.type}/${item.id}`}
                   >
                     <div className={styles.imageContainer}>
                       <img className={styles.image} src={item.imgSrc} alt="" />

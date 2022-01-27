@@ -138,7 +138,7 @@ const UploadEmployees = () => {
   const handleChange = (e) => {
     if (names) {
       const id = `${names}`.replace(/\s+/g, "");
-      setUploads({ ...uploads, id, timestamp: Date.now() });
+      setUploads({ ...uploads, id, type: "employee", timestamp: Date.now() });
     }
     const element = e.target;
     if (element.type === "text" || element.type === "number") {

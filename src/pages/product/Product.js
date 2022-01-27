@@ -1,7 +1,6 @@
 import styles from "./product.module.css";
 
 const Product = ({ product }) => {
-  console.log(product);
   return (
     <div className={styles.container}>
       <h1>

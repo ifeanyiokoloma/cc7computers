@@ -25,7 +25,7 @@ const Accessories = ({ limit, header = "Accessories" }) => {
               <Link
                 key={accessory.id}
                 className={styles.content}
-                to={`/shop/${accessory.type}/${accessory.id}`}
+                to={`/${accessory.type}/${accessory.id}`}
               >
                 <div className={styles.imgContainer}>
                   <img

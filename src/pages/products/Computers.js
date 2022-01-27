@@ -29,7 +29,7 @@ const Computers = ({ limit, header = "Computers" }) => {
               <Link
                 key={computer.id}
                 className={styles.content}
-                to={`/shop/${computer.id}`}
+                to={`/${computer.id}`}
               >
                 <div className={styles.imgContainer}>
                   <img
