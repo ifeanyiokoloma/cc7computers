@@ -1,48 +1,64 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./hero.module.css";
 
-const Hero = () => {
+const Hero = ({ page, imgName, pageData }) => {
   return (
     <section className={styles.container}>
       <picture>
         <source
           className={styles.img}
-          media="(max-width: 500px)"
-          srcset="./BGimages/computer-operator-mobile.jpg"
+          media="(max-width: 320px)"
+          srcset={`./images/heroes/${page}/${imgName}320.jpg`}
         />
         <source
           className={styles.img}
-          media="(max-width: 800px)"
-          srcset="./BGimages/computer-operator-tablet.jpg"
+          media="(max-width: 375px)"
+          srcset={`./images/heroes/${page}/${imgName}375.jpg`}
+        />
+        <source
+          className={styles.img}
+          media="(max-width: 425px)"
+          srcset={`./images/heroes/${page}/${imgName}425.jpg`}
+        />
+        <source
+          className={styles.img}
+          media="(max-width: 768px)"
+          srcset={`./images/heroes/${page}/${imgName}768.jpg`}
         />
         <source
           className={styles.img}
           media="(max-width: 1024px)"
-          srcset="./BGimages/computer-operator-laptop.jpg"
+          srcset={`./images/heroes/${page}/${imgName}1024.jpg`}
         />
         <source
           className={styles.img}
-          srcset="./BGimages/computer-operator-landscape.jpg"
+          media="(max-width: 1440px)"
+          srcset={`./images/heroes/${page}/${imgName}1440.jpg`}
+        />
+        <source
+          className={styles.img}
+          media="(max-width: 2560px)"
+          srcset={`./images/heroes/${page}/${imgName}2560.jpg`}
         />
         <img
           className={styles.img}
-          src="./BGimages/computer-operator-landscape.jpg"
+          srcset={`./images/heroes/${page}/${imgName}2560.jpg`}
           alt="Computer Operator"
         />
       </picture>
       <div className={styles.content}>
-        <article className={styles.text}>
-          <h1>Your Computer Support Center</h1>
-          <p>
-            CC7 Computers offers everything computer related: computer sales,
-            repair, maintenance, training and website creation and development.
-          </p>
-          <div className={styles.buttons}>
-            <button className={styles.shop}><Link to="/shop">shop</Link></button>
-            <button className={styles.contact}><Link to="/contact">contact us</Link></button>
-          </div>
+        <article className={styles.article}>
+          <h1>{pageData.heading}</h1>
+          <p>{pageData.paragraph}</p>
         </article>
+        {pageData.btns &&
+          pageData.btns.map((btn) => (
+            <div className={styles.buttons}>
+              <button className={styles.shop}>
+                <Link to={btn}>{btn}</Link>
+              </button>
+            </div>
+          ))}
       </div>
     </section>
   );

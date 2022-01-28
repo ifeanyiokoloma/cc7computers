@@ -1,25 +1,14 @@
+import Hero from "../../components/hero/Hero";
 import styles from "./about.module.css";
 import Employees from "./Employees";
+import { about } from "../../data/articles/articles";
 
 const About = () => {
   return (
     <>
+      <Hero page="about" imgName="keyboard" pageData={about} />
       <section className={styles.container}>
-        <article className="paper">
-          <header>
-            <h1>About</h1>
-          </header>
-          <p>
-            CC7 Computers offers everything computer related: computer sales,
-            repair, maintenance, training and website creation and development.
-          </p>
-          <p>
-            CC7 Computers was founded by an experienced CompTIA professional who
-            has a mandate in computer repairs/maintenance and powered by a team
-            of fellow repairs/maintenance and fellow professonals.
-          </p>
-        </article>
-        <article className="paper">
+        <article className={styles.vision}>
           <header>
             <h2>Our Vision</h2>
           </header>
@@ -30,7 +19,8 @@ const About = () => {
             organizations, as it relates to computing and business needs
           </p>
         </article>
-        <article className="paper">
+
+        <article className={styles.mission}>
           <header>
             <h2>Our Mission</h2>
           </header>
@@ -39,14 +29,18 @@ const About = () => {
             John 14:2)
           </p>
         </article>
-        <article className="paper">
+        <section className={styles.values}>
           <header>
-            <h2>Values</h2>
+            <h2>Our Values</h2>
           </header>
-          <p>
-            Wisdom, Intergrity, Clarity, Accountability and Networking. (WICAN)
-          </p>
-        </article>
+          <ul>
+            <li>Wisdom</li>
+            <li>Intergrity</li>
+            <li>Clarity</li>
+            <li>Accountability</li>
+            <li>Networking</li>
+          </ul>
+        </section>
       </section>
       <Employees />
     </>

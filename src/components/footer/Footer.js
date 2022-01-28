@@ -1,4 +1,4 @@
-import React from "react";
+import cc7Logo from "../../data/images/cc7.jpg";
 import { Link } from "react-router-dom";
 import styles from "./footer.module.css";
 
@@ -6,8 +6,13 @@ const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
+        <div  className={styles.logoContainer}>
+          <Link to="/"><img className={styles.logo} src={cc7Logo} alt="CC7 Computers Logo" /></Link>
+          <strong>Giving life<br />and power<br />to computing...</strong>
+        </div>
+
         <ul>
-          <h3>Shop</h3>
+          <h3>Business</h3>
           <li>
             <Link to="/computers">Computers</Link>
           </li>
@@ -27,12 +32,16 @@ const Footer = () => {
             <a href="/about">About Us</a>
           </li>
           <li>
-            <a href="/employees">Meet Our Engineers</a>
+            <a href="/employees">Meet Our Team</a>
           </li>
         </ul>
-        <hr />
       </div>
-      <small>Copyright © 2022</small>
+      <hr />
+      <div className={styles.copyright}>
+        <p>
+          <small>Copyright © 2022 <strong>CC7 Computers</strong></small>
+        </p>
+      </div>
     </footer>
   );
 };

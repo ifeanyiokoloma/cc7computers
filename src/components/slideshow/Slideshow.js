@@ -5,11 +5,11 @@ import useAdvancedFetch from "../../hooks/useAdvancedFetch";
 import { Skeleton } from "@mui/material";
 import { Link } from "react-router-dom";
 
-const Slideshow = ({ itemType, dir, order, limit, header }) => {
+const Slideshow = ({ itemType, dir, order, limit, header}) => {
   const [items] = useAdvancedFetch(dir, itemType, order, limit, []);
   return (
     <section className={styles.container}>
-      <h3 style={{ textAlign: "center" }}>{header}</h3>
+      <h3 className="text-center">{header}</h3>
       {items.length > 0 ? (
         <div className={styles.center}>
           <Splide

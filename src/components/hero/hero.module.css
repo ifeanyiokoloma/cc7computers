@@ -13,6 +13,7 @@
 .img {
   height: 100%;
   width: 100%;
+  object-fit: cover;
 }
 
 .content {
@@ -27,19 +28,28 @@
   flex-flow: wrap row;
 }
 
-.text {
-  max-width: 900px;
+.article {
+  max-width: 700px;
   padding: 1rem;
   text-align: center;
 }
 
-.text h1 {
+@media screen and (max-width: 800px) {
+  
+}
+
+@media screen and (max-width: 500px) {
+  
+}
+
+.article h1 {
   color: #fff;
 }
 
-.text p {
-  color: lightgray;
+.article p {
+  color: var(--light-grey);
   font-weight: lighter;
+  font-size: 1.2rem;
 }
 
 @media screen and (max-width: 600px) {

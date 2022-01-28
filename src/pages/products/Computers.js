@@ -29,7 +29,7 @@ const Computers = ({ limit, header = "Computers" }) => {
               <Link
                 key={computer.id}
                 className={styles.content}
-                to={`/${computer.id}`}
+                to={`/${computer.type}/${computer.id}`}
               >
                 <div className={styles.imgContainer}>
                   <img
