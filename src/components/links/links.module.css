@@ -1,0 +1,5 @@
+.active {
+  border-bottom: 2px solid var(--pri-color);
+  color: var(--pri-color);
+  transition: 0.2s;
+}

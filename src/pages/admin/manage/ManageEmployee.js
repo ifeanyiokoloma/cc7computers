@@ -2,7 +2,7 @@ import useFetchLive from "../../../hooks/useFetchLive";
 import { Skeleton } from "@mui/material";
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { useState } from "react";
-import { db } from "../../../firebase/FirebaseApp";
+import { db } from "../../../firebase/app";
 import styles from "./manage.module.css";
 
 const ManageEmployee = () => {

@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./navbar.module.css";
 import { BsCart3, BsSearch } from "react-icons/bs";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
 import Search from "../search/Search";
-import { links } from "../../data/data";
+import { mainLinks } from "../../data/links";
 import { AnimatePresence, motion } from "framer-motion";
 import SearchResult from "../search/SearchResult";
 import useFetchLive from "../../hooks/useFetchLive";
 import HamburgerIcon from "../HamburgerIcon/HamburgerIcon";
 import Logo from "../logo/Logo";
+import Links from "../links/Links";
+import LoginBtn from "../login/LoginBtn";
 
 const Navbar = ({ isSearch, setIsSearch }) => {
   const [mobileNav, setMobileNav] = useState(false);
@@ -59,70 +60,30 @@ const Navbar = ({ isSearch, setIsSearch }) => {
   return (
     <nav className={styles.nav}>
       <div className={styles.content}>
-        <AnimatePresence exitBeforeEnter>
-          {!isSearch && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ ease: "easeInOut", delay: 0.5 }}
-              className={styles.logoContainer}
-            >
-              <Logo />
-            </motion.div>
-          )}
-          {!isSearch && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ ease: "easeInOut", delay: 0.5 }}
-              className={styles.menu}
-            >
-              <BsSearch
-                onClick={() => activateSearch()}
-                size="1.7rem"
-                style={{ cursor: "pointer" }}
-              />
-              <HamburgerIcon
-                setMenu={setMobileNav}
-                isMenu={mobileNav}
-                bgColor={"black"}
-              />
-            </motion.div>
-          )}
-          {!isSearch && (
-            <motion.ul
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ ease: "easeInOut", delay: 0.5 }}
-              className={styles.navList}
-            >
-              {links.map((link) => (
-                <>
-                  <li key={link.id}>
-                    <NavLink
-                      className={({ isActive }) =>
-                        isActive ? styles.active : null
-                      }
-                      to={`/${link.name}`}
-                    >
-                      {link.name}
-                    </NavLink>
-                  </li>
-                </>
-              ))}
-              <li>
-                <BsSearch
-                  size="1.7rem"
-                  style={{ cursor: "pointer" }}
-                  onClick={() => activateSearch()}
-                />
-              </li>
-              <li className={styles.shoppingCart}>
-                <BsCart3 />
-              </li>
-            </motion.ul>
-          )}
-        </AnimatePresence>
+        {!isSearch && (
+          <>
+            <HamburgerIcon
+              setMenu={setMobileNav}
+              isMenu={mobileNav}
+              bgColor={"black"}
+              className={styles.hamburgerIcon}
+            />
+
+            <Logo width={40} className={styles.logo} />
+
+            <Links className={styles.navList} links={mainLinks} />
+
+            <BsSearch
+              size="1.7rem"
+              style={{ cursor: "pointer" }}
+              onClick={() => activateSearch()}
+              className={styles.desktopSearch}
+            />
+
+            <BsCart3 fontSize="2rem" cursor="pointer" />
+          </>
+        )}
+
         <Search
           setIsSearch={setIsSearch}
           isSearch={isSearch}
@@ -130,37 +91,26 @@ const Navbar = ({ isSearch, setIsSearch }) => {
           closeSearch={closeSearch}
         />
       </div>
+
+      {!isSearch && mobileNav && (
+        <Links
+          extraItem={<LoginBtn />}
+          extraItem2={
+            <BsSearch
+              onClick={() => activateSearch()}
+              size="1rem"
+              style={{ cursor: "pointer" }}
+            />
+          }
+          links={mainLinks}
+          className={styles.mobileNav}
+        />
+      )}
+
       <AnimatePresence exitBeforeEnter>
-        {!isSearch && mobileNav && (
-          <motion.ul
-            initial={{ opacity: 0, y: -100 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              ease: "easeInOut",
-              when: "beforeChildren",
-              delay: 0.5,
-            }}
-            exit={{ opacity: 0 }}
-            className={styles.mobileNav}
-          >
-            {links.map((link) => (
-              <>
-                <li key={link.id}>
-                  <NavLink
-                    className={({ isActive }) =>
-                      isActive ? styles.active : null
-                    }
-                    to={`/${link.name}`}
-                  >
-                    {link.name}
-                  </NavLink>
-                </li>
-              </>
-            ))}
-          </motion.ul>
-        )}
         {isSearch && (
           <motion.div
+            key="searchResult"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{

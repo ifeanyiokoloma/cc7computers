@@ -3,7 +3,7 @@ import { setDoc, updateDoc, doc } from "firebase/firestore";
 import styles from "./upload.module.css";
 import { useState, useEffect } from "react";
 import { accessory } from "../../../data/data";
-import { db, storage } from "../../../firebase/FirebaseApp";
+import { db, storage } from "../../../firebase/app";
 
 const UploadAccessories = () => {
   const [imgProps, setImgProps] = useState({});

@@ -1,11 +1,12 @@
+import Hero from "../../components/hero/Hero";
+import { contact } from "../../data/articles/articles";
 import styles from "./contact.module.css";
 
 const Contact = () => {
   return (
+    <>
+    <Hero page="contact" imgName="contact" pageData={contact} />
     <section className={styles.container}>
-        <header className="paper">
-          <h1>Contact</h1>
-        </header>
 
       <address className={styles.address}>
           <section className="paper">
@@ -27,6 +28,7 @@ const Contact = () => {
           </section>
       </address>
     </section>
+    </>
   );
 };
 

@@ -1,10 +1,14 @@
 import cc7Logo from "../../data/images/cc7.jpg";
 import { Link } from "react-router-dom";
 import styles from "./footer.module.css";
+import useAuth from "../../hooks/useAuth";
+import LoginBtn from "../login/LoginBtn";
 
 const Footer = () => {
+  const [isSignedIn, user] = useAuth()
   return (
     <footer className={styles.footer}>
+      {isSignedIn ? <div className="mb-3"><p>Signed as {user.displayName}</p><LoginBtn className="d-inline" /></div>: <Link to="/login">Login</Link>}
       <div className={styles.container}>
         <div  className={styles.logoContainer}>
           <Link to="/"><img className={styles.logo} src={cc7Logo} alt="CC7 Computers Logo" /></Link>

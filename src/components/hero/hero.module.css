@@ -5,9 +5,9 @@
 }
 
 @media screen and (max-width: 600px) {
-  .container {
+  /* .container {
     height: calc(100vh - 60px);
-  }
+  } */
 }
 
 .img {

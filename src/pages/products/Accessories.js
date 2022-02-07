@@ -18,12 +18,13 @@ const Accessories = ({ limit, header = "Accessories" }) => {
       <div className={styles.grid}>
         {accessories.length > 0 ? (
           accessories.map((accessory) => (
-            <motion.div className="paper"
+            <motion.div
+              key={accessory.id}
+              className="paper"
               whileHover={{ scale: 1.1, transition: { duration: 0.5 } }}
               whileTap={{ scale: 0.8, transition: { duration: 0.5 } }}
             >
               <Link
-                key={accessory.id}
                 className={styles.content}
                 to={`/${accessory.type}/${accessory.id}`}
               >

@@ -32,7 +32,7 @@ const Services = () => {
             <p>
               Different local and online shops offer computer services. We don't
               just offer computer services, we offer them with a differences. We
-              assembled a group of elite professonals who are experienced in
+              assembled a group of elite professionals who are experienced in
               computer operations and tasked with your satisfaction.
             </p>
           </article>

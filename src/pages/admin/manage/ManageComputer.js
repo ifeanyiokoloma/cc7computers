@@ -2,7 +2,7 @@ import { Skeleton } from "@mui/material";
 import styles from "./manage.module.css";
 import { useState } from "react";
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
-import { db } from "../../../firebase/FirebaseApp";
+import { db } from "../../../firebase/app";
 import useAdvancedFetch from "../../../hooks/useAdvancedFetch";
 
 const ManageComputer = () => {

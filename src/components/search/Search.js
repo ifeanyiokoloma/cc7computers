@@ -7,35 +7,35 @@ const Search = ({ isSearch, handleTyped, closeSearch }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
-  
+
   return (
     <AnimatePresence>
       {isSearch && (
         <motion.form
-            className={styles.form}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ ease: "easeInOut", delay: 0.5 }}
-            onSubmit={handleSubmit}
+          className={styles.form}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ ease: "easeInOut", delay: 0.5 }}
+          onSubmit={handleSubmit}
         >
-            <span className={styles.searchIcon}>
-              <BsSearch />
-            </span>
+          <span className={styles.searchIcon}>
+            <BsSearch />
+          </span>
 
-            <input
-              onChange={(e) => handleTyped(e)}
-              name="search"
-              id="search"
-              type="search"
-              placeholder="Search"
-              autoFocus={true}
-              autoComplete="off"
-            />
+          <input
+            onChange={(e) => handleTyped(e)}
+            name="search"
+            id="search"
+            type="search"
+            placeholder="Search"
+            autoFocus={true}
+            autoComplete="off"
+          />
 
-            <span className={styles.closeIcon} onClick={closeSearch}>
-              <GrClose />
-            </span>
-          </motion.form>
+          <span className={styles.closeIcon} onClick={closeSearch}>
+            <GrClose />
+          </span>
+        </motion.form>
       )}
     </AnimatePresence>
   );

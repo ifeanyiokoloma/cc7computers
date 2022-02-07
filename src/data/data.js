@@ -37,9 +37,4 @@ export const employees = [
 
 export const login = [{}];
 
-export const links = [
-  { name: "shop", id: uuidv4() },
-  { name: "services", id: uuidv4() },
-  { name: "contact", id: uuidv4() },
-  { name: "about", id: uuidv4() },
-];
+

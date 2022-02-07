@@ -3,7 +3,7 @@ import { computer } from "../../../data/data";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { setDoc, updateDoc, doc } from "firebase/firestore";
 import styles from "./upload.module.css";
-import { db, storage } from "../../../firebase/FirebaseApp";
+import { db, storage } from "../../../firebase/app";
 
 const UploadComputers = () => {
   const [imgProps, setImgProps] = useState({});

@@ -1,6 +1,6 @@
 import { collection, onSnapshot, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { db } from "../firebase/FirebaseApp";
+import { db } from "../firebase/app";
 
 const useFetchLive = (dir, initialValue) => {
   const [data, setData] = useState(initialValue);

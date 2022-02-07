@@ -1,4 +1,6 @@
-const HamburgerIcon = ({ isMenu, setMenu, bgColor }) => {
+import { motion } from "framer-motion";
+
+const HamburgerIcon = ({ isMenu, setMenu, bgColor, className }) => {
   const toggleMenu = () => setMenu(!isMenu);
 
   const hamburgerStyles = {
@@ -32,11 +34,18 @@ const HamburgerIcon = ({ isMenu, setMenu, bgColor }) => {
   const { container, bar1, bar2, bar3 } = hamburgerStyles;
 
   return (
-    <div style={container} onClick={toggleMenu}>
+    <motion.div
+      className={className}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ ease: "easeInOut", delay: 0.5 }}
+      style={container}
+      onClick={toggleMenu}
+    >
       <div style={bar1}></div>
       <div style={bar2}></div>
       <div style={bar3}></div>
-    </div>
+    </motion.div>
   );
 };
 

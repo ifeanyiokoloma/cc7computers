@@ -3,7 +3,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { setDoc, updateDoc, doc } from "firebase/firestore";
 import { employees } from "../../../data/data";
 import styles from "./upload.module.css";
-import { db, storage } from "../../../firebase/FirebaseApp";
+import { db, storage } from "../../../firebase/app";
 
 const UploadEmployees = () => {
   const [imgProps, setImgProps] = useState({});

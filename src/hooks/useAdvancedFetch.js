@@ -7,17 +7,15 @@ import {
   where,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { db } from "../firebase/FirebaseApp";
+import { db } from "../firebase/app";
 
 const useAdvancedFetch = (dir, productType, order, reach, initialValue) => {
   const [data, setData] = useState(initialValue);
 
-  
   useEffect(() => {
     let unSubcribe, q;
 
     if (reach && productType) {
-      console.info("rc && pt");
       q = query(
         collection(db, dir),
         where("type", "==", productType),

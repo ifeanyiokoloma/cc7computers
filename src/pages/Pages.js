@@ -11,7 +11,7 @@ import UploadEmployees from "../pages/admin/upload/UploadEmployees";
 import UploadAccessories from "../pages/admin/upload/UploadAccessories";
 import Computers from "../pages/products/Computers";
 import Accessories from "../pages/products/Accessories";
-// import Login from "../pages/Login";
+import VerifyUser from "../components/login/VerifyUser";
 import ManageAccessory from "./admin/manage/ManageAccessory";
 import ManageComputer from "./admin/manage/ManageComputer";
 import ManageEmployee from "./admin/manage/ManageEmployee";
@@ -21,6 +21,7 @@ import Contact from "./contact/Contact.js";
 import Services from "./services/Services";
 import Employees from "./about/Employees";
 import Employee from "./employee/Employee";
+import UpdateUser from "../components/login/UpdateUser";
 
 const Pages = () => {
   const [products] = useFetchLive("products", []);
@@ -28,8 +29,20 @@ const Pages = () => {
   return (
     <>
       <Routes>
+        
         <Route index path="/" caseSensitive={true} element={<Home />} />
-        {/* <Route index path="/login" caseSensitive={true} element={<Login />} /> */}
+        <Route
+          index
+          path="/login"
+          caseSensitive={true}
+          element={<VerifyUser />}
+        />
+        <Route
+          index
+          path="/update-user"
+          caseSensitive={true}
+          element={<UpdateUser />}
+        />
         <Route path="/shop" caseSensitive={true} element={<Shop />} />
         <Route path="/about" caseSensitive={true} element={<About />} />
         <Route path="/contact" caseSensitive={true} element={<Contact />} />
