@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import styles from "./navbar.module.css";
 import { BsCart3, BsSearch } from "react-icons/bs";
 import { useState } from "react";

@@ -1,17 +1,17 @@
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { auth } from "../../firebase/app";
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { sendCode, verify } from "../../data/form";
 import Form from "../form/Form";
-import styles from "./login.module.css";
+// import styles from "./login.module.css";
 
 const VerifyUser = () => {
-  const location = useLocation();
+  // const location = useLocation();
   const [phoneNumber, setPhoneNumber] = useState("+234");
   const [code, setCode] = useState("");
   const [isVerify, setIsVerify] = useState(false);
-  const [dialog, setDialog] = useState("");
+  // const [dialog, setDialog] = useState("");
   const navigate = useNavigate();
 
   const collectPhoneNumber = (e) => {
@@ -25,21 +25,20 @@ const VerifyUser = () => {
     auth.languageCode = "en";
     try {
       window.recaptchaVerifier = new RecaptchaVerifier(
-      "recaptcha-container",
-      {
-        size: "invisible",
-        callback: (response) => {
-          // reCAPTCHA solved, allow signInWithPhoneNumber.
-          // onSignInSubmit();
-          console.log(response);
+        "recaptcha-container",
+        {
+          size: "invisible",
+          callback: (response) => {
+            // reCAPTCHA solved, allow signInWithPhoneNumber.
+            // onSignInSubmit();
+            console.log(response);
+          },
         },
-
-      },
-      auth
-    );
+        auth
+      );
     } catch (error) {
       console.log(error);
-    }   
+    }
   };
 
   const requestOTP = (e) => {
@@ -71,7 +70,7 @@ const VerifyUser = () => {
       return (newCode = OTPValue);
     });
   };
-  
+
   if (code.length === 6) {
     const confirmationResult = window.confirmationResult;
     confirmationResult
@@ -82,9 +81,9 @@ const VerifyUser = () => {
         console.log(user);
         console.log(user.displayName);
         if (user.displayName) {
-          navigate("/")
+          navigate("/");
         } else {
-          navigate("/update-user", {replace: true});
+          navigate("/update-user", { replace: true });
         }
       })
       .catch((error) => {

@@ -2,10 +2,9 @@ import { signOut } from "firebase/auth";
 import { Link } from "react-router-dom";
 import { auth } from "../../firebase/app";
 import useAuth from "../../hooks/useAuth";
-import styles from "./login.module.css";
 
 const LoginBtn = ({className}) => {
-  const [isSignedIn, user] = useAuth();
+  const [isSignedIn] = useAuth();
 
   const login = {
     boxShadow: "1px 1px 2px 2px rgba(0, 0, 0, 0.3)",
@@ -41,7 +40,6 @@ const LoginBtn = ({className}) => {
         type="button"
         style={logout}
         className={className}
-        type="button"
         onClick={logOut}
       >
         Logout
