@@ -9,7 +9,7 @@ import useFetchLive from "../../hooks/useFetchLive";
 import HamburgerIcon from "../HamburgerIcon/HamburgerIcon";
 import Logo from "../logo/Logo";
 import Links from "../links/Links";
-import LoginBtn from "../login/LoginBtn";
+import AccountIcon from "../login/AccountIcon";
 
 const Navbar = ({ isSearch, setIsSearch }) => {
   const [mobileNav, setMobileNav] = useState(false);
@@ -78,8 +78,10 @@ const Navbar = ({ isSearch, setIsSearch }) => {
               onClick={() => activateSearch()}
               className={styles.desktopSearch}
             />
-
-            <BsCart3 fontSize="2rem" cursor="pointer" />
+            <div className={styles.account}>
+              <BsCart3 fontSize="2rem" cursor="pointer" />
+              <AccountIcon />
+            </div>
           </>
         )}
 
@@ -93,8 +95,7 @@ const Navbar = ({ isSearch, setIsSearch }) => {
 
       {!isSearch && mobileNav && (
         <Links
-          extraItem={<LoginBtn />}
-          extraItem2={
+          extraItem={
             <BsSearch
               onClick={() => activateSearch()}
               size="1rem"

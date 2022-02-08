@@ -1,8 +1,8 @@
+import { MdAccountCircle } from "react-icons/md";
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-import LogOutBtn from "./LogOutBtn";
 
-const LoginBtn = ({ className }) => {
+const AccountIcon = ({ className }) => {
   const {isSignedIn} = useAuth();
 
   const login = {
@@ -14,7 +14,8 @@ const LoginBtn = ({ className }) => {
   };
 
   if (isSignedIn) {
-    return <LogOutBtn className={className} />;
+
+    return <Link to="/my-account"><MdAccountCircle cursor="pointer" size="2.5rem" /></Link>;
   }
   return (
     <button style={login} type="button" className={className}>
@@ -25,4 +26,4 @@ const LoginBtn = ({ className }) => {
   );
 };
 
-export default LoginBtn;
+export default AccountIcon;

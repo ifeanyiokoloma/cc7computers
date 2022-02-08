@@ -3,16 +3,36 @@ import { Link } from "react-router-dom";
 import styles from "./footer.module.css";
 import useAuth from "../../hooks/useAuth";
 import LoginBtn from "../login/LoginBtn";
+import LogOutBtn from "../login/LogOutBtn";
 
 const Footer = () => {
-  const [isSignedIn, user] = useAuth()
+  const {isSignedIn, user} = useAuth();
   return (
     <footer className={styles.footer}>
-      {isSignedIn ? <div className="mb-3"><p>Signed as {user.displayName}</p><LoginBtn className="d-inline" /></div>: <Link to="/login">Login</Link>}
+      {isSignedIn ? (
+        <div className="mb-5">
+          <p>Signed as {user.displayName}</p>
+          <LogOutBtn className="mb-4" />
+        </div>
+      ) : (
+        <LoginBtn className="mb-4" />
+      )}
       <div className={styles.container}>
-        <div  className={styles.logoContainer}>
-          <Link to="/"><img className={styles.logo} src={cc7Logo} alt="CC7 Computers Logo" /></Link>
-          <strong>Giving life<br />and power<br />to computing...</strong>
+        <div className={styles.logoContainer}>
+          <Link to="/">
+            <img
+              className={styles.logo}
+              src={cc7Logo}
+              alt="CC7 Computers Logo"
+            />
+          </Link>
+          <strong>
+            Giving life
+            <br />
+            and power
+            <br />
+            to computing...
+          </strong>
         </div>
 
         <ul>
@@ -43,7 +63,9 @@ const Footer = () => {
       <hr />
       <div className={styles.copyright}>
         <p>
-          <small>Copyright © 2022 <strong>CC7 Computers</strong></small>
+          <small>
+            Copyright © 2022 <strong>CC7 Computers</strong>
+          </small>
         </p>
       </div>
     </footer>

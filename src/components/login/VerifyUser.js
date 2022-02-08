@@ -11,13 +11,29 @@ const VerifyUser = () => {
   const [phoneNumber, setPhoneNumber] = useState("+234");
   const [code, setCode] = useState("");
   const [isVerify, setIsVerify] = useState(false);
-  // const [dialog, setDialog] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [dialog, setDialog] = useState("");
+  const [error, setError] = useState("");
+
   const navigate = useNavigate();
 
   const collectPhoneNumber = (e) => {
     const phoneNumberValue = e.target.value;
+    const phoneNumberTrimmed = phoneNumberValue.trim();
     setPhoneNumber((newNumber) => {
-      return (newNumber = phoneNumberValue);
+      if (phoneNumberTrimmed.startsWith(0) && phoneNumberTrimmed.length > 10) {
+        const slicedNumber = phoneNumberTrimmed.slice(1, 11);
+        const completeNumber = `+234${slicedNumber}`;
+        return (newNumber = completeNumber);
+      } else if (
+        phoneNumberTrimmed.startsWith("+2340") &&
+        phoneNumberTrimmed.length > 14
+      ) {
+        const completeNumber = phoneNumberTrimmed.replace("0", "");
+        return (newNumber = completeNumber);
+      } else {
+        return (newNumber = phoneNumberTrimmed);
+      }
     });
   };
 
@@ -44,6 +60,7 @@ const VerifyUser = () => {
   const requestOTP = (e) => {
     e.preventDefault();
     if (phoneNumber.length >= 12) {
+      setIsLoading(true)
       generateRecaptcha();
       let appVerifier = window.recaptchaVerifier;
 
@@ -51,15 +68,17 @@ const VerifyUser = () => {
         .then((confirmationResult) => {
           // SMS sent. Prompt user to type the code from the message, then sign the
           // user in with confirmationResult.confirm(code).
-          console.log("SMS sent, type the code sent to your phone as message");
+          setIsLoading(false)
+          setDialog("SMS sent, type the code sent to your phone");
           setIsVerify(true);
           window.confirmationResult = confirmationResult;
           // ...
         })
         .catch((error) => {
           // Error; SMS not sent
+          setIsLoading(false)
           appVerifier.reset(window.recaptchaWidgetId);
-          console.log(error);
+          setError(error.message);
         });
     }
   };
@@ -78,8 +97,8 @@ const VerifyUser = () => {
       .then((result) => {
         // User signed in successfully.
         const user = result.user;
-        console.log(user);
-        console.log(user.displayName);
+        // console.log(user);
+        // console.log(user.displayName);
         if (user.displayName) {
           navigate("/");
         } else {
@@ -96,19 +115,28 @@ const VerifyUser = () => {
   return (
     <>
       {!isVerify ? (
-        <Form
-          inputs={sendCode}
-          handleChange={collectPhoneNumber}
-          handleSubmit={requestOTP}
-          formName="Verify Phone Number"
-          submit="Verify Your Phone Number"
-        />
+        <>
+          <Form
+            inputs={sendCode}
+            handleChange={collectPhoneNumber}
+            handleSubmit={requestOTP}
+            formName="Verify Phone Number"
+            submit="Verify Your Phone Number"
+            dialog={dialog}
+            error={error}
+            loading={isLoading}
+          />
+        </>
       ) : (
-        <Form
-          inputs={verify}
-          handleChange={verifyOTP}
-          formName="Enter Verification Code Sent To Your Phone Number"
-        />
+        <>
+          <Form
+            inputs={verify}
+            handleChange={verifyOTP}
+            formName="Enter Verification Code Sent To Your Phone Number"
+            dialog={dialog}
+            error={error}
+          />
+        </>
       )}
     </>
   );

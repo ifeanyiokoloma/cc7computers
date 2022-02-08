@@ -104,8 +104,15 @@ a {
   }
 }
 
+.account {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
 @media screen and (max-width: 500px) {
   .mobileNav {
     width: 100%;
   }
 }
+

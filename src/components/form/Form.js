@@ -7,6 +7,9 @@ const Form = ({
   formName,
   submit,
   reset,
+  error,
+  dialog,
+  loading
 }) => {
   return (
     <form
@@ -36,14 +39,17 @@ const Form = ({
             </button>
           </div>
         )}
+        {dialog && <p className="text-primary">{dialog}</p>}
+        {error && <p className="text-danger">{error}</p>}
       </fieldset>
       {submit && (
         <div className={styles.btnContainer}>
           <button className={styles.submit} type="submit">
-            {submit}
+            {loading ? "Loading..." : submit}
           </button>
         </div>
       )}
+
       <div id="recaptcha-container"></div>
     </form>
   );

@@ -22,6 +22,7 @@ import Services from "./services/Services";
 import Employees from "./about/Employees";
 import Employee from "./employee/Employee";
 import UpdateUser from "../components/login/UpdateUser";
+import Account from "../components/login/Account";
 
 const Pages = () => {
   const [products] = useFetchLive("products", []);
@@ -31,6 +32,7 @@ const Pages = () => {
       <Routes>
         
         <Route index path="/" caseSensitive={true} element={<Home />} />
+        <Route index path="/my-account" caseSensitive={true} element={<Account />} />
         <Route
           index
           path="/login"
