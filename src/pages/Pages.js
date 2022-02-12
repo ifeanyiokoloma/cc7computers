@@ -21,8 +21,9 @@ import Contact from "./contact/Contact.js";
 import Services from "./services/Services";
 import Employees from "./about/Employees";
 import Employee from "./employee/Employee";
-import UpdateUser from "../components/login/UpdateUser";
-import Account from "../components/login/Account";
+import Account from "../components/account/Account";
+import ProtectRoute from "../components/ProtectRoute";
+import ProtectAdmin from "../components/ProtectAdmin";
 
 const Pages = () => {
   const [products] = useFetchLive("products", []);
@@ -30,21 +31,53 @@ const Pages = () => {
   return (
     <>
       <Routes>
-        
+        <Route element={<ProtectRoute />}>
+          <Route
+            path="/my-account"
+            caseSensitive={true}
+            element={<Account />}
+          />
+        </Route>
+        <Route element={<ProtectAdmin />}>
+          <Route path="/admin" element={<Admin />}>
+            <Route path="manage" caseSensitive={true} element={<Manage />}>
+              <Route
+                path="employees"
+                caseSensitive={true}
+                element={<ManageEmployee />}
+              />
+              <Route
+                path="accessories"
+                caseSensitive={true}
+                element={<ManageAccessory />}
+              />
+              <Route
+                path="computers"
+                caseSensitive={true}
+                element={<ManageComputer />}
+              />
+            </Route>
+            <Route path="upload" caseSensitive={true} element={<Upload />}>
+              <Route
+                path="computers"
+                caseSensitive={true}
+                element={<UploadComputers />}
+              />
+              <Route
+                path="employees"
+                caseSensitive={true}
+                element={<UploadEmployees />}
+              />
+              <Route
+                path="accessories"
+                caseSensitive={true}
+                element={<UploadAccessories />}
+              />
+            </Route>
+          </Route>
+        </Route>
+        <Route path="/login" caseSensitive={true} element={<VerifyUser />} />
         <Route index path="/" caseSensitive={true} element={<Home />} />
-        <Route index path="/my-account" caseSensitive={true} element={<Account />} />
-        <Route
-          index
-          path="/login"
-          caseSensitive={true}
-          element={<VerifyUser />}
-        />
-        <Route
-          index
-          path="/update-user"
-          caseSensitive={true}
-          element={<UpdateUser />}
-        />
         <Route path="/shop" caseSensitive={true} element={<Shop />} />
         <Route path="/about" caseSensitive={true} element={<About />} />
         <Route path="/contact" caseSensitive={true} element={<Contact />} />
@@ -57,42 +90,6 @@ const Pages = () => {
         />
         <Route path="computers" caseSensitive={true} element={<Computers />} />
         <Route path="/employees" caseSensitive={true} element={<Employees />} />
-        <Route path="/admin" element={<Admin />}>
-          <Route path="manage" caseSensitive={true} element={<Manage />}>
-            <Route
-              path="employees"
-              caseSensitive={true}
-              element={<ManageEmployee />}
-            />
-            <Route
-              path="accessories"
-              caseSensitive={true}
-              element={<ManageAccessory />}
-            />
-            <Route
-              path="computers"
-              caseSensitive={true}
-              element={<ManageComputer />}
-            />
-          </Route>
-          <Route path="upload" caseSensitive={true} element={<Upload />}>
-            <Route
-              path="computers"
-              caseSensitive={true}
-              element={<UploadComputers />}
-            />
-            <Route
-              path="employees"
-              caseSensitive={true}
-              element={<UploadEmployees />}
-            />
-            <Route
-              path="accessories"
-              caseSensitive={true}
-              element={<UploadAccessories />}
-            />
-          </Route>
-        </Route>
         {products.map((product) => {
           return (
             <Route

@@ -6,10 +6,10 @@ import LoginBtn from "../login/LoginBtn";
 import LogOutBtn from "../login/LogOutBtn";
 
 const Footer = () => {
-  const {isSignedIn, user} = useAuth();
+  const { signIn, user } = useAuth();
   return (
     <footer className={styles.footer}>
-      {isSignedIn ? (
+      {signIn ? (
         <div className="mb-5">
           <p>Signed as {user.displayName}</p>
           <LogOutBtn className="mb-4" />

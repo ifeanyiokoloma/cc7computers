@@ -1,12 +1,12 @@
 import { v4 as uuidv4 } from "uuid";
 
 export const sendCode = [
-  { name: "phone", type: "tel", placeholder: "phone number", id: uuidv4() },
+  { name: "phoneNumber", type: "tel", placeholder: "phone number", id: uuidv4() },
 ];
 
 export const verify = [
   {
-    name: "verify",
+    name: "otp",
     type: "number",
     placeholder: "verification code",
     id: uuidv4(),

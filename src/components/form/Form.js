@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import styles from "./form.module.css";
 
 const Form = ({
@@ -9,8 +10,13 @@ const Form = ({
   reset,
   error,
   dialog,
-  loading
+  loading,
 }) => {
+  const inputRef = useRef(null);
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
+
   return (
     <form
       styles={{ backgroundImage: `url("/images/loginbg.jpg")` }}
@@ -24,6 +30,7 @@ const Form = ({
             <label className={styles.label}>Enter {input.placeholder}:</label>
             <input
               className={styles.input}
+              ref={inputRef}
               id={input.name}
               name={input.name}
               placeholder={input.placeholder}

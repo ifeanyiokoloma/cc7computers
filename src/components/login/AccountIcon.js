@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
 const AccountIcon = ({ className }) => {
-  const {isSignedIn} = useAuth();
+  const { signIn } = useAuth();
 
   const login = {
     boxShadow: "1px 1px 2px 2px rgba(0, 0, 0, 0.3)",
@@ -13,9 +13,12 @@ const AccountIcon = ({ className }) => {
     backgroundColor: "var(--pri-color)",
   };
 
-  if (isSignedIn) {
-
-    return <Link to="/my-account"><MdAccountCircle cursor="pointer" size="2.5rem" /></Link>;
+  if (signIn) {
+    return (
+      <Link to="/my-account">
+        <MdAccountCircle cursor="pointer" size="2.5rem" />
+      </Link>
+    );
   }
   return (
     <button style={login} type="button" className={className}>

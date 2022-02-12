@@ -4,7 +4,6 @@ import LogOutBtn from "./LogOutBtn";
 
 const LoginBtn = ({ className }) => {
   const {isSignedIn} = useAuth();
-
   const login = {
     boxShadow: "1px 1px 2px 2px rgba(0, 0, 0, 0.3)",
     borderRadius: "3px",
