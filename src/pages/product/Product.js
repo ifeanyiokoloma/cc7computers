@@ -1,3 +1,4 @@
+import Payment from "../../components/payment/Payment";
 import styles from "./product.module.css";
 
 const Product = ({ product }) => {
@@ -46,11 +47,12 @@ const Product = ({ product }) => {
                 <span>type:</span> {product.type}
               </p>
             )}
+            <p className={styles.price}>
+              &#8358;
+              {product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            </p>
             <div className={styles.btns}>
-              <button className={styles.add2cart}>
-                &#8358;
-                {product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-              </button>
+              <Payment productPrice={product.price} />
             </div>
           </div>
         </div>

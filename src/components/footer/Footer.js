@@ -11,7 +11,7 @@ const Footer = () => {
     <footer className={styles.footer}>
       {signIn ? (
         <div className="mb-5">
-          <p>Signed as {user.displayName}</p>
+          <p>Logged in as {user.displayName}</p>
           <LogOutBtn className="mb-4" />
         </div>
       ) : (

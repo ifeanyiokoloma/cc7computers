@@ -1,0 +1,54 @@
+/* .container {
+  margin: 1rem;
+  text-transform: capitalize;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+} */
+
+.container fieldset {
+  padding: 2rem;
+}
+
+@media screen and (max-width: 320px) {
+  .container fieldset {
+    border: unset;
+  }
+}
+
+.container legend {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.container label {
+  font-size: 1.2rem;
+}
+
+.container input {
+  border: none;
+  border-bottom: 2px solid #000;
+}
+
+.container input,
+.container textarea {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  padding: 0.1rem 0.5rem;
+}
+
+.container textarea {
+  border: 2px solid;
+  border-radius: 5px;
+}
+
+input::placeholder {
+  text-transform: capitalize;
+}
+
+input:focus {
+  border-bottom: 2px solid #000;
+  outline: none;
+}

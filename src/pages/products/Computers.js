@@ -23,7 +23,7 @@ const Computers = ({ limit, header = "Computers" }) => {
           computers.map((computer) => (
             <motion.div
               key={computer.id}
-              whileHover={{ scale: 1.1, transition: { duration: 0.5 } }}
+              whileHover={{ scale: 1.05, transition: { duration: 0.5 } }}
               whileTap={{ scale: 0.8, transition: { duration: 0.5 } }}
               className="paper"
             >

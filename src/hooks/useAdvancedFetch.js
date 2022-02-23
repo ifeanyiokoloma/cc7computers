@@ -23,17 +23,14 @@ const useAdvancedFetch = (dir, productType, order, reach, initialValue) => {
         limit(reach)
       );
     } else if (productType && !reach) {
-      console.info("pt");
       q = query(
         collection(db, dir),
         where("type", "==", productType),
         orderBy(order)
       );
     } else if (reach && !productType) {
-      console.info("rc");
       q = query(collection(db, dir), orderBy(order), limit(reach));
     } else {
-      console.info("none");
       q = query(collection(db, dir), orderBy(order));
     }
     unSubcribe = onSnapshot(q, (querySnapshot) => {

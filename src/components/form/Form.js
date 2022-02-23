@@ -13,6 +13,7 @@ const Form = ({
   loading,
 }) => {
   const inputRef = useRef(null);
+
   useEffect(() => {
     inputRef.current.focus();
   }, []);
@@ -36,6 +37,7 @@ const Form = ({
               placeholder={input.placeholder}
               type={input.type}
               onChange={handleChange}
+              required={input.required}
             />
           </p>
         ))}
@@ -51,13 +53,11 @@ const Form = ({
       </fieldset>
       {submit && (
         <div className={styles.btnContainer}>
-          <button className={styles.submit} type="submit">
+          <button id="submit" className={styles.submit} type="submit">
             {loading ? "Loading..." : submit}
           </button>
         </div>
       )}
-
-      <div id="recaptcha-container"></div>
     </form>
   );
 };

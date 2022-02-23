@@ -5,7 +5,7 @@ import useAdvancedFetch from "../../hooks/useAdvancedFetch";
 import { Skeleton } from "@mui/material";
 import { Link } from "react-router-dom";
 
-const Slideshow = ({ itemType, dir, order, limit, header}) => {
+const Slideshow = ({ itemType, dir, order, limit, header }) => {
   const [items] = useAdvancedFetch(dir, itemType, order, limit, []);
   return (
     <section className={styles.container}>
@@ -39,52 +39,49 @@ const Slideshow = ({ itemType, dir, order, limit, header}) => {
           >
             {items.map((item) => (
               <SplideSlide key={item.id}>
-                  <Link
-                    style={{
-                      display: "flex",
-                      flexFlow: "column",
-                      height: "100%",
-                      cursor: "pointer",
-                    }}
-                    className="paper"
-                    to={`/${item.type}/${item.id}`}
-                  >
-                    <div className={styles.imageContainer}>
-                      <img className={styles.image} src={item.imgSrc} alt="" />
-                    </div>
-                    <section
-                      style={{ borderRadius: 0 }}
-                      className={styles.text}
-                    >
-                      {item.brand && item.brand && (
-                        <h6 className="text-uppercase">
-                          {item.brand} {item.model}
-                        </h6>
-                      )}
-                      {item.name && <p>{item.name}</p>}
-                      {item.price && (
-                        <p className={styles.price}>
-                          &#8358;
-                          {item.price
-                            .toString()
-                            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                        </p>
-                      )}
-                      {item.names && <h5>{item.names}</h5>}
-                      {item.job && (
-                        <p>
-                          <span className={styles.prop}>Job Title: </span>
-                          {item.job}
-                        </p>
-                      )}
-                      {item.skills && (
-                        <p>
-                          <span className={styles.prop}>Skills: </span>
-                          {item.skills}
-                        </p>
-                      )}
-                    </section>
-                  </Link>
+                <Link
+                  style={{
+                    display: "flex",
+                    flexFlow: "column",
+                    height: "100%",
+                    cursor: "pointer",
+                  }}
+                  className="paper"
+                  to={`/${item.type}/${item.id}`}
+                >
+                  <div className={styles.imageContainer}>
+                    <img className={styles.image} src={item.imgSrc} alt="" />
+                  </div>
+                  <section style={{ borderRadius: 0 }} className={styles.text}>
+                    {item.brand && item.brand && (
+                      <h6 className="text-uppercase">
+                        {item.brand} {item.model}
+                      </h6>
+                    )}
+                    {item.name && <p>{item.name}</p>}
+                    {item.price && (
+                      <p className={styles.price}>
+                        &#8358;
+                        {item.price
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                      </p>
+                    )}
+                    {item.names && <h5>{item.names}</h5>}
+                    {item.job && (
+                      <p>
+                        <span className={styles.prop}>Job Title: </span>
+                        {item.job}
+                      </p>
+                    )}
+                    {item.skills && (
+                      <p>
+                        <span className={styles.prop}>Skills: </span>
+                        {item.skills}
+                      </p>
+                    )}
+                  </section>
+                </Link>
               </SplideSlide>
             ))}
           </Splide>
@@ -94,7 +91,7 @@ const Slideshow = ({ itemType, dir, order, limit, header}) => {
           sx={{ bgcolor: "black" }}
           variant="rectangular"
           width="100%"
-          height="80vh"
+          height="100vh"
         />
       )}
     </section>

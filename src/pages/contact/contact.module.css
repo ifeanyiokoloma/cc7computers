@@ -8,20 +8,30 @@
 }
 
 .container > header {
-    margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 
-.container address {
+.container {
   display: grid;
   grid-gap: 1rem;
   grid-template-columns: repeat(2, 1fr);
   font-style: normal;
 }
 
-.address section {
-    display: flex;
-    flex-flow: column;
-    gap: .5rem;
+.container address {
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+  gap: 0.5rem;
+}
+
+.container p {
+  font-size: 1.2rem;
+}
+
+.container a {
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 @media screen and (max-width: 500px) {
@@ -29,6 +39,6 @@
     grid-template-columns: repeat(1, 1fr);
   }
   .container {
-      padding: 1rem;
+    padding: 1rem;
   }
 }

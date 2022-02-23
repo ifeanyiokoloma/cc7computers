@@ -1,10 +1,9 @@
 .container {
-  max-width: 700px;
-  margin: auto;
+  padding: 3rem;
+  margin-bottom: 3rem;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 2rem;
-  height: 100vh;
+  grid-gap: 3rem;
   grid-template-areas:
     "vision mission"
     "values values";
@@ -45,6 +44,9 @@
   font-size: 2rem;
 }
 
+@media screen and (max-width: 800px) {
+}
+
 @media screen and (max-width: 500px) {
   .container {
     padding: 1rem;
@@ -55,9 +57,9 @@
     height: auto;
   }
   .values ul {
-  flex-flow: column;
-  margin: 0;
-  padding: 0;
+    flex-flow: column;
+    margin: 0;
+    padding: 0;
   }
 
   .values header {

@@ -107,3 +107,8 @@
   font-size: 1.3rem;
   font-weight: bold;
 }
+
+.price {
+  color: Blue;
+  font-size: 3rem !important;
+}

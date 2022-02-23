@@ -3,3 +3,58 @@
   color: var(--pri-color);
   transition: 0.2s;
 }
+
+.link {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.link:hover > ul,
+.child:hover {
+  display: block;
+}
+
+.child {
+  display: none;
+  position: absolute;
+  top: 59px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  background-color: var(--pri-color);
+  padding: 0 2rem;
+  margin-left: -3rem;
+  z-index: 2;
+  font-size: 0.8rem;
+}
+
+.child li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid gray;
+}
+
+.child :last-child {
+  border: none;
+}
+
+.child a {
+  color: white;
+}
+
+@media screen and (max-width: 800px) {
+  .child {
+    position: unset;
+    display: block;
+    margin: unset;
+    border: unset;
+  }
+  .child li {
+    border: none;
+    padding: 0.3rem 0;
+  }
+  .link {
+    display: block;
+  }
+}

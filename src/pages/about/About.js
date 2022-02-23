@@ -14,7 +14,7 @@ const About = () => {
           </header>
           <p>
             To become the model for global computer systems, support service
-            provision, to measure maximum productivity in the use of computer
+            provision, to ensure maximum productivity in the use of computer
             system, leading to an enhanced perfomance of individuals and
             organizations, as it relates to computing and business needs
           </p>
@@ -35,7 +35,7 @@ const About = () => {
           </header>
           <ul>
             <li>Wisdom</li>
-            <li>Intergrity</li>
+            <li>Integrity</li>
             <li>Clarity</li>
             <li>Accountability</li>
             <li>Networking</li>

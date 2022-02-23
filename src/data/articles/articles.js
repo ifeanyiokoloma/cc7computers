@@ -14,5 +14,11 @@ export const about = {
 export const contact = {
   heading: "Contact Us",
   paragraph:
-    "Head Office: \n 142 Zik's Avenue Opposite Market 3, \n Eke Awka, Awka, \n Anambra State",
+    "Head Office: \n 142 Zik's Avenue, First Floor, Opposite Market 3, \n Eke Awka, Awka, \n Anambra State",
+};
+
+export const services = {
+  heading: "Services",
+  paragraph:
+    "Different local and online shops offer computer services. We don't just offer computer services, we offer them with a difference. We assembled a group of elite professionals who are experienced in computer operations and tasked them with your satisfaction.",
 };

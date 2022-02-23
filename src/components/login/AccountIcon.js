@@ -13,19 +13,22 @@ const AccountIcon = ({ className }) => {
     backgroundColor: "var(--pri-color)",
   };
 
-  if (signIn) {
-    return (
-      <Link to="/my-account">
-        <MdAccountCircle cursor="pointer" size="2.5rem" />
-      </Link>
-    );
-  }
   return (
-    <button style={login} type="button" className={className}>
-      <Link replace={true} style={{ color: "white" }} to="/login">
-        Login
-      </Link>
-    </button>
+    <>
+      {signIn && (
+        <Link to="/my-account">
+          <MdAccountCircle cursor="pointer" size="2.5rem" />
+        </Link>
+      )}
+
+      {!signIn && (
+        <button style={login} type="button" className={className}>
+          <Link replace={true} style={{ color: "white" }} to="/login">
+            Login
+          </Link>
+        </button>
+      )}
+    </>
   );
 };
 

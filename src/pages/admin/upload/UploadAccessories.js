@@ -136,7 +136,12 @@ const UploadAccessories = () => {
   const handleChange = (e) => {
     if (name && brand && model) {
       const id = `${name}-${brand}-${model}`.replace(/\s+/g, "");
-      setUploads((newUpload) => ({ ...newUpload, id, type: "accessory", timestamp: Date.now() }));
+      setUploads((newUpload) => ({
+        ...newUpload,
+        id,
+        type: "accessory",
+        timestamp: Date.now(),
+      }));
     }
     const element = e.target;
     if (element.type === "text" || element.type === "number") {
@@ -163,7 +168,7 @@ const UploadAccessories = () => {
               <label
                 style={{
                   border: "2px solid black",
-                  margin: "3rem",
+                  margin: property.name === "image" ? 0 : "3rem",
                   padding: "1rem",
                   borderRadius: "5px",
                   cursor: "pointer",

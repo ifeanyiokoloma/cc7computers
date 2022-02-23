@@ -1,6 +1,7 @@
 .container {
   padding: 1rem;
   overflow: auto;
+  height: calc(100vh - 60px);
 }
 
 .header {

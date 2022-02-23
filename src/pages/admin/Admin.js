@@ -1,11 +1,13 @@
 import { NavLink, Outlet } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 import styles from "./admin.module.css";
 
 const Admin = () => {
+  const {user} = useAuth()
   return (
     <main className={styles.container}>
       <header className={styles.header}>
-        <h1>Welcome, Admin</h1>
+        <h1>Welcome, {user.displayName}</h1>
         <nav className={styles.nav}>
           <NavLink
             className={({ isActive }) => (isActive && styles.active)}

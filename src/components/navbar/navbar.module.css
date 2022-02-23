@@ -4,11 +4,11 @@
 }
 
 .content {
+  max-height: 60px;
   height: 60px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem 1rem;
+  padding: 0 1rem;
   border-bottom: 1px solid black;
 }
 
@@ -34,10 +34,6 @@
   color: goldenrod;
 }
 
-/* .username {
-  color: goldenrod;
-} */
-
 a {
   text-decoration: none;
   color: rgb(85, 84, 84);
@@ -62,8 +58,11 @@ a {
   display: none;
 }
 
-@media screen and (max-width: 800px) {
+.desktopSearch {
+  height: 100%;
+}
 
+@media screen and (max-width: 800px) {
   .desktopSearch {
     display: none;
   }
@@ -78,6 +77,7 @@ a {
 
   .hamburgerIcon {
     display: block;
+    align-self: center;
   }
 
   .navList {
@@ -115,4 +115,3 @@ a {
     width: 100%;
   }
 }
-

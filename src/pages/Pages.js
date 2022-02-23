@@ -32,6 +32,17 @@ const Pages = () => {
     <>
       <Routes>
         <Route element={<ProtectRoute />}>
+          {products.map((product) => {
+            return (
+              <Route
+                key={product.id}
+                product={product}
+                path={`/${product.type}/${product.id}`}
+                caseSensitive={true}
+                element={<Product product={product} />}
+              />
+            );
+          })}
           <Route
             path="/my-account"
             caseSensitive={true}
@@ -76,7 +87,9 @@ const Pages = () => {
             </Route>
           </Route>
         </Route>
-        <Route path="/login" caseSensitive={true} element={<VerifyUser />} />
+
+        <Route path="/login" element={<VerifyUser />} />
+
         <Route index path="/" caseSensitive={true} element={<Home />} />
         <Route path="/shop" caseSensitive={true} element={<Shop />} />
         <Route path="/about" caseSensitive={true} element={<About />} />
@@ -90,17 +103,7 @@ const Pages = () => {
         />
         <Route path="computers" caseSensitive={true} element={<Computers />} />
         <Route path="/employees" caseSensitive={true} element={<Employees />} />
-        {products.map((product) => {
-          return (
-            <Route
-              key={product.id}
-              product={product}
-              path={`/${product.type}/${product.id}`}
-              caseSensitive={true}
-              element={<Product product={product} />}
-            />
-          );
-        })}
+
         {employees.map((employee) => {
           return (
             <Route

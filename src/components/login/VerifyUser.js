@@ -1,22 +1,33 @@
-import { RecaptchaVerifier, signInWithPhoneNumber, updateProfile } from "firebase/auth";
+import {
+  RecaptchaVerifier,
+  sendEmailVerification,
+  signInWithPhoneNumber,
+  updateEmail,
+  updateProfile,
+} from "firebase/auth";
 import { auth } from "../../firebase/app";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { sendCode, userName, verify,  } from "../../data/form";
+import { sendCode, verify } from "../../data/form";
 import Form from "../form/Form";
-// import styles from "./login.module.css";
+import EmailForm from "../EmailForm";
+import { UserNameForm } from "../UserNameForm";
 
 const VerifyUser = () => {
   const [phoneNumber, setPhoneNumber] = useState("+234");
   const [code, setCode] = useState("");
-  const [isVerify, setIsVerify] = useState(false);
-  const [isUpdateUser, setIsUpdateUser] = useState(false);
-  const [isLogin, setIsLogin] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
-  const [dialog, setDialog] = useState("");
-  const [error, setError] = useState("");
+  const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [isLogin, setIsLogin] = useState(true);
+  const [isVerify, setIsVerify] = useState(false);
+  const [isUpdateEmail, setIsUpdateEmail] = useState(false);
+  const [isUpdateName, setIsUpdateName] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [dialog, setDialog] = useState(
+    "You will receive an SMS message for verification"
+  );
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -24,83 +35,115 @@ const VerifyUser = () => {
 
   const generateRecaptcha = () => {
     auth.languageCode = "en";
-    try {
-      window.recaptchaVerifier = new RecaptchaVerifier(
-        "recaptcha-container",
-        {
-          size: "invisible",
-          callback: (response) => {
-            // reCAPTCHA solved, allow signInWithPhoneNumber.
-            // onSignInSubmit();
-            console.log(response);
-          },
+    window.recaptchaVerifier = new RecaptchaVerifier(
+      "submit",
+      {
+        size: "invisible",
+        callback: (response) => {
+          // reCAPTCHA solved, allow signInWithPhoneNumber.
         },
-        auth
-      );
-    } catch (error) {
-      console.log(error);
-    }
+      },
+      auth
+    );
   };
 
   const requestOTP = (e) => {
+    setError("");
     e.preventDefault();
     if (phoneNumber.length >= 11) {
       setIsLoading(true);
       generateRecaptcha();
-      let appVerifier = window.recaptchaVerifier;
 
+      const appVerifier = window.recaptchaVerifier;
       signInWithPhoneNumber(auth, phoneNumber, appVerifier)
         .then((confirmationResult) => {
-          // SMS sent. Prompt user to type the code from the message, then sign the
-          // user in with confirmationResult.confirm(code).
-          setIsLoading(false);
-          setIsLogin(false)
+          // SMS sent. Prompt user to type the code from the message,
           setDialog("SMS sent, type the code sent to your phone");
+
+          // then sign the user in with confirmationResult.confirm(code).
+          setDialog("");
+          setError("");
+          setIsLoading(false);
+          setIsLogin(false);
           setIsVerify(true);
+
+          setDialog("Type the verification code you received by SMS");
           window.confirmationResult = confirmationResult;
-          // ...
         })
         .catch((error) => {
           // Error; SMS not sent
           setIsLoading(false);
-          appVerifier.reset(window.recaptchaWidgetId);
-          setError(error.message);
+          setError(`SMS not sent, ${error.code}: ${error.message}`);
+
+          // reset the reCAPTCHA so the user can try again
+          const grecaptcha = window.recaptchaVerifier;
+
+          grecaptcha.render().then((widgetId) => {
+            window.recaptchaWidgetId = widgetId;
+          });
         });
     } else {
       return setError("This might not be be a valid phone number");
     }
   };
 
+  const confirmationResult = window.confirmationResult;
   if (code.length === 6) {
-    const confirmationResult = window.confirmationResult;
     confirmationResult
       .confirm(code)
       .then((result) => {
         // User signed in successfully.
-        const user = result.user;
-        // console.log(user);
-        // console.log(user.displayName);
-        if (user.displayName) {
-          navigate(from, { replace: true });
+        if (result.user.email === null) {
+          setIsVerify(false);
+          setIsUpdateEmail(true);
+        } else if (result.user.displayName === null) {
+          setIsVerify(false);
+          setIsUpdateName(true);
         } else {
-          setIsVerify(false)
-          setIsUpdateUser(true);
+          navigate(from, { replace: true });
         }
       })
       .catch((error) => {
         // User couldn't sign in (bad verification code?)
-        console.log("User couldn't sign in (bad verification code?)");
-        // ...
+        setError(
+          `User couldn't sign in (bad verification code?) ${error.code}: ${error.message}`
+        );
       });
   }
 
-  const setUserName = (e) => {
+  const handleEmail = (e) => {
+    e.preventDefault();
+    updateEmail(auth.currentUser, email)
+      .then(() => {
+        // Email updated!
+        setDialog("Email updated!");
+        if (!auth.currentUser.displayName === "" && !auth.currentUser) {
+          navigate(from, { replace: true });
+        } else {
+          sendEmailVerification(auth.currentUser).then(() => {
+            setDialog("Email verification sent!");
+          });
+          setIsUpdateEmail(false);
+          setIsUpdateName(true);
+        }
+      })
+      .catch((error) => {
+        // An error occurred
+        setError(error.message);
+        // ...
+      });
+  };
+
+  const handleUserName = (e) => {
     e.preventDefault();
     updateProfile(auth.currentUser, {
       displayName: `${firstName} ${lastName}`,
     })
       .then(() => {
         // Profile updated!
+        setDialog("Name updated!");
+        setDialog("");
+        setError("");
         navigate(from, { replace: true });
       })
       .catch((error) => {
@@ -114,22 +157,28 @@ const VerifyUser = () => {
     const input = e.target;
     switch (input.name) {
       case "firstName":
-        const firstName = input.value;
-      setFirstName((newName) => {
-        return (newName = firstName);
-      });
+        const fnameValue = input.value;
+        setFirstName((newName) => {
+          return (newName = fnameValue);
+        });
         break;
       case "lastName":
-        const lastName = input.value;
+        const lnameValue = input.value;
         setLastName((newName) => {
-          return (newName = lastName);
+          return (newName = lnameValue);
+        });
+        break;
+      case "email":
+        const emailValue = input.value;
+        setEmail((newEmail) => {
+          return (newEmail = emailValue);
         });
         break;
       case "otp":
         const OTPValue = input.value;
-      setCode((newCode) => {
-        return (newCode = OTPValue);
-      });
+        setCode((newCode) => {
+          return (newCode = OTPValue);
+        });
         break;
       case "phoneNumber":
         const phoneNumberValue = e.target.value;
@@ -153,7 +202,7 @@ const VerifyUser = () => {
           }
         });
         break;
-      
+
       default:
         break;
     }
@@ -181,16 +230,23 @@ const VerifyUser = () => {
           formName="Enter Verification Code Sent To Your Phone Number"
           dialog={dialog}
           error={error}
+          handleSubmit={(e) => e.preventDefault()}
         />
       )}
 
-      {isUpdateUser && (
-        <Form
-          inputs={userName}
-          formName="Update Your Data"
+      {isUpdateEmail && (
+        <EmailForm
+          handleSubmit={handleEmail}
           handleChange={collectData}
-          handleSubmit={setUserName}
-          submit="Submit Your Name"
+          dialog={dialog}
+          error={error}
+        />
+      )}
+      {isUpdateName && (
+        <UserNameForm
+          handleSubmit={handleUserName}
+          handleChange={collectData}
+          dialog={dialog}
           error={error}
         />
       )}
