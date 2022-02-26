@@ -9,7 +9,7 @@ const Form = ({
   submit,
   reset,
   error,
-  dialog,
+  info,
   loading,
 }) => {
   const inputRef = useRef(null);
@@ -48,7 +48,7 @@ const Form = ({
             </button>
           </div>
         )}
-        {dialog && <p className="text-primary">{dialog}</p>}
+        {info && <p className="text-primary">{info}</p>}
         {error && <p className="text-danger">{error}</p>}
       </fieldset>
       {submit && (

@@ -10,10 +10,11 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { sendCode, verify } from "../../data/form";
 import Form from "../form/Form";
-import EmailForm from "../EmailForm";
-import { UserNameForm } from "../UserNameForm";
+import EmailForm from "../form/EmailForm";
+import { UserNameForm } from "../form/UserNameForm";
 
 const VerifyUser = () => {
+  // Declared Variables starts here
   const [phoneNumber, setPhoneNumber] = useState("+234");
   const [code, setCode] = useState("");
   const [email, setEmail] = useState("");
@@ -24,14 +25,66 @@ const VerifyUser = () => {
   const [isUpdateEmail, setIsUpdateEmail] = useState(false);
   const [isUpdateName, setIsUpdateName] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [dialog, setDialog] = useState(
+  const [info, setInfo] = useState(
     "You will receive an SMS message for verification"
   );
   const [error, setError] = useState("");
 
+  // React-router Variables
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+
+  // Declared variables ends here
+
+  // Utility Functions
+  // Reset
+  function resetMsg() {
+    setError("");
+    setInfo("");
+  }
+
+  // Request for OTP
+  const requestOTP = (e) => {
+    e.preventDefault();
+    if (phoneNumber.length >= 11) {
+      resetMsg();
+
+      setIsLoading(true);
+
+      generateRecaptcha();
+
+      const appVerifier = window.recaptchaVerifier;
+      signInWithPhoneNumber(auth, phoneNumber, appVerifier)
+        .then((confirmationResult) => {
+          // SMS sent. Prompt user to type the code from the message,
+          setInfo("SMS sent, type the code sent to your phone");
+
+          // then sign the user in with confirmationResult.confirm(code).
+
+          setIsLoading(false);
+          setIsLogin(false);
+          setIsVerify(true);
+
+          setInfo("Type the verification code you received by SMS");
+          window.confirmationResult = confirmationResult;
+        })
+        .catch((error) => {
+          // Error; SMS not sent
+          setIsLoading(false);
+          setError(`SMS not sent, ${error.message}, try again`);
+
+          // reset the reCAPTCHA so the user can try again
+          const grecaptcha = window.recaptchaVerifier;
+
+          grecaptcha.render().then((widgetId) => {
+            grecaptcha.reset(widgetId);
+          });
+        });
+    } else {
+      return setError("This might not be be a valid phone number");
+    }
+  };
 
   const generateRecaptcha = () => {
     auth.languageCode = "en";
@@ -47,81 +100,51 @@ const VerifyUser = () => {
     );
   };
 
-  const requestOTP = (e) => {
-    setError("");
+  function verifyCode(e) {
     e.preventDefault();
-    if (phoneNumber.length >= 11) {
-      setIsLoading(true);
-      generateRecaptcha();
-
-      const appVerifier = window.recaptchaVerifier;
-      signInWithPhoneNumber(auth, phoneNumber, appVerifier)
-        .then((confirmationResult) => {
-          // SMS sent. Prompt user to type the code from the message,
-          setDialog("SMS sent, type the code sent to your phone");
-
-          // then sign the user in with confirmationResult.confirm(code).
-          setDialog("");
-          setError("");
-          setIsLoading(false);
-          setIsLogin(false);
-          setIsVerify(true);
-
-          setDialog("Type the verification code you received by SMS");
-          window.confirmationResult = confirmationResult;
+    const confirmationResult = window.confirmationResult;
+    if (code.length === 6) {
+      confirmationResult
+        .confirm(code)
+        .then((result) => {
+          // User signed in successfully.
+          if (result.user.email === null) {
+            setIsVerify(false);
+            resetMsg();
+            setIsUpdateEmail(true);
+          } else if (result.user.displayName === null) {
+            setIsVerify(false);
+            resetMsg();
+            setIsUpdateName(true);
+          } else {
+            navigate(from, { replace: true });
+          }
         })
         .catch((error) => {
-          // Error; SMS not sent
-          setIsLoading(false);
-          setError(`SMS not sent, ${error.code}: ${error.message}`);
-
-          // reset the reCAPTCHA so the user can try again
-          const grecaptcha = window.recaptchaVerifier;
-
-          grecaptcha.render().then((widgetId) => {
-            window.recaptchaWidgetId = widgetId;
-          });
+          // User couldn't sign in (bad verification code?)
+          setError(
+            `User couldn't sign in (bad verification code?) ${error.message}`
+          );
         });
     } else {
-      return setError("This might not be be a valid phone number");
+      return setError("This might not be be a valid code");
     }
-  };
-
-  const confirmationResult = window.confirmationResult;
-  if (code.length === 6) {
-    confirmationResult
-      .confirm(code)
-      .then((result) => {
-        // User signed in successfully.
-        if (result.user.email === null) {
-          setIsVerify(false);
-          setIsUpdateEmail(true);
-        } else if (result.user.displayName === null) {
-          setIsVerify(false);
-          setIsUpdateName(true);
-        } else {
-          navigate(from, { replace: true });
-        }
-      })
-      .catch((error) => {
-        // User couldn't sign in (bad verification code?)
-        setError(
-          `User couldn't sign in (bad verification code?) ${error.code}: ${error.message}`
-        );
-      });
   }
 
   const handleEmail = (e) => {
     e.preventDefault();
+    resetMsg();
     updateEmail(auth.currentUser, email)
       .then(() => {
         // Email updated!
-        setDialog("Email updated!");
+        setInfo("Email updated!");
         if (!auth.currentUser.displayName === "" && !auth.currentUser) {
           navigate(from, { replace: true });
         } else {
           sendEmailVerification(auth.currentUser).then(() => {
-            setDialog("Email verification sent!");
+            setTimeout(() => {
+              setInfo("Email verification sent!");
+            }, 5000);
           });
           setIsUpdateEmail(false);
           setIsUpdateName(true);
@@ -136,13 +159,14 @@ const VerifyUser = () => {
 
   const handleUserName = (e) => {
     e.preventDefault();
+    resetMsg();
     updateProfile(auth.currentUser, {
       displayName: `${firstName} ${lastName}`,
     })
       .then(() => {
         // Profile updated!
-        setDialog("Name updated!");
-        setDialog("");
+        setInfo("Name updated!");
+        setInfo("");
         setError("");
         navigate(from, { replace: true });
       })
@@ -217,7 +241,7 @@ const VerifyUser = () => {
           handleSubmit={requestOTP}
           formName="Login With Your Phone Number"
           submit="Verify Your Phone Number"
-          dialog={dialog}
+          info={info}
           error={error}
           loading={isLoading}
         />
@@ -227,10 +251,11 @@ const VerifyUser = () => {
         <Form
           inputs={verify}
           handleChange={collectData}
+          handleSubmit={verifyCode}
+          submit="Verify Code"
           formName="Enter Verification Code Sent To Your Phone Number"
-          dialog={dialog}
+          info={info}
           error={error}
-          handleSubmit={(e) => e.preventDefault()}
         />
       )}
 
@@ -238,7 +263,7 @@ const VerifyUser = () => {
         <EmailForm
           handleSubmit={handleEmail}
           handleChange={collectData}
-          dialog={dialog}
+          info={info}
           error={error}
         />
       )}
@@ -246,7 +271,7 @@ const VerifyUser = () => {
         <UserNameForm
           handleSubmit={handleUserName}
           handleChange={collectData}
-          dialog={dialog}
+          info={info}
           error={error}
         />
       )}

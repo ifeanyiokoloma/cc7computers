@@ -1,7 +1,7 @@
 export const home = {
   heading: "Your Computer Support Center",
   paragraph:
-    "CC7 Computers offers everything computer related: computer sales, repair, maintenance, training, website creation, and website development,",
+    "CC7 Computers offers everything computer related: computer sales, repair, maintenance, training, and website development.",
   btn: ["shop", "contact"],
 };
 

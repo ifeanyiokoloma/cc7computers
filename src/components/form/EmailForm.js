@@ -1,7 +1,7 @@
-import { emailForm } from "../data/form";
-import Form from "./form/Form";
+import { emailForm } from "../../data/form";
+import Form from "./Form";
 
-const EmailForm = ({ handleSubmit, handleChange, dialog, error }) => {
+const EmailForm = ({ handleSubmit, handleChange, info, error }) => {
   return (
     <section>
       <Form
@@ -10,7 +10,7 @@ const EmailForm = ({ handleSubmit, handleChange, dialog, error }) => {
         handleSubmit={handleSubmit}
         handleChange={handleChange}
         submit="Submit Your Email"
-        dialog={dialog}
+        info={info}
         error={error}
       />
     </section>

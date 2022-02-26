@@ -4,8 +4,8 @@ import useAuth from "../hooks/useAuth";
 const ProtectRoute = () => {
   const location = useLocation();
 
-  const { loading, signIn, signOut } = useAuth();
-  
+  const { loading, signIn } = useAuth();
+
   if (loading) {
     return <h1>Loading...</h1>;
   }
@@ -14,7 +14,7 @@ const ProtectRoute = () => {
     return <Outlet />;
   }
 
-  if (signOut) {
+  if (!signIn) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 };

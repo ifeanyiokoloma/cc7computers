@@ -1,7 +1,7 @@
-import { userNameForm } from "../data/form";
-import Form from "./form/Form";
+import { userNameForm } from "../../data/form";
+import Form from "./Form";
 
-export const UserNameForm = ({ handleSubmit, handleChange, dialog, error }) => {
+export const UserNameForm = ({ handleSubmit, handleChange, info, error }) => {
   return (
     <section>
       <Form
@@ -10,7 +10,7 @@ export const UserNameForm = ({ handleSubmit, handleChange, dialog, error }) => {
         handleSubmit={handleSubmit}
         handleChange={handleChange}
         submit="Submit your name"
-        dialog={dialog}
+        info={info}
         error={error}
       />
     </section>
