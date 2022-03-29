@@ -1,0 +1,18 @@
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-flow: column;
+  gap: 3rem;
+}
+
+.name,
+.email,
+.phoneNumber,
+.logOutBtn {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.6rem;
+}

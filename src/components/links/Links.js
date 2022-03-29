@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
 import styles from "./links.module.css";
 
@@ -24,30 +24,11 @@ const Links = ({
             className={({ isActive }) => (isActive ? styles.active : null)}
             to={`/${link.name}`}
           >
-            {link.name}
+            <div className={styles.linkItems}>
+              {link.icon}
+              {link.name}
+            </div>
           </NavLink>
-          {link.child && (
-            <AnimatePresence key="link">
-              <motion.ul
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className={styles.child}
-              >
-                {link.child.map((childLink) => (
-                  <li key={childLink.id}>
-                    <NavLink
-                      className={({ isActive }) =>
-                        isActive ? styles.active : null
-                      }
-                      to={`/${childLink.name}`}
-                    >
-                      {childLink.name}
-                    </NavLink>
-                  </li>
-                ))}
-              </motion.ul>
-            </AnimatePresence>
-          )}
         </li>
       ))}
       {extraItem && <br />}

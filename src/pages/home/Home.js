@@ -9,13 +9,7 @@ const Home = () => {
   return (
     <main className={styles.container}>
       <Hero page="home" pageData={home} imgName="operator" />
-      <Slideshow
-        itemType="computer"
-        dir="products"
-        order="timestamp"
-        limit={5}
-        header="New Computers"
-      />
+      <Slideshow />
       <Accessories limit={5} header="New Accessories" />
     </main>
   );

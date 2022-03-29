@@ -1,0 +1,44 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.productsBox {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+}
+
+.productBox {
+  display: flex;
+  gap: 1rem;
+}
+
+.singleProduct {
+  display: flex;
+  justify-content: space-between;
+  gap: 3rem;
+  align-items: center;
+}
+
+.singleProductsBox:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.imageBox {
+  width: 150px;
+  height: 150px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.imageBox img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.name {
+  align-self: center;
+}

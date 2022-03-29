@@ -20,7 +20,7 @@ export const verify = [
   },
 ];
 
-export const userNameForm = [
+export const nameForm = [
   {
     name: "firstName",
     type: "text",

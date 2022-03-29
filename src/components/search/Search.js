@@ -1,6 +1,5 @@
 import styles from "./search.module.css";
 import { BsSearch } from "react-icons/bs";
-import { GrClose } from "react-icons/gr";
 import { AnimatePresence, motion } from "framer-motion";
 
 const Search = ({ isSearch, handleTyped, closeSearch }) => {
@@ -31,10 +30,6 @@ const Search = ({ isSearch, handleTyped, closeSearch }) => {
             autoFocus={true}
             autoComplete="off"
           />
-
-          <span className={styles.closeIcon} onClick={closeSearch}>
-            <GrClose />
-          </span>
         </motion.form>
       )}
     </AnimatePresence>

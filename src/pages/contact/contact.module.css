@@ -1,44 +1,27 @@
 .container {
-  padding: 3rem;
-}
-
-.container > header,
-.container section {
-  padding: 1rem;
-}
-
-.container > header {
-  margin-bottom: 2rem;
-}
-
-.container {
-  display: grid;
-  grid-gap: 1rem;
-  grid-template-columns: repeat(2, 1fr);
-  font-style: normal;
+  padding: 3rem 0;
 }
 
 .container address {
+  max-width: 500px;
+  margin: 0 auto;
   display: flex;
-  align-items: center;
   flex-flow: column;
-  gap: 0.5rem;
+  justify-content: center;
+  gap: 3rem;
 }
 
-.container p {
-  font-size: 1.2rem;
+.container address section {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  /* align-items: center; */
+  gap: 1rem;
+  border: 2px solid;
+  padding: 1rem;
+  border-radius: 10px;
 }
 
 .container a {
-  font-size: 2rem;
-  font-weight: bold;
-}
-
-@media screen and (max-width: 500px) {
-  .container address {
-    grid-template-columns: repeat(1, 1fr);
-  }
-  .container {
-    padding: 1rem;
-  }
+  font-size: 1.5rem;
 }

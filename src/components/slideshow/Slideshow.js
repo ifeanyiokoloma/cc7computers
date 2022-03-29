@@ -4,96 +4,95 @@ import "@splidejs/splide/dist/css/splide.min.css";
 import useAdvancedFetch from "../../hooks/useAdvancedFetch";
 import { Skeleton } from "@mui/material";
 import { Link } from "react-router-dom";
+import Header from "../Header";
+import Img from "react-cool-img";
+import ProductDesc from "../ProductDesc.js/ProductDesc";
+import { useInView } from "react-intersection-observer";
 
-const Slideshow = ({ itemType, dir, order, limit, header }) => {
-  const [items] = useAdvancedFetch(dir, itemType, order, limit, []);
+const Slideshow = () => {
+  const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
+  const [computers] = useAdvancedFetch(
+    "products",
+    "computer",
+    "timestamp",
+    5,
+    []
+  );
   return (
-    <section className={styles.container}>
-      <h3 className="text-center">{header}</h3>
-      {items.length > 0 ? (
-        <div className={styles.center}>
-          <Splide
-            options={{
-              mediaQuery: "max",
-              breakpoints: {
-                500: {
-                  height: "100%",
-                },
-              },
-              rewind: true,
-              autoplay: true,
-              width: "100%",
-              gap: "1rem",
-              height: "80vh",
-              pauseOnHover: true,
-              speed: 2000,
-              interval: 6000,
-              keyboard: true,
-              type: "slide",
-              rewindSpeed: 2000,
-              pagination: true,
-              arrows: true,
-              easing: "ease",
-            }}
-            hasSliderWrapper
-          >
-            {items.map((item) => (
-              <SplideSlide key={item.id}>
-                <Link
-                  style={{
-                    display: "flex",
-                    flexFlow: "column",
-                    height: "100%",
-                    cursor: "pointer",
-                  }}
-                  className="paper"
-                  to={`/${item.type}/${item.id}`}
-                >
-                  <div className={styles.imageContainer}>
-                    <img className={styles.image} src={item.imgSrc} alt="" />
-                  </div>
-                  <section style={{ borderRadius: 0 }} className={styles.text}>
-                    {item.brand && item.brand && (
-                      <h6 className="text-uppercase">
-                        {item.brand} {item.model}
-                      </h6>
-                    )}
-                    {item.name && <p>{item.name}</p>}
-                    {item.price && (
-                      <p className={styles.price}>
-                        &#8358;
-                        {item.price
-                          .toString()
-                          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                      </p>
-                    )}
-                    {item.names && <h5>{item.names}</h5>}
-                    {item.job && (
-                      <p>
-                        <span className={styles.prop}>Job Title: </span>
-                        {item.job}
-                      </p>
-                    )}
-                    {item.skills && (
-                      <p>
-                        <span className={styles.prop}>Skills: </span>
-                        {item.skills}
-                      </p>
-                    )}
-                  </section>
-                </Link>
-              </SplideSlide>
-            ))}
-          </Splide>
-        </div>
-      ) : (
-        <Skeleton
-          sx={{ bgcolor: "black" }}
-          variant="rectangular"
-          width="100%"
-          height="100vh"
-        />
-      )}
+    <section
+      ref={ref}
+      style={{ opacity: inView ? 1 : 0, transition: "1s ease-in-out" }}
+      className={styles.container}
+    >
+      <Header
+        element="h2"
+        title="New Computers"
+        textAlign="center"
+        className={styles.header}
+      />
+      <section className={styles.slideContainer}>
+        <Splide
+          options={{
+            mediaQuery: "max",
+            rewind: true,
+            autoplay: true,
+            width: "100%",
+            gap: "1rem",
+            height: "85vh",
+            pauseOnHover: true,
+            speed: 1000,
+            interval: 6000,
+            keyboard: true,
+            rewindSpeed: 2000,
+            pagination: true,
+            arrows: true,
+            easing: "ease",
+            type: "loop",
+            padding: "auto",
+          }}
+          hasSliderWrapper
+        >
+          {computers.length > 0 ? (
+            computers.map((computer) => {
+              const computerID = `${computer.brand} ${computer.model}`;
+              return (
+                <SplideSlide key={computer.id}>
+                  <Link
+                    style={{
+                      display: "flex",
+                      flexFlow: "column",
+                      height: "100%",
+                      cursor: "pointer",
+                      position: "relative",
+                    }}
+                    to={`/${computer.type}/${computer.id}`}
+                  >
+                    <div className={styles.imageContainer}>
+                      <Img
+                        style={{
+                          backgroundColor: "grey",
+                        }}
+                        className={styles.image}
+                        src={computer.imgSrc}
+                        alt={computerID}
+                      />
+                    </div>
+                    <ProductDesc
+                      className={styles.productDesc}
+                      title={computerID}
+                      productPrice={computer.price}
+                    />
+                  </Link>
+                </SplideSlide>
+              );
+            })
+          ) : (
+            <SplideSlide>
+              <Skeleton variant="rectangular" width="100%" height="100vh" />
+            </SplideSlide>
+          )}
+        </Splide>
+      </section>
     </section>
   );
 };

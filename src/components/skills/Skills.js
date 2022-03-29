@@ -1,21 +1,26 @@
 import styles from "./skills.module.css";
 import Header from "../../components/Header";
+import Img from "react-cool-img";
 
 const Skills = () => {
   return (
     <section className={styles.skills}>
-      <Header title="Computer Skills" header="h3" />
+      <Header
+        title="Computer Trainning"
+        element="h3"
+        className={styles.header}
+      />
       <p className="text-center">We offer these courses:</p>
       <section>
         <Header
           className={styles.header}
           title="Ic3 Digital Literacy"
           title2="Digital Literacy (Office Centric)"
-          header="h4"
-          header2="h6"
+          element="h4"
+          element2="h6"
         />
 
-        <img
+        <Img
           className={styles.image}
           src="/images/skills/ic3.png"
           alt="ic3 logo"
@@ -33,10 +38,10 @@ const Skills = () => {
           className={styles.header}
           title="Comptia A+"
           title2="Computer Technician (Windows Centric)"
-          header="h4"
-          header2="h6"
+          element="h4"
+          element2="h6"
         />
-        <img
+        <Img
           className={styles.image}
           src="/images/skills/a+.png"
           alt="comptia a+ logo"
@@ -55,11 +60,11 @@ const Skills = () => {
           className={styles.header}
           title="Comptia N+"
           title2="Network Technician (Cisco Centric)"
-          header="h4"
-          header2="h6"
+          element="h4"
+          element2="h6"
         />
 
-        <img
+        <Img
           className={styles.image}
           src="/images/skills/n+.png"
           alt="comptia n+ logo"
@@ -79,11 +84,11 @@ const Skills = () => {
           className={styles.header}
           title="Website Development"
           title2="Frontend Development"
-          header="h4"
-          header2="h6"
+          element="h4"
+          element2="h6"
         />
 
-        <img
+        <Img
           className={styles.image}
           src="/images/skills/frontend.png"
           alt="comptia n+ logo"

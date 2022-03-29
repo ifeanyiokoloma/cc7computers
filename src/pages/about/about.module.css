@@ -1,43 +1,37 @@
 .container {
   padding: 3rem;
   margin-bottom: 3rem;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 3rem;
-  grid-template-areas:
-    "vision mission"
-    "values values";
 }
 
-.container article {
+.container section {
   text-align: justify;
+  max-width: 800px;
+  margin: auto;
+  padding: 1rem;
 }
 
-.container header {
-  text-decoration: underline;
+.icon {
+  font-size: 3rem;
+  margin: 0 auto;
+  width: 100%;
 }
 
-.vision {
-  grid-area: vision;
-}
-
-.mission {
-  grid-area: mission;
-}
-
-.values {
-  grid-area: values;
-  justify-self: center;
-}
-
-.values header {
+.header {
   text-align: center;
 }
 
-.values ul {
+.values {
   display: flex;
-  gap: 1rem;
+  flex-flow: column;
+  height: 100vh;
+  justify-content: center;
+}
+
+.values ul {
   list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .values ul li::first-letter {
@@ -70,11 +64,4 @@
 .container div {
   padding: 1rem;
   margin-bottom: 1rem;
-}
-
-.container p {
-  font-weight: 400;
-  letter-spacing: 0.01rem;
-  line-height: 2rem;
-  font-size: 1.2rem;
 }
