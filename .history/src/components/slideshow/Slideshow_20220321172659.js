@@ -11,7 +11,13 @@ import { useInView } from "react-intersection-observer";
 
 const Slideshow = () => {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
-  const [computers] = useAdvancedFetch("products", "computer", 5, []);
+  const [computers] = useAdvancedFetch(
+    "products",
+    "computer",
+    "timestamp",
+    5,
+    []
+  );
   return (
     <section
       ref={ref}
