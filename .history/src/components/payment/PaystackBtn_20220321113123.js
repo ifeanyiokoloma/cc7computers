@@ -4,7 +4,7 @@ import useAuth from "../../hooks/useAuth";
 import paystackLogo from "../../data/images/paystack.svg";
 import { v4 as uuidv4 } from "uuid";
 
-function PaystackBtn({ productPrice, className, onSuccess }) {
+function PaystackBtn({ productPrice, className }) {
   const { user } = useAuth();
   const config = {
     reference: uuidv4(),
@@ -46,7 +46,6 @@ function PaystackBtn({ productPrice, className, onSuccess }) {
             alt="paystack logo"
           />
         }
-        onSuccess={onSuccess}
         className={className}
         {...componentProps}
       />
