@@ -62,7 +62,7 @@ const Product = () => {
           filteredProduct.map((product) => {
             const productTitle = `${product && product.brand} ${product.model}`;
             return (
-              <div key={product.id}>
+              <section key={product.id}>
                 <Header
                   element="h1"
                   title={productTitle}
@@ -132,7 +132,7 @@ const Product = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </section>
             );
           })
         ) : (

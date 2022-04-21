@@ -62,11 +62,12 @@ const Product = () => {
           filteredProduct.map((product) => {
             const productTitle = `${product && product.brand} ${product.model}`;
             return (
-              <div key={product.id}>
+              <>
                 <Header
                   element="h1"
                   title={productTitle}
                   className={styles.header}
+                  key={product.id}
                 />
                 <div className={styles.content}>
                   <PhotoFrame className={styles.imageFrame}>
@@ -132,7 +133,7 @@ const Product = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </>
             );
           })
         ) : (
