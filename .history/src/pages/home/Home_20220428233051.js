@@ -12,16 +12,16 @@ const Home = () => {
       <Hero page="home" pageData={home} imgName="operator" />
       <Slideshow />
       <Accessories
+        limit={5}
         header="Accessories"
         link="accessories"
         linkName="Accessories"
-        extent={5}
       />
       <Computers
+        limit={5}
         header="Computers"
         link="computers"
         linkName="Computers"
-        extent={5}
       />
     </main>
   );

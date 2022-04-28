@@ -4,7 +4,7 @@ import Hero from "../../components/hero/Hero";
 import styles from "./home.module.css";
 import Accessories from "../products/Accessories";
 import { home } from "../../data/articles/articles";
-import Computers from "../products/Computers";
+import { Computer } from "@mui/icons-material";
 
 const Home = () => {
   return (
@@ -12,16 +12,16 @@ const Home = () => {
       <Hero page="home" pageData={home} imgName="operator" />
       <Slideshow />
       <Accessories
+        limit={5}
         header="Accessories"
         link="accessories"
         linkName="Accessories"
-        extent={5}
       />
-      <Computers
+      <Computer
+        limit={5}
         header="Computers"
         link="computers"
         linkName="Computers"
-        extent={5}
       />
     </main>
   );

@@ -1,7 +1,10 @@
 import styles from "./products.module.css";
 import PropTypes from "prop-types";
 import useAdvancedFetch from "../../hooks/useAdvancedFetch";
+import { motion } from "framer-motion";
 import Header from "../../components/Header";
+import { Skeleton } from "@mui/material";
+// import Card from "../card/Card";
 import { useEffect, useState } from "react";
 import {
   collection,
@@ -16,19 +19,9 @@ import {
 import { db } from "../../firebase/app";
 import AnimateComponents from "../AnimateComponents";
 import Button from "../button/Button";
-import SingleProduct from "./singleProduct/SingleProduct";
-import ProductsSkeleton from "../skeletons/productSkeleton/ProductsSkeleton";
-import { Link } from "react-router-dom";
-import { AiOutlinePlus } from "react-icons/ai";
+import SingleProduct from "./SingleProduct";
 
-const Products = ({
-  productName,
-  productType,
-  order,
-  extent = 6,
-  link,
-  linkName,
-}) => {
+const Products = ({ productName, productType, order, extent }) => {
   const [next, setNext] = useState();
   const [prev, setPrev] = useState();
   const [gridState, setGridState] = useState("");
@@ -72,7 +65,7 @@ const Products = ({
           collection(db, "products"),
           where("type", "==", productType),
           orderBy("timestamp", "desc"),
-          limit(extent)
+          limit(6)
         );
         break;
     }
@@ -111,6 +104,8 @@ const Products = ({
     const firstOverAllProduct = overAllProducts[0];
     const firstProduct = products[0];
 
+    console.log("overall:", firstOverAllProduct.timestamp);
+    console.log("one:", firstProduct.timestamp);
     if (firstProduct.timestamp !== firstOverAllProduct.timestamp) {
       setLastNext(false);
       setGridState("prev");
@@ -129,54 +124,70 @@ const Products = ({
         <Header element="h2" title={productName} className={styles.header} />
 
         <div className={styles.grid}>
-          {products.length > 0 ? (
-            products.map((product) => <SingleProduct product={product} />)
-          ) : (
-            <ProductsSkeleton />
-          )}
-          {link && (
-            <Link
-              to={link}
-              className="bg-white d-flex justify-content-center align-items-center"
-            >
-              <p className="display-6 text-center p-3">
-                See More {linkName} <AiOutlinePlus />
-              </p>
-            </Link>
-          )}
+          {products.length > 0
+            ? products.map((product) => <SingleProduct product={product} />)
+            : Array.from([1, 2, 3, 4, 5, 6]).map((index) => (
+                <motion.section
+                  whileHover={{ scale: 1.05, transition: { duration: 0.5 } }}
+                  whileTap={{ scale: 0.8, transition: { duration: 0.5 } }}
+                  className={styles.card}
+                  key={index}
+                >
+                  <div className={styles.content}>
+                    <Skeleton
+                      animation="wave"
+                      variant="rectangular"
+                      sx={{ height: 400 }}
+                    />
+                    <section className={styles.text}>
+                      <h1>
+                        <Skeleton
+                          sx={{ width: "30%" }}
+                          animation="wave"
+                          variant="text"
+                        />
+                      </h1>
+                      <p className={styles.price}>
+                        <Skeleton
+                          sx={{ width: "20%" }}
+                          animation="wave"
+                          variant="text"
+                        />
+                      </p>
+                    </section>
+                  </div>
+                </motion.section>
+              ))}
         </div>
-        {!link && (
-          <div className={styles.btns}>
-            <Button
-              disabled={lastPrev && true}
-              btnColor="var(--pri-color)"
-              onClick={handlePrevGrid}
-            >
-              Prev
-            </Button>
+        <div className={styles.btns}>
+          <Button
+            disabled={lastPrev && true}
+            btnColor="var(--pri-color)"
+            onClick={handlePrevGrid}
+          >
+            Prev
+          </Button>
 
-            <Button
-              disabled={lastNext ? true : null}
-              btnColor="var(--pri-color)"
-              onClick={handleNextGrid}
-            >
-              Next
-            </Button>
-          </div>
-        )}
+          <Button
+            disabled={lastNext ? true : null}
+            btnColor="var(--pri-color)"
+            onClick={handleNextGrid}
+          >
+            Next
+          </Button>
+        </div>
       </section>
     </AnimateComponents>
   );
 };
 
 Products.propTypes = {
+  // dir: PropTypes.string,
   products: PropTypes.string,
   productType: PropTypes.string,
   order: PropTypes.string,
   extent: PropTypes.number,
   productName: PropTypes.string,
-  link: PropTypes.string,
-  linkName: PropTypes.string,
 };
 
 Products.defaultProps = {

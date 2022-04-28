@@ -25,7 +25,7 @@ const Products = ({
   productName,
   productType,
   order,
-  extent = 6,
+  extent,
   link,
   linkName,
 }) => {

@@ -25,7 +25,7 @@ const Products = ({
   productName,
   productType,
   order,
-  extent = 6,
+  extent,
   link,
   linkName,
 }) => {
@@ -72,7 +72,7 @@ const Products = ({
           collection(db, "products"),
           where("type", "==", productType),
           orderBy("timestamp", "desc"),
-          limit(extent)
+          limit(6)
         );
         break;
     }
@@ -183,7 +183,7 @@ Products.defaultProps = {
   dir: "products",
   products: "computers",
   productType: "computer",
-  extent: 6,
+  // extent: 6,
   productName: "computers",
 };
 

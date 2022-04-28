@@ -19,16 +19,8 @@ import Button from "../button/Button";
 import SingleProduct from "./singleProduct/SingleProduct";
 import ProductsSkeleton from "../skeletons/productSkeleton/ProductsSkeleton";
 import { Link } from "react-router-dom";
-import { AiOutlinePlus } from "react-icons/ai";
 
-const Products = ({
-  productName,
-  productType,
-  order,
-  extent = 6,
-  link,
-  linkName,
-}) => {
+const Products = ({ productName, productType, order, extent, link }) => {
   const [next, setNext] = useState();
   const [prev, setPrev] = useState();
   const [gridState, setGridState] = useState("");
@@ -72,7 +64,7 @@ const Products = ({
           collection(db, "products"),
           where("type", "==", productType),
           orderBy("timestamp", "desc"),
-          limit(extent)
+          limit(6)
         );
         break;
     }
@@ -135,14 +127,9 @@ const Products = ({
             <ProductsSkeleton />
           )}
           {link && (
-            <Link
-              to={link}
-              className="bg-white d-flex justify-content-center align-items-center"
-            >
-              <p className="display-6 text-center p-3">
-                See More {linkName} <AiOutlinePlus />
-              </p>
-            </Link>
+            <div className="d-flex justify-content-center align-items-center display-6 text-center">
+              <Link to={link}>More Accessories</Link>
+            </div>
           )}
         </div>
         {!link && (
@@ -176,7 +163,6 @@ Products.propTypes = {
   extent: PropTypes.number,
   productName: PropTypes.string,
   link: PropTypes.string,
-  linkName: PropTypes.string,
 };
 
 Products.defaultProps = {

@@ -25,7 +25,7 @@ const Products = ({
   productName,
   productType,
   order,
-  extent = 6,
+  extent,
   link,
   linkName,
 }) => {
@@ -72,7 +72,7 @@ const Products = ({
           collection(db, "products"),
           where("type", "==", productType),
           orderBy("timestamp", "desc"),
-          limit(extent)
+          limit(6)
         );
         break;
     }
@@ -139,7 +139,7 @@ const Products = ({
               to={link}
               className="bg-white d-flex justify-content-center align-items-center"
             >
-              <p className="display-6 text-center p-3">
+              <p className="display-6 text-center p-1">
                 See More {linkName} <AiOutlinePlus />
               </p>
             </Link>

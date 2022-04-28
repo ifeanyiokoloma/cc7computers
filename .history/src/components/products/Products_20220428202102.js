@@ -18,17 +18,9 @@ import AnimateComponents from "../AnimateComponents";
 import Button from "../button/Button";
 import SingleProduct from "./singleProduct/SingleProduct";
 import ProductsSkeleton from "../skeletons/productSkeleton/ProductsSkeleton";
-import { Link } from "react-router-dom";
-import { AiOutlinePlus } from "react-icons/ai";
+import Link from "react-router-dom";
 
-const Products = ({
-  productName,
-  productType,
-  order,
-  extent = 6,
-  link,
-  linkName,
-}) => {
+const Products = ({ productName, productType, order, extent, link }) => {
   const [next, setNext] = useState();
   const [prev, setPrev] = useState();
   const [gridState, setGridState] = useState("");
@@ -72,7 +64,7 @@ const Products = ({
           collection(db, "products"),
           where("type", "==", productType),
           orderBy("timestamp", "desc"),
-          limit(extent)
+          limit(6)
         );
         break;
     }
@@ -135,48 +127,40 @@ const Products = ({
             <ProductsSkeleton />
           )}
           {link && (
-            <Link
-              to={link}
-              className="bg-white d-flex justify-content-center align-items-center"
-            >
-              <p className="display-6 text-center p-3">
-                See More {linkName} <AiOutlinePlus />
-              </p>
-            </Link>
+            <div className="d-flex justify-content-center align-items-center display-6 text-center">
+              <Link to={link}>More Accessories</Link>
+            </div>
           )}
         </div>
-        {!link && (
-          <div className={styles.btns}>
-            <Button
-              disabled={lastPrev && true}
-              btnColor="var(--pri-color)"
-              onClick={handlePrevGrid}
-            >
-              Prev
-            </Button>
+        <div className={styles.btns}>
+          <Button
+            disabled={lastPrev && true}
+            btnColor="var(--pri-color)"
+            onClick={handlePrevGrid}
+          >
+            Prev
+          </Button>
 
-            <Button
-              disabled={lastNext ? true : null}
-              btnColor="var(--pri-color)"
-              onClick={handleNextGrid}
-            >
-              Next
-            </Button>
-          </div>
-        )}
+          <Button
+            disabled={lastNext ? true : null}
+            btnColor="var(--pri-color)"
+            onClick={handleNextGrid}
+          >
+            Next
+          </Button>
+        </div>
       </section>
     </AnimateComponents>
   );
 };
 
 Products.propTypes = {
+  // dir: PropTypes.string,
   products: PropTypes.string,
   productType: PropTypes.string,
   order: PropTypes.string,
   extent: PropTypes.number,
   productName: PropTypes.string,
-  link: PropTypes.string,
-  linkName: PropTypes.string,
 };
 
 Products.defaultProps = {
