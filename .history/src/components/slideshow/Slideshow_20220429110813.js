@@ -11,13 +11,7 @@ import { useInView } from "react-intersection-observer";
 
 const Slideshow = () => {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
-  const [computers] = useAdvancedFetch(
-    "products",
-    "computer",
-    "timestamp",
-    5,
-    []
-  );
+  const [computers] = useAdvancedFetch("products", "computer", 6, []);
   return (
     <section
       ref={ref}
@@ -49,8 +43,8 @@ const Slideshow = () => {
             easing: "ease",
             type: "loop",
             padding: "auto",
+            perPage: 3,
           }}
-          hasSliderWrapper
         >
           {computers.length > 0 ? (
             computers.map((computer) => {

@@ -44,9 +44,6 @@
     padding: 1rem 0;
     border-radius: unset;
   }
-  .slideContainer {
-    padding: 0 1rem;
-  }
 }
 
 @media screen and (max-width: 500px) {

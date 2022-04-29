@@ -47,9 +47,6 @@ const Slideshow = () => {
               800: {
                 perPage: 2,
               },
-              425: {
-                perPage: 1,
-              },
             },
             perPage: 3,
           }}

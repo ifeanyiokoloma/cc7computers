@@ -52,7 +52,7 @@ const Products = ({
         q = query(
           collection(db, "products"),
           where("type", "==", productType),
-          orderBy("timestamp"),
+          orderBy("timestamp", "desc"),
           limit(extent),
           startAfter(next)
         );
@@ -61,7 +61,7 @@ const Products = ({
         q = query(
           collection(db, "products"),
           where("type", "==", productType),
-          orderBy("timestamp"),
+          orderBy("timestamp", "desc"),
           limit(extent),
           endBefore(prev)
         );
@@ -71,7 +71,7 @@ const Products = ({
         q = query(
           collection(db, "products"),
           where("type", "==", productType),
-          orderBy("timestamp"),
+          orderBy("timestamp", "desc"),
           limit(extent)
         );
         break;

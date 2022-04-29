@@ -15,13 +15,13 @@ const Home = () => {
         header="Accessories"
         link="accessories"
         linkName="Accessories"
-        extent={3}
+        extent={2}
       />
       <Computers
         header="Computers"
         link="computers"
         linkName="Computers"
-        extent={3}
+        extent={2}
       />
     </main>
   );

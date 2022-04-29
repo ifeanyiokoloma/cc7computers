@@ -6,7 +6,7 @@
 }
 
 .slideContainer {
-  /* width: 80%; */
+  width: 80%;
   height: 60%;
   margin: 0 auto;
 }
@@ -43,9 +43,6 @@
     margin: 3rem 0;
     padding: 1rem 0;
     border-radius: unset;
-  }
-  .slideContainer {
-    padding: 0 1rem;
   }
 }
 

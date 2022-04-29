@@ -9,6 +9,7 @@
     "@mui/icons-material": "^5.2.5",
     "@mui/material": "^5.2.3",
     "@splidejs/react-splide": "^0.6.17",
+    "@splidejs/splide": "^4.0.1",
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -28,7 +29,7 @@
     "react-intersection-observer": "^8.33.1",
     "react-paystack": "^3.0.5",
     "react-router-dom": "^6.1.0",
-    "react-scripts": "^4.0.3",
+    "react-scripts": "^5.0.1",
     "uuid": "^8.3.2"
   },
   "scripts": {

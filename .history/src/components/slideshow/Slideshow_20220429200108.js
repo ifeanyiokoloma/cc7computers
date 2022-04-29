@@ -20,7 +20,7 @@ const Slideshow = () => {
     >
       <Header
         element="h2"
-        title="New Arrivals"
+        title="New Computers"
         textAlign="center"
         className={styles.header}
       />
@@ -43,14 +43,6 @@ const Slideshow = () => {
             easing: "ease",
             type: "loop",
             padding: "auto",
-            breakpoints: {
-              800: {
-                perPage: 2,
-              },
-              425: {
-                perPage: 1,
-              },
-            },
             perPage: 3,
           }}
         >
