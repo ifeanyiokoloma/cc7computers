@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
 import styles from "./links.module.css";
+import React from "react";
 
 const Links = ({
   links,

@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import styles from "./searchResult.module.css";
+import React from "react";
 
 const SearchResult = ({ filteredProducts, closeSearch, dialogue }) => {
   return (

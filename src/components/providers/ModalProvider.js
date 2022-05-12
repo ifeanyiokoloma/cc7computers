@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ModalContext } from "../context/contexts";
+import React from "react";
 
 const ModalProvider = ({ children }) => {
   const [showVerifyUser, setShowVerifyUser] = useState(false);

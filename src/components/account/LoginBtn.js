@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import Button from "../button/Button";
 import { ModalContext } from "../context/contexts";
 import LogOutBtn from "./LogOutBtn";
+import React from "react";
 
 const LoginBtn = ({ margin, size }) => {
   const { signIn } = useAuth();

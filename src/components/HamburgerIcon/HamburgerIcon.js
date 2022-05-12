@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import React from "react";
 
 const HamburgerIcon = ({ isMenu, setMenu, bgColor, className }) => {
   const toggleMenu = () => setMenu(!isMenu);

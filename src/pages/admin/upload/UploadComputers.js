@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { computer } from "../../../data/data";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { setDoc, updateDoc, doc } from "firebase/firestore";

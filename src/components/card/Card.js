@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import AnimateComponents from "../AnimateComponents";
 import ProductDesc from "../ProductDesc.js/ProductDesc";
 import styles from "./card.module.css";
+import React from "react";
 
 const Card = ({ linkTo, productImage, productID, productPrice }) => {
   return (

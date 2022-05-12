@@ -2,7 +2,7 @@ import { Modal } from "react-bootstrap";
 import { NameForm } from "../form/NameForm";
 import { ModalContext } from "../context/contexts";
 import Header from "../Header";
-import { useContext } from "react";
+import React, { useContext } from "react";
 
 const NameFormModal = () => {
   const { handleCloseNameForm, showNameForm } = useContext(ModalContext);

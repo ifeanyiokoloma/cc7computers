@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 import styles from "../upload/upload.module.css";
+import React from "react";
 
 const Manage = () => {
   return (

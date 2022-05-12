@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import SignInMessage from "./SignInMessage";
+import React from "react";
 
 const ProtectRoute = () => {
   const { loading, signIn } = useAuth();

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import styles from "./button.module.css";
+import React from "react";
 
 const Button = ({
   children,

@@ -24,6 +24,7 @@ import Account from "./pages/account/Account";
 import ProtectRoute from "./components/ProtectRoute";
 import ProtectAdmin from "./components/ProtectAdmin";
 import Payment from "./components/payment/Payment";
+import React from "react";
 
 const Pages = () => {
   // const [products] = useFetchLive("products", []);

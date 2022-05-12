@@ -7,8 +7,8 @@ const TypoBG = ({ children }) => {
         position: "relative",
         background:
           "linear-gradient(rgba(0, 0, 0,.9), rgba(0, 0, 0,.9)), url('./images/bg/typo.jpg') fixed center/cover",
-        color: "white",
-        paddingBottom: "3rem",
+        // color: "white",
+        paddingBottom: "1rem",
       }}
     >
       {children}

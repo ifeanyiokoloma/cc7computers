@@ -6,10 +6,18 @@ import { db } from "../../../firebase/app";
 import useAdvancedFetch from "../../../hooks/useAdvancedFetch";
 import Button from "../../../components/button/Button";
 import Img from "react-cool-img";
+import React from "react";
 
 const ManageAccessory = () => {
   const [isEdit, setIsEdit] = useState(false);
-  const [computers] = useAdvancedFetch("products", "accessory", 0, []);
+  const [accessories] = useAdvancedFetch(
+    "products",
+    "accessory",
+    "timestamp",
+    "desc",
+    0,
+    []
+  );
 
   // Functions
   const activateEditMode = () => {
@@ -25,14 +33,14 @@ const ManageAccessory = () => {
     if (input.value === "") {
       return console.log("enter something to update");
     } else {
-      const computerRef = doc(db, "products", id);
+      const accessoryRef = doc(db, "products", id);
       const name = input.name;
       const value = input.value;
       const inputObj = {
         [name]: value,
       };
       try {
-        await updateDoc(computerRef, inputObj);
+        await updateDoc(accessoryRef, inputObj);
       } catch (error) {
         console.log(error.code);
       }
@@ -40,9 +48,9 @@ const ManageAccessory = () => {
   };
 
   async function handleDelete(id) {
-    const computerRef = doc(db, "products", id);
+    const accessoryRef = doc(db, "products", id);
     try {
-      await deleteDoc(computerRef, id);
+      await deleteDoc(accessoryRef, id);
     } catch (error) {
       console.log(error.message);
     }
@@ -50,15 +58,15 @@ const ManageAccessory = () => {
   return (
     <section className={styles.container}>
       <div className={styles.grid}>
-        {computers.length > 0 ? (
-          computers.map((computer) => {
+        {accessories.length > 0 ? (
+          accessories.map((accessory) => {
             return (
-              <form className="card" key={computer.id}>
+              <form className="card" key={accessory.id}>
                 <div className={styles.imageBox}>
                   <Img
                     className={styles.image}
-                    src={computer.imgSrc}
-                    alt={computer.id}
+                    src={accessory.imgSrc}
+                    alt={accessory.id}
                   />
                 </div>
                 <div className="card-txt">
@@ -70,11 +78,11 @@ const ManageAccessory = () => {
                           className="card-input"
                           type="text"
                           name="Brand"
-                          onBlur={(e) => handleUpdate(e, computer.id)}
-                          placeholder={computer.brand}
+                          onBlur={(e) => handleUpdate(e, accessory.id)}
+                          placeholder={accessory.brand}
                         />
                       ) : (
-                        computer.brand
+                        accessory.brand
                       )}
                     </span>
                   </p>
@@ -86,11 +94,11 @@ const ManageAccessory = () => {
                           className="card-input"
                           type="text"
                           name="Model"
-                          onBlur={(e) => handleUpdate(e, computer.id)}
-                          placeholder={computer.model}
+                          onBlur={(e) => handleUpdate(e, accessory.id)}
+                          placeholder={accessory.model}
                         />
                       ) : (
-                        computer.model
+                        accessory.model
                       )}
                     </span>
                   </p>
@@ -102,11 +110,11 @@ const ManageAccessory = () => {
                           className="card-input"
                           type="text"
                           name="Model"
-                          onBlur={(e) => handleUpdate(e, computer.id)}
-                          placeholder={computer.type}
+                          onBlur={(e) => handleUpdate(e, accessory.id)}
+                          placeholder={accessory.type}
                         />
                       ) : (
-                        computer.type
+                        accessory.type
                       )}
                     </span>
                   </p>
@@ -118,11 +126,11 @@ const ManageAccessory = () => {
                           className="card-input"
                           type="text"
                           name="Model"
-                          onBlur={(e) => handleUpdate(e, computer.id)}
-                          placeholder={computer.name}
+                          onBlur={(e) => handleUpdate(e, accessory.id)}
+                          placeholder={accessory.name}
                         />
                       ) : (
-                        computer.name
+                        accessory.name
                       )}
                     </span>
                   </p>
@@ -134,11 +142,11 @@ const ManageAccessory = () => {
                           className="card-input"
                           type="number"
                           name="quantity"
-                          placeholder={computer.quantity}
-                          onBlur={(e) => handleUpdate(e, computer.id)}
+                          placeholder={accessory.quantity}
+                          onBlur={(e) => handleUpdate(e, accessory.id)}
                         />
                       ) : (
-                        computer.quantity
+                        accessory.quantity
                       )}
                     </span>
                   </p>
@@ -150,11 +158,11 @@ const ManageAccessory = () => {
                           className="card-input"
                           type="number"
                           name="price"
-                          placeholder={computer.price}
-                          onBlur={(e) => handleUpdate(e, computer.id)}
+                          placeholder={accessory.price}
+                          onBlur={(e) => handleUpdate(e, accessory.id)}
                         />
                       ) : (
-                        computer.price
+                        accessory.price
                       )}
                     </span>
                   </p>
@@ -179,7 +187,7 @@ const ManageAccessory = () => {
                     <Button
                       type="button"
                       onClick={() => {
-                        handleDelete(computer.id);
+                        handleDelete(accessory.id);
                       }}
                       btnColor="var(--red-color)"
                     >

@@ -9,34 +9,73 @@ import {
 import { useEffect, useState } from "react";
 import { db } from "../firebase/app";
 
-const useAdvancedFetch = (dir, productType, amount, initialValue) => {
+const useAdvancedFetch = (dir, productType, order, from, amount, initialValue) => {
   const [data, setData] = useState(initialValue);
 
   useEffect(() => {
     let unSubcribe, q;
 
-    if (amount && productType) {
+    if (productType && order && from && amount) {
       q = query(
         collection(db, dir),
         where("type", "==", productType),
-        orderBy("timestamp", "desc"),
+        orderBy(order, from),
+        limit(amount)
+      );
+    } if (!productType && !order && !from && !amount) {
+      q = query(
+        collection(db, dir)
+      );
+    } if (!productType) {
+      q = query(
+        collection(db, dir),
+        orderBy(order, from),
+        limit(amount)
+      );
+    } if (!from) {
+      q = query(
+        collection(db, dir),
+        where("type", "==", productType),
+        orderBy(order),
+        limit(amount)
+      );
+    } if (!amount && !from) {
+      q = query(
+        collection(db, dir),
+        where("type", "==", productType),
+        orderBy(order),
+      );
+    } if (!amount) {
+      q = query(
+        collection(db, dir),
+        where("type", "==", productType),
+        orderBy(order, from),
+      );
+    } 
+
+    /*if (amount && productType ) {
+      q = query(
+        collection(db, dir),
+        where("type", "==", productType),
+        orderBy(order, from),
         limit(amount)
       );
     } else if (productType && !amount) {
       q = query(
         collection(db, dir),
         where("type", "==", productType),
-        orderBy("timestamp", "desc")
+        orderBy(order, from)
       );
-    } else if (amount && !productType) {
+    } 
+    else if (amount && !productType) {
       q = query(
         collection(db, dir),
-        orderBy("timestamp", "desc"),
+        orderBy(order, from),
         limit(amount)
       );
     } else {
-      q = query(collection(db, dir), orderBy("timestamp", "desc"));
-    }
+      q = query(collection(db, dir), orderBy(order, from));
+    }*/
     unSubcribe = onSnapshot(q, (querySnapshot) => {
       const newData = querySnapshot.docs.map((doc) => {
         return { ...doc.data() };

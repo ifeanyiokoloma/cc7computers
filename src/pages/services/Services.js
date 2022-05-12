@@ -5,6 +5,7 @@ import { services } from "../../data/articles/articles";
 import styles from "./services.module.css";
 import { RiComputerLine } from "react-icons/ri";
 import Article from "../../components/article/Article";
+import React from "react";
 
 const Services = () => {
   return (

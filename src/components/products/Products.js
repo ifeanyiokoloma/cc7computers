@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./products.module.css";
 import PropTypes from "prop-types";
 import useAdvancedFetch from "../../hooks/useAdvancedFetch";
@@ -21,14 +22,7 @@ import ProductsSkeleton from "../skeletons/productSkeleton/ProductsSkeleton";
 import { Link } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
 
-const Products = ({
-  productName,
-  productType,
-  order,
-  extent = 6,
-  link,
-  linkName,
-}) => {
+const Products = ({ productName, productType, extent, link, linkName }) => {
   const [next, setNext] = useState();
   const [prev, setPrev] = useState();
   const [gridState, setGridState] = useState("");
@@ -39,7 +33,8 @@ const Products = ({
   const [overAllProducts] = useAdvancedFetch(
     "products",
     productType,
-    order,
+    "timestamp",
+    "asc",
     extent,
     []
   );
@@ -128,7 +123,9 @@ const Products = ({
 
         <div className={styles.grid}>
           {products.length > 0 ? (
-            products.map((product) => <SingleProduct product={product} />)
+            products.map((product) => (
+              <SingleProduct key={product.key} product={product} />
+            ))
           ) : (
             <ProductsSkeleton />
           )}
@@ -181,7 +178,7 @@ Products.defaultProps = {
   dir: "products",
   products: "computers",
   productType: "computer",
-  extent: 6,
+  extent: 8,
   productName: "computers",
 };
 

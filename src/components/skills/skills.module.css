@@ -1,6 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Dosis:wght@300&display=swap");
+
 .skills {
   margin: 0 auto;
   max-width: 800px;
+  color: white;
 }
 
 .skills section {
@@ -21,6 +24,7 @@
 .header {
   grid-area: header;
   text-align: center;
+  font-family: "Dosis", sans-serif;
 }
 
 .image {

@@ -16,6 +16,7 @@ import AnimateComponents from "../../components/AnimateComponents";
 import Skeleton from "@mui/material/Skeleton";
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "../../firebase/app";
+import React from "react";
 
 const Product = () => {
   // const [isAddedToCart, setIsAddedToCart] = useState(

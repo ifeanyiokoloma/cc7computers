@@ -5,6 +5,7 @@ import Feedback from "../../components/feedback/Feedback";
 import { FiPhoneCall } from "react-icons/fi";
 import { HiOutlineOfficeBuilding } from "react-icons/hi";
 import TypoBG from "../../components/TypoBG";
+import React from "react";
 
 const Contact = () => {
   return (

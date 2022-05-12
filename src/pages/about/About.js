@@ -3,10 +3,10 @@ import styles from "./about.module.css";
 // import Employees from "./Employees";
 import { about } from "../../data/articles/articles";
 import TypoBG from "../../components/TypoBG";
-import Header from "../../components/Header";
 import Article from "../../components/article/Article";
 import { IoTelescopeOutline } from "react-icons/io5";
 import { MdDirectionsCar } from "react-icons/md";
+import React from "react";
 
 const About = () => {
   return (
@@ -18,24 +18,36 @@ const About = () => {
             title="Our Vision"
             element="h2"
             icon={<IoTelescopeOutline className={styles.icon} />}
+            textClass={styles.header}
           >
-            To become the model for global computer systems, support service
-            provision, to ensure maximum productivity in the use of computer
-            system, leading to an enhanced perfomance of individuals and
-            organizations, as it relates to computing and business needs.
+            <ul className={styles.visionList}>
+              <li>
+                To become the model for global computer systems support service
+                provision,
+              </li>
+              <li>
+                To ensure maximum productivity in the use of computer system,
+                leading to an enhanced perfomance of individuals and
+                organizations, as it relates to computing and business needs.
+              </li>
+            </ul>
+            <br />
           </Article>
 
           <Article
             element="h2"
             title="Our Mission"
             icon={<MdDirectionsCar className={styles.icon} />}
+            textClass={styles.header}
           >
-            Giving life and power to computing via heaven computing (Gen 1:26,
-            John 14:2)
+            <p className={styles.mission}>
+              Giving life and power to computing <br /> via heaven computing{" "}
+              <br />
+              (Gen 1:26, John 14:2)
+            </p>
           </Article>
 
-          <section className={styles.values}>
-            <Header title="Our Values" element="h2" className={styles.header} />
+          <Article element="h2" title="Our Values" textClass={styles.header}>
             <ul>
               <li>Wisdom</li>
               <li>Integrity</li>
@@ -43,7 +55,7 @@ const About = () => {
               <li>Accountability</li>
               <li>Networking</li>
             </ul>
-          </section>
+          </Article>
         </section>
       </TypoBG>
       {/* <Employees /> */}

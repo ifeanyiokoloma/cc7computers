@@ -1,5 +1,5 @@
 import { sendEmailVerification, updateEmail } from "firebase/auth";
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { emailForm } from "../../data/form";
 import { auth } from "../../firebase/app";
 import { ModalContext } from "../context/contexts";

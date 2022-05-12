@@ -8,6 +8,7 @@ import Logo from "../logo/Logo";
 import Links from "../links/Links";
 import AccountIcon from "../account/AccountIcon";
 import { ModalContext, ShoppingCartContext } from "../context/contexts";
+import React from "react";
 
 const Navbar = ({ isSearch, setIsSearch }) => {
   const [mobileNav, setMobileNav] = useState(false);
@@ -53,11 +54,22 @@ const Navbar = ({ isSearch, setIsSearch }) => {
       {mobileNav && (
         <Links
           extraItem={
-            <BsSearch
+            <span
+              onClick={handleShowCart}
+              className={styles.mobileShoppingCart}
+            >
+              <AiFillShopping fontSize="1rem" cursor="pointer" />
+              <span>Shopping Cart</span>
+            </span>
+          }
+          extraItem2={
+            <span
               onClick={() => handleShowSearch()}
-              size="1rem"
-              style={{ cursor: "pointer" }}
-            />
+              className={styles.mobileSearch}
+            >
+              <BsSearch size="1rem" style={{ cursor: "pointer" }} />
+              <span>Search</span>
+            </span>
           }
           links={mainLinks}
           className={styles.mobileNav}

@@ -1,3 +1,5 @@
+import React from "react";
+
 const Price = ({ amount, size, weight, txtColor, align }) => {
   const stylePrice = {
     fontSize: size,

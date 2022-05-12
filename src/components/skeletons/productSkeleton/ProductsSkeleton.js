@@ -1,6 +1,7 @@
 import styles from "./productsSkeleton.module.css";
 import { motion } from "framer-motion";
 import { Skeleton } from "@mui/material";
+import React from "react";
 
 const ProductsSkeleton = () => {
   return Array.from([1, 2, 3, 4, 5, 6]).map((index) => (

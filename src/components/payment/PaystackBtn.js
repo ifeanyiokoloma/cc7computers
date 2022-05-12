@@ -3,6 +3,7 @@ import { PaystackButton } from "react-paystack";
 import useAuth from "../../hooks/useAuth";
 import paystackLogo from "../../data/images/paystack.svg";
 import { v4 as uuidv4 } from "uuid";
+import React from "react";
 
 function PaystackBtn({ productPrice, className, onSuccess }) {
   const { user } = useAuth();

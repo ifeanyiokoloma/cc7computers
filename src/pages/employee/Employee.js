@@ -1,4 +1,5 @@
 import styles from "./employee.module.css";
+import React from "react";
 
 const Employee = ({ employee }) => {
   return (

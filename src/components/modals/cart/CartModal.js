@@ -10,6 +10,7 @@ import PaystackBtn from "../../payment/PaystackBtn";
 import Price from "../../Price";
 // import useAuth from "../../../hooks/useAuth";
 import SignInMessage from "../../SignInMessage";
+import React from "react";
 
 const CartModal = () => {
   // const { loading, user, signIn, signOut } = useAuth();

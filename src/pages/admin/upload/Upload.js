@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from 'react-router-dom'
 import styles from "./upload.module.css";
+import React from "react";
 
 const Upload = () => {
     return (

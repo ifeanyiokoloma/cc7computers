@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import styles from "./hero.module.css";
 import { useInView } from "react-intersection-observer";
 import Header from "../Header";
+import React from "react";
 
 const Hero = ({ page, imgName, pageData, btn }) => {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
@@ -56,7 +57,7 @@ const Hero = ({ page, imgName, pageData, btn }) => {
       <div className={styles.content}>
         <article className={styles.article}>
           <Header element="h1" title={pageData.heading} />
-          <p className="lead">{pageData.paragraph}</p>
+          <p className={styles.paragraph}>{pageData.paragraph}</p>
         </article>
         <div className={styles.buttons}>
           {pageData.btns &&

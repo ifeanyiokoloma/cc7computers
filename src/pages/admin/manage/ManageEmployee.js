@@ -6,13 +6,15 @@ import { db } from "../../../firebase/app";
 import styles from "./manage.module.css";
 import Img from "react-cool-img";
 import Button from "../../../components/button/Button";
+import React from "react";
 
 const ManageEmployee = () => {
   const [employees] = useFetchLive("employees", []);
   const [isEdit, setIsEdit] = useState(false);
 
   // Functions
-  const activateEditMode = () => {
+  const activateEditMode = (e) => {
+    console.log(e);
     setIsEdit(true);
   };
 

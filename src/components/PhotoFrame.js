@@ -1,3 +1,5 @@
+import React from "react";
+
 const figureStyles = {
   border: "1rem solid",
   borderBottom: "2rem solid",

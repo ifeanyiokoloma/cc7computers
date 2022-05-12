@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { accessory } from "../../../data/data";
 import { db, storage } from "../../../firebase/app";
 import Button from "../../../components/button/Button";
+import React from "react";
 
 const UploadAccessories = () => {
   const [imgProps, setImgProps] = useState({});

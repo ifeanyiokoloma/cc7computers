@@ -6,13 +6,22 @@ import { db } from "../../../firebase/app";
 import useAdvancedFetch from "../../../hooks/useAdvancedFetch";
 import Button from "../../../components/button/Button";
 import Img from "react-cool-img";
+import React from "react";
 
 const ManageComputer = () => {
   const [isEdit, setIsEdit] = useState(false);
-  const [computers] = useAdvancedFetch("products", "computer", 0, []);
+  const [computers] = useAdvancedFetch(
+    "products",
+    "computer",
+    "timestamp",
+    "desc",
+    0,
+    []
+  );
 
   // Functions
-  const activateEditMode = () => {
+  const activateEditMode = (id) => {
+    console.log(id);
     setIsEdit(true);
   };
 
@@ -194,7 +203,7 @@ const ManageComputer = () => {
                     {isEdit ? (
                       <>
                         <Button
-                          onClick={() => cancelEditMode()}
+                          onClick={() => cancelEditMode(computer.id)}
                           btnColor="var(--pri-color)"
                         >
                           cancel edit
@@ -202,7 +211,7 @@ const ManageComputer = () => {
                       </>
                     ) : (
                       <Button
-                        onClick={() => activateEditMode()}
+                        onClick={() => activateEditMode(computer.id)}
                         btnColor="var(--green-color)"
                       >
                         edit

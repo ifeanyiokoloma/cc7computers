@@ -8,10 +8,18 @@ import Header from "../Header";
 import Img from "react-cool-img";
 import ProductDesc from "../ProductDesc.js/ProductDesc";
 import { useInView } from "react-intersection-observer";
+import React from "react";
 
 const Slideshow = () => {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
-  const [computers] = useAdvancedFetch("products", "", 6, []);
+  const [computers] = useAdvancedFetch(
+    "products",
+    "",
+    "timestamp",
+    "desc",
+    6,
+    []
+  );
   return (
     <section
       ref={ref}
@@ -51,7 +59,7 @@ const Slideshow = () => {
                 perPage: 1,
               },
             },
-            perPage: 3,
+            perPage: 2,
           }}
         >
           {computers.length > 0 ? (

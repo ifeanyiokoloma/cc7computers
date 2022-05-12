@@ -1,20 +1,40 @@
-.typoBorder {
-  border: 3px solid;
-  padding: 2rem;
-  border-radius: 10px;
-}
-
 .article {
   display: flex;
   justify-content: center;
+  /* align-items: center; */
   flex-flow: column;
-  align-items: center;
   height: 100vh;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 1rem;
+  gap: 1rem;
+  padding: 0 1rem;
+  margin: auto;
 }
 
-.header {
+.body {
+  font-weight: lighter;
+  font-size: 1.2rem;
+  line-height: 1.7;
+  color: rgb(219, 215, 215);
+}
+
+/* .article > header {
   text-align: center;
+} */
+
+/* .header {
+  font-size: 3rem;
+  font-weight: bolder;
+} */
+
+@media screen and (min-width: 425px) {
+  .article {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .article {
+    max-width: 600px;
+    margin: 0 auto;
+  }
 }

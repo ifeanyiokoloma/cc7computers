@@ -5,6 +5,7 @@ import { useContext, useState } from "react";
 import useFetchLive from "../../hooks/useFetchLive";
 import { Modal } from "react-bootstrap";
 import SearchResult from "./searchResult/SearchResult";
+import React from "react";
 
 const SearchModal = () => {
   let filtered;

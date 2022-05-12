@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Dosis:wght@300&display=swap");
+
 .container {
   height: calc(100vh - 120px);
   position: relative;
@@ -31,6 +33,12 @@
 
 .article h1 {
   color: #fff;
+}
+
+.paragraph {
+  font-family: "Dosis", sans-serif;
+  font-size: 1rem;
+  margin: 0;
 }
 
 .article p {
@@ -101,5 +109,15 @@
   .buttons {
     display: flex;
     flex-flow: column;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .article h1 {
+    font-size: 2rem;
+  }
+  .paragraph {
+    font-size: 1.2rem;
+    line-height: 1.5;
   }
 }

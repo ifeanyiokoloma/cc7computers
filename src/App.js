@@ -10,6 +10,7 @@ import NameFormModal from "./components/modals/NameFormModal";
 import SearchModal from "./components/search/SearchModal";
 import CartModal from "./components/modals/cart/CartModal";
 import InfoModal from "./components/modals/InfoModal";
+import React from "react";
 
 function App() {
   const [isSearch, setIsSearch] = useState(false);

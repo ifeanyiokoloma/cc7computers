@@ -1,6 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import styles from "./admin.module.css";
+import React from "react";
 
 const Admin = () => {
   const {user} = useAuth()

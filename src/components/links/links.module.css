@@ -22,4 +22,7 @@
   .link {
     display: block;
   }
+  .linkItems {
+    justify-content: flex-start;
+  }
 }

@@ -5,6 +5,7 @@ import useAuth from "../../hooks/useAuth";
 import LoginBtn from "../account/LoginBtn";
 import LogOutBtn from "../account/LogOutBtn";
 import { useInView } from "react-intersection-observer";
+import React from "react";
 
 const Footer = () => {
   const { signIn, user } = useAuth();

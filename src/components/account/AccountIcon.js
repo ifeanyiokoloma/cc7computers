@@ -2,6 +2,7 @@ import { MdAccountCircle } from "react-icons/md";
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import LoginBtn from "./LoginBtn";
+import React from "react";
 
 const AccountIcon = () => {
   const { signIn } = useAuth();

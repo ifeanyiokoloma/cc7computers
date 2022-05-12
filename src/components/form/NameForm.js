@@ -3,6 +3,7 @@ import { useState } from "react";
 import { nameForm } from "../../data/form";
 import { auth } from "../../firebase/app";
 import Form from "./Form";
+import React from "react";
 
 export const NameForm = () => {
   const [info, setInfo] = useState("");

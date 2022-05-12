@@ -1,13 +1,14 @@
 import { motion } from "framer-motion";
 import Card from "../../card/Card";
 import styles from "./singleProduct.module.css";
+import React from "react";
 
-const SingleProduct = ({ product }) => {
+const SingleProduct = ({ product, key }) => {
   const productLink = `/${product.type}/${product.id}`;
   const productID = `${product.brand} ${product.model}`;
   return (
     <motion.section
-      key={product.id}
+      key={key}
       whileHover={{ scale: 1.05, transition: { duration: 0.5 } }}
       whileTap={{ scale: 0.8, transition: { duration: 0.5 } }}
       className={styles.card}

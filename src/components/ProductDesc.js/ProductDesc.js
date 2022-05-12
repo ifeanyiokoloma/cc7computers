@@ -1,5 +1,6 @@
 import Header from "../Header";
 import Price from "../Price";
+import React from "react";
 
 const ProductDesc = ({ title, productPrice, className }) => {
   return (

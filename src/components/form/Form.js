@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { Button } from "react-bootstrap";
 import styles from "./form.module.css";
+import React from "react";
 
 const Form = ({
   inputs,

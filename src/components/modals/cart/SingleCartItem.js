@@ -4,6 +4,7 @@ import styles from "./cart.module.css";
 import { AiOutlineClose } from "react-icons/ai";
 import { auth, db } from "../../../firebase/app";
 import { deleteDoc, doc } from "firebase/firestore";
+import React from "react";
 
 const SingleCartItem = ({ product }) => {
   async function handleDeleteProduct(id) {

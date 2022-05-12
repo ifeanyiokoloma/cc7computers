@@ -2,6 +2,7 @@ import styles from "./shop.module.css";
 import Computers from "../products/Computers";
 import Accessories from "../products/Accessories";
 import PropTypes from "prop-types";
+import React from "react";
 
 const Shop = () => {
   return (

@@ -12,6 +12,7 @@ import Form from "../form/Form";
 import { ModalContext } from "../context/contexts";
 import Header from "../Header";
 import { Modal } from "react-bootstrap";
+import React from "react";
 
 const VerifyUser = () => {
   // Declared Variables starts here
