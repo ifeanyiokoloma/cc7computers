@@ -29,11 +29,7 @@ const Article = ({
         // textClass={textClass}
         txtSize="2rem"
       />
-      <div
-        style={article.body}
-        // className="fs-4 fw-lighter lh-base"
-        className={styles.body}
-      >
+      <div style={article.body} className={styles.body}>
         {children}
       </div>
     </article>

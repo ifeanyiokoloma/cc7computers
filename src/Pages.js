@@ -14,101 +14,49 @@ import Accessories from "./pages/products/Accessories";
 import ManageAccessory from "./pages/admin/manage/ManageAccessory";
 import ManageComputer from "./pages/admin/manage/ManageComputer";
 import ManageEmployee from "./pages/admin/manage/ManageEmployee";
-import useFetchLive from "./hooks/useFetchLive";
 import About from "./pages/about/About.js";
 import Contact from "./pages/contact/Contact.js";
 import Services from "./pages/services/Services";
-// import Employees from "./pages/about/Employees";
-import Employee from "./pages/employee/Employee";
 import Account from "./pages/account/Account";
 import ProtectRoute from "./components/ProtectRoute";
 import ProtectAdmin from "./components/ProtectAdmin";
 import Payment from "./components/payment/Payment";
 import React from "react";
+import Team from "./components/team/Team";
 
 const Pages = () => {
-  // const [products] = useFetchLive("products", []);
-  const [employees] = useFetchLive("employees", []);
   return (
     <>
       <Routes>
-        <Route
-          path={"/:productName/:productID"}
-          caseSensitive={true}
-          element={<Product />}
-        />
+        <Route path={"/:productName/:productID"} element={<Product />} />
         <Route element={<ProtectRoute />}>
-          <Route
-            path="/my-account"
-            caseSensitive={true}
-            element={<Account />}
-          />
-          <Route path="/payment" caseSensitive={true} element={<Payment />} />
+          <Route path="/my-account" element={<Account />} />
+          <Route path="/payment" element={<Payment />} />
         </Route>
         <Route element={<ProtectAdmin />}>
           <Route path="/admin" element={<Admin />}>
-            <Route path="manage" caseSensitive={true} element={<Manage />}>
-              <Route
-                path="employees"
-                caseSensitive={true}
-                element={<ManageEmployee />}
-              />
-              <Route
-                path="accessories"
-                caseSensitive={true}
-                element={<ManageAccessory />}
-              />
-              <Route
-                path="computers"
-                caseSensitive={true}
-                element={<ManageComputer />}
-              />
+            <Route path="manage" element={<Manage />}>
+              <Route path="employees" element={<ManageEmployee />} />
+              <Route path="accessories" element={<ManageAccessory />} />
+              <Route path="computers" element={<ManageComputer />} />
             </Route>
-            <Route path="upload" caseSensitive={true} element={<Upload />}>
-              <Route
-                path="computers"
-                caseSensitive={true}
-                element={<UploadComputers />}
-              />
-              <Route
-                path="employees"
-                caseSensitive={true}
-                element={<UploadEmployees />}
-              />
-              <Route
-                path="accessories"
-                caseSensitive={true}
-                element={<UploadAccessories />}
-              />
+            <Route path="upload" element={<Upload />}>
+              <Route path="computers" element={<UploadComputers />} />
+              <Route path="employees" element={<UploadEmployees />} />
+              <Route path="accessories" element={<UploadAccessories />} />
             </Route>
           </Route>
         </Route>
 
-        <Route index path="/" caseSensitive={true} element={<Home />} />
-        <Route path="/shop" caseSensitive={true} element={<Shop />} />
-        <Route path="/about" caseSensitive={true} element={<About />} />
-        <Route path="/contact" caseSensitive={true} element={<Contact />} />
-        <Route path="/services" caseSensitive={true} element={<Services />} />
-        <Route path="computers" caseSensitive={true} element={<Computers />} />
-        <Route
-          path="accessories"
-          caseSensitive={true}
-          element={<Accessories />}
-        />
-        <Route path="computers" caseSensitive={true} element={<Computers />} />
-        {/* <Route path="/employees" caseSensitive={true} element={<Employees />} /> */}
-
-        {employees.map((employee) => {
-          return (
-            <Route
-              key={employee.id}
-              employee={employee}
-              path={`/${employee.type}/${employee.id}`}
-              caseSensitive={true}
-              element={<Employee employee={employee} />}
-            />
-          );
-        })}
+        <Route index path="/" element={<Home />} />
+        <Route path="/shop" element={<Shop />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="computers" element={<Computers />} />
+        <Route path="accessories" element={<Accessories />} />
+        <Route path="computers" element={<Computers />} />
+        <Route path="/team" element={<Team />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>

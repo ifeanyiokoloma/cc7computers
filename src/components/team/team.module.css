@@ -1,0 +1,22 @@
+.imageBox {
+  height: calc(100vh - 60px);
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .imageBox {
+  height: calc(100vh - 60px);
+  width: 50%;
+  margin: auto;
+}
+}
+
+
+/* 
+
+
+@media screen and (min-width: 1024px) {
+  .image {
+    height: unset;
+  }
+} */
