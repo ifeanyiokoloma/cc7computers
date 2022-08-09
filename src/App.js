@@ -11,6 +11,8 @@ import SearchModal from "./components/search/SearchModal";
 import CartModal from "./components/modals/cart/CartModal";
 import InfoModal from "./components/modals/InfoModal";
 import React from "react";
+import SignIn from "./components/account/SignIn/SignIn";
+import SignUp from "./components/account/signUp/SignUp";
 
 function App() {
   const [isSearch, setIsSearch] = useState(false);
@@ -24,6 +26,8 @@ function App() {
   return (
     <>
       <Navbar isSearch={isSearch} setIsSearch={setIsSearch} />
+      <SignIn />
+      <SignUp />
       <InfoModal />
       <EmailFormModal />
       <NameFormModal />

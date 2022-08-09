@@ -11,14 +11,14 @@ const LoginBtn = ({ margin, size }) => {
     fontWeight: 600,
   };
 
-  const { handleShowVerifyUser } = useContext(ModalContext);
+  const { openSignIn } = useContext(ModalContext);
 
   return (
     <div>
       {signIn && <LogOutBtn />}
       {!signIn && (
         <Button
-          onClick={() => handleShowVerifyUser()}
+          onClick={() => openSignIn()}
           style={login}
           type="button"
           btnColor="var(--pri-color)"

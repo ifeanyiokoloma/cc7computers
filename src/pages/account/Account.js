@@ -27,16 +27,6 @@ const Account = () => {
     setVerified(user.emailVerified);
   }, [user.emailVerified]);
 
-  function formatPhoneNumber(phoneNumberString) {
-    var cleaned = ("" + phoneNumberString).replace(/\D/g, "");
-    var match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/);
-    if (match) {
-      var intlCode = match[1] ? "+1 " : "";
-      return [intlCode, "(", match[2], ") ", match[3], "-", match[4]].join("");
-    }
-    return null;
-  }
-
   console.log(user.phoneNumber);
 
   return (
@@ -51,7 +41,7 @@ const Account = () => {
       <div className={styles.content}>
         <div className={styles.phoneNumber}>
           <b>Your PhoneNumber</b>
-          <em>{formatPhoneNumber(user.phoneNumber)}</em>
+          <em>{user.phoneNumber}</em>
         </div>
 
         <div className={styles.name}>

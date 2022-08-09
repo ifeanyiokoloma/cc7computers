@@ -8,6 +8,26 @@ const ModalProvider = ({ children }) => {
   const [showNameForm, setShowNameForm] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
+  const [signUp, setSignUp] = useState(false);
+  const [signIn, setSignIn] = useState(false);
+
+  // Create SignUp close/open Function
+  const openSignUp = () => {
+    setSignUp(true);
+  };
+
+  const closeSignUp = () => {
+    setSignUp(false);
+  };
+
+  // Create SignIn close/open Function
+  const openSignIn = () => {
+    setSignIn(true);
+  };
+
+  const closeSignIn = () => {
+    setSignIn(false);
+  };
 
   // Show Modal Functions
   function handleShowSearch() {
@@ -61,6 +81,12 @@ const ModalProvider = ({ children }) => {
         handleCloseNameForm,
         handleCloseSearch,
         handleCloseInfo,
+        openSignUp,
+        openSignIn,
+        closeSignUp,
+        closeSignIn,
+        signUp,
+        signIn,
       }}
     >
       {children}

@@ -10,16 +10,19 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import ModalProvider from "./components/providers/ModalProvider";
 import ShoppingCartProvider from "./components/providers/ShoppingCartProvider";
+import { SnackbarProvider } from "notistack";
 
 ReactDOM.render(
   <StrictMode>
-    <ModalProvider>
-      <BrowserRouter>
-        <ShoppingCartProvider>
-          <App />
-        </ShoppingCartProvider>
-      </BrowserRouter>
-    </ModalProvider>
+    <SnackbarProvider>
+      <ModalProvider>
+        <BrowserRouter>
+          <ShoppingCartProvider>
+            <App />
+          </ShoppingCartProvider>
+        </BrowserRouter>
+      </ModalProvider>
+    </SnackbarProvider>
   </StrictMode>,
   document.getElementById("root")
 );
