@@ -18,11 +18,16 @@ import React, { useContext, forwardRef, useState } from "react";
 import { ModalContext } from "../../context/contexts";
 import {
   GoogleAuthProvider,
-  FacebookAuthProvider,
+  // FacebookAuthProvider,
   signInWithRedirect,
 } from "firebase/auth";
 import { auth } from "../../../firebase/app";
-import { Facebook, Google, Close, Lock } from "@mui/icons-material";
+import {
+  // Facebook,
+  Google,
+  Close,
+  Lock,
+} from "@mui/icons-material";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useSnackbar } from "notistack";
 
@@ -102,11 +107,11 @@ export default function SignIn() {
     await signInWithRedirect(auth, provider);
   };
 
-  const fbSignIn = async () => {
-    const provider = new FacebookAuthProvider();
+  // const fbSignIn = async () => {
+  //   const provider = new FacebookAuthProvider();
 
-    await signInWithRedirect(auth, provider);
-  };
+  //   await signInWithRedirect(auth, provider);
+  // };
 
   const handleClose = () => {
     window.location.reload();
@@ -160,7 +165,7 @@ export default function SignIn() {
             >
               Sign in with Google
             </Button>
-            <Button
+            {/* <Button
               style={{
                 margin: ".5rem auto",
                 background: "#3b5998",
@@ -171,7 +176,7 @@ export default function SignIn() {
               onClick={fbSignIn}
             >
               Sign in with Facebook
-            </Button>
+            </Button> */}
             <Box
               component="form"
               noValidate
