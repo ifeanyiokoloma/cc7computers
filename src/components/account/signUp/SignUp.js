@@ -300,7 +300,7 @@ export default function SignUp() {
                   <Button
                     sx={{ textTransform: "unset", textDecoration: "underline" }}
                     onClick={() => {
-                      handleClose();
+                      closeSignUp();
                       openSignIn();
                     }}
                   >
