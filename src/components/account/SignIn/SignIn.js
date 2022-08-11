@@ -13,6 +13,10 @@ import {
   Box,
   Alert,
   AlertTitle,
+  InputAdornment,
+  FormControl,
+  InputLabel,
+  FilledInput,
 } from "@mui/material";
 import React, { useContext, forwardRef, useState } from "react";
 import { ModalContext } from "../../context/contexts";
@@ -27,6 +31,8 @@ import {
   Google,
   Close,
   Lock,
+  Visibility,
+  VisibilityOff,
 } from "@mui/icons-material";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useSnackbar } from "notistack";
@@ -39,6 +45,10 @@ const Transition = forwardRef(function Transition(props, ref) {
 
 export default function SignIn() {
   const [error, setError] = useState("");
+  const [values, setValues] = useState({
+    password: "",
+    showPassword: false,
+  });
   const { enqueueSnackbar } = useSnackbar("");
 
   const handleSubmit = (event) => {
@@ -113,9 +123,23 @@ export default function SignIn() {
   //   await signInWithRedirect(auth, provider);
   // };
 
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
+
   const handleClose = () => {
     window.location.reload();
     closeSignIn();
+  };
+  const handleClickShowPassword = () => {
+    setValues({
+      ...values,
+      showPassword: !values.showPassword,
+    });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
   };
 
   const { signIn, closeSignIn, openSignUp } = useContext(ModalContext);
@@ -192,17 +216,34 @@ export default function SignIn() {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                variant="filled"
               />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
+              <FormControl fullWidth margin="normal" required variant="filled">
+                <InputLabel htmlFor="password">Password</InputLabel>
+                <FilledInput
+                  name="password"
+                  id="password"
+                  type={values.showPassword ? "text" : "password"}
+                  value={values.password}
+                  onChange={handleChange("password")}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {values.showPassword ? (
+                          <VisibilityOff />
+                        ) : (
+                          <Visibility />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
               <Button
                 type="submit"
                 fullWidth
