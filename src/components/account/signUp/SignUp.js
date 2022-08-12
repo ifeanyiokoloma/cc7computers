@@ -1,4 +1,4 @@
-import React, { forwardRef, useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {
   Container,
@@ -17,7 +17,6 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  Slide,
 } from "@mui/material";
 import { Close, Lock } from "@mui/icons-material";
 import { ModalContext } from "../../context/contexts";
@@ -28,12 +27,9 @@ import { auth, db } from "../../../firebase/app";
 import { doc, setDoc } from "firebase/firestore";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { useSnackbar } from "notistack";
+import { Transition } from "../../Functions/Functions";
 
 const theme = createTheme();
-
-const Transition = forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
 
 export default function SignUp() {
   const [startDate, setStartDate] = useState(new Date());

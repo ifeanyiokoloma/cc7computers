@@ -13,6 +13,8 @@ import InfoModal from "./components/modals/InfoModal";
 import React from "react";
 import SignIn from "./components/account/SignIn/SignIn";
 import SignUp from "./components/account/signUp/SignUp";
+import ForgetPassword from "./components/account/SignIn/ForgetPassword";
+import Response from "./components/Response/Response";
 
 function App() {
   const [isSearch, setIsSearch] = useState(false);
@@ -26,6 +28,8 @@ function App() {
   return (
     <>
       <Navbar isSearch={isSearch} setIsSearch={setIsSearch} />
+      <Response />
+      <ForgetPassword />
       <SignIn />
       <SignUp />
       <InfoModal />

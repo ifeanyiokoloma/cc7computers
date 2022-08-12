@@ -1,6 +1,5 @@
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {
-  Slide,
   Typography,
   Grid,
   Container,
@@ -18,7 +17,7 @@ import {
   InputLabel,
   FilledInput,
 } from "@mui/material";
-import React, { useContext, forwardRef, useState } from "react";
+import React, { useContext, useState } from "react";
 import { ModalContext } from "../../context/contexts";
 import {
   GoogleAuthProvider,
@@ -36,12 +35,9 @@ import {
 } from "@mui/icons-material";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useSnackbar } from "notistack";
+import { Transition } from "../../Functions/Functions";
 
 const theme = createTheme();
-
-const Transition = forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
 
 export default function SignIn() {
   const [error, setError] = useState("");
@@ -50,6 +46,14 @@ export default function SignIn() {
     showPassword: false,
   });
   const { enqueueSnackbar } = useSnackbar("");
+  const { signIn, closeSignIn, openSignUp, openForgetPwd } = useContext(
+    ModalContext
+  );
+
+  const handleForgetPwd = () => {
+    closeSignIn();
+    openForgetPwd();
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -141,9 +145,6 @@ export default function SignIn() {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-
-  const { signIn, closeSignIn, openSignUp } = useContext(ModalContext);
-
   return (
     <ThemeProvider theme={theme}>
       <Dialog
@@ -266,6 +267,7 @@ export default function SignIn() {
                 <Grid item xs>
                   <Button
                     sx={{ textTransform: "unset", textDecoration: "underline" }}
+                    onClick={handleForgetPwd}
                   >
                     Forgot password?
                   </Button>

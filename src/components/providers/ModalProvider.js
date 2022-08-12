@@ -10,6 +10,27 @@ const ModalProvider = ({ children }) => {
   const [showInfo, setShowInfo] = useState(false);
   const [signUp, setSignUp] = useState(false);
   const [signIn, setSignIn] = useState(false);
+  const [forgetPwd, setForgetPwd] = useState(false);
+  const [response, setResponse] = useState(false);
+  const [message, setMessage] = useState("");
+
+  // Create Response close/open Function
+  const openResponse = () => {
+    setResponse(true);
+  };
+
+  const closeResponse = () => {
+    setResponse(false);
+  };
+
+  // Create ForgetPwd close/open Function
+  const openForgetPwd = () => {
+    setForgetPwd(true);
+  };
+
+  const closeForgetPwd = () => {
+    setForgetPwd(false);
+  };
 
   // Create SignUp close/open Function
   const openSignUp = () => {
@@ -87,6 +108,14 @@ const ModalProvider = ({ children }) => {
         closeSignIn,
         signUp,
         signIn,
+        forgetPwd,
+        openForgetPwd,
+        closeForgetPwd,
+        message,
+        setMessage,
+        response,
+        openResponse,
+        closeResponse,
       }}
     >
       {children}
