@@ -1,4 +1,4 @@
-import { Lock } from "@mui/icons-material";
+import { Lock, Close } from "@mui/icons-material";
 import {
   Alert,
   AlertTitle,
@@ -9,6 +9,7 @@ import {
   CssBaseline,
   Dialog,
   Grid,
+  IconButton,
   TextField,
   Typography,
 } from "@mui/material";
@@ -82,6 +83,15 @@ const ForgetPassword = () => {
       onClose={handleClose}
       TransitionComponent={Transition}
     >
+      <IconButton
+        sx={{ position: "absolute", top: 10, right: 10 }}
+        aria-label="close"
+        color="error"
+        size="large"
+        onClick={closeForgetPwd}
+      >
+        <Close fontSize="inherit" />
+      </IconButton>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
