@@ -17,8 +17,10 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  InputAdornment,
+  FilledInput,
 } from "@mui/material";
-import { Close, Lock } from "@mui/icons-material";
+import { Close, Lock, Visibility, VisibilityOff } from "@mui/icons-material";
 import { ModalContext } from "../../context/contexts";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -32,19 +34,22 @@ import { Transition } from "../../Functions/Functions";
 const theme = createTheme();
 
 export default function SignUp() {
-  const [startDate, setStartDate] = useState(new Date());
-  const [gender, setGender] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [values, setValues] = useState({
+    password: "",
+    gender: "",
+    error: "",
+    startDate: "",
+    loading: false,
+  });
   const { enqueueSnackbar } = useSnackbar();
 
-  const handleChange = (event) => {
-    setGender(event.target.value);
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setLoading(true);
+    setValues({ ...values, loading: true });
     const data = new FormData(event.currentTarget);
 
     const tel = data.get("tel");
@@ -85,28 +90,36 @@ export default function SignUp() {
       })
       .catch((error) => {
         const errorCode = error.code;
-        setLoading(false);
+        // setLoading(false);
+        setValues({ ...values, loading: false });
         switch (errorCode) {
           case "auth/email-already-in-use":
-            setError("Already exists an account with the given email address");
+            // setError("Already exists an account with the given email address");
+            setValues({
+              ...values,
+              error: "Already exists an account with the given email address",
+            });
             enqueueSnackbar(
               "Already exists an account with the given email address",
               { variant: "error" }
             );
             break;
           case "auth/invalid-email":
-            setError("Email address is not valid");
+            // setError("Email address is not valid");
+            setValues({ ...values, error: "Email address is not valid" });
             enqueueSnackbar("Email address is not valid", { variant: "error" });
             break;
           case "auth/weak-password":
-            setError("Password is not strong enough");
+            // setError("Password is not strong enough");
+            setValues({ ...values, error: "Password is not strong enough" });
             enqueueSnackbar("Password is not strong enough", {
               variant: "error",
             });
             break;
 
           default:
-            setError("Error Unknown");
+            // setError("Error Unknown");
+            setValues({ ...values, error: "Error Unknown" });
             enqueueSnackbar("Error Unknown", { variant: "error" });
             break;
         }
@@ -115,12 +128,24 @@ export default function SignUp() {
   };
 
   const handleClose = () => {
-    setError("");
+    // setError("");
+    setValues({ ...values, error: "" });
     window.location.reload();
     closeSignUp();
   };
 
   const { signUp, closeSignUp, openSignIn } = useContext(ModalContext);
+
+  const handleClickShowPassword = () => {
+    setValues({
+      ...values,
+      showPassword: !values.showPassword,
+    });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -155,12 +180,7 @@ export default function SignUp() {
             <Typography component="h1" variant="h5">
               Sign up
             </Typography>
-            <Box
-              component="form"
-              noValidate
-              onSubmit={handleSubmit}
-              sx={{ mt: 3 }}
-            >
+            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
@@ -208,49 +228,33 @@ export default function SignUp() {
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    autoComplete="new-password"
-                    variant="filled"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <div className="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root">
-                    <label
-                      className="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-filled MuiFormLabel-root MuiFormLabel-colorPrimary MuiFormLabel-filled Mui-required css-o943dk-MuiFormLabel-root-MuiInputLabel-root"
-                      data-shrink="true"
-                      htmlFor="dob"
-                      id="dob-label"
-                    >
-                      Date Of Birth
-                      <span
-                        aria-hidden="true"
-                        className="MuiInputLabel-asterisk MuiFormLabel-asterisk css-wgai2y-MuiFormLabel-asterisk"
-                      >
-                         *
-                      </span>
-                    </label>
-                    <div className="MuiFilledInput-root MuiFilledInput-underline MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-gjbq6i-MuiInputBase-root-MuiFilledInput-root">
-                      <DatePicker
-                        dateFormat="dd/MM/yyyy"
-                        selected={startDate}
-                        onChange={(date) => setStartDate(date)}
-                        className="MuiFilledInput-input MuiInputBase-input css-10botns-MuiInputBase-input-MuiFilledInput-input"
-                        id="dob"
-                        name="dob"
-                        onFocus={(e) => {
-                          e.currentTarget.parentElement.parentElement.parentElement.classList.add(
-                            "Mui-focused"
-                          );
-                        }}
-                      />
-                    </div>
-                  </div>
+                  <FormControl fullWidth required variant="filled">
+                    <InputLabel htmlFor="password">Password</InputLabel>
+                    <FilledInput
+                      required
+                      name="password"
+                      id="password"
+                      type={values.showPassword ? "text" : "password"}
+                      value={values.password}
+                      onChange={handleChange("password")}
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge="end"
+                          >
+                            {values.showPassword ? (
+                              <VisibilityOff />
+                            ) : (
+                              <Visibility />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                    />
+                  </FormControl>
                 </Grid>
                 <Grid item xs={12}>
                   <FormControl variant="filled" sx={{ width: "100%" }}>
@@ -259,22 +263,44 @@ export default function SignUp() {
                       labelId="gender"
                       id="gender"
                       name="gender"
-                      value={gender}
-                      onChange={handleChange}
+                      value={values.gender}
+                      onChange={handleChange("gender")}
                       required
                     >
-                      <MenuItem value="">
+                      {/* <MenuItem value="">
                         <em>None</em>
-                      </MenuItem>
+                      </MenuItem> */}
                       <MenuItem value="male">Male</MenuItem>
                       <MenuItem value="female">Female</MenuItem>
                     </Select>
                   </FormControl>
                 </Grid>
+                <Grid item xs={12}>
+                  <DatePicker
+                    dateFormat="dd/MM/yyyy"
+                    placeholderText="Click to select your date of birth"
+                    selected={values.startDate}
+                    onChange={(date) =>
+                      setValues({ ...values, startDate: date })
+                    }
+                    className="form-control form-control-lg"
+                    id="dob"
+                    name="dob"
+                    showYearDropdown
+                    scrollableYearDropdown
+                    yearDropdownItemNumber={15}
+                    showMonthDropdown
+                    dropdownMode="select"
+                    todayButton="Choose your date of birth"
+                    withPortal
+                    openToDate={new Date()}
+                    maxDate={new Date()}
+                    required
+                  />
+                </Grid>
               </Grid>
-
               <LoadingButton
-                loading={loading}
+                loading={values.loading}
                 variant="contained"
                 fullWidth
                 sx={{ mt: 3, mb: 2 }}
@@ -283,11 +309,11 @@ export default function SignUp() {
                 Submit
               </LoadingButton>
 
-              {error ? (
+              {values.error ? (
                 <Grid item xs={12}>
                   <Alert severity="error">
                     <AlertTitle>Error</AlertTitle>
-                    {error}
+                    {values.error}
                   </Alert>
                 </Grid>
               ) : null}
