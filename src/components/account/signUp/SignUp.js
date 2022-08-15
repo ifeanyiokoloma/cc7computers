@@ -127,10 +127,14 @@ export default function SignUp() {
       });
   };
 
+  const resetForm = () => {
+    document.getElementById("signupForm").reset();
+  };
+
   const handleClose = () => {
     // setError("");
     setValues({ ...values, error: "" });
-    window.location.reload();
+    resetForm();
     closeSignUp();
   };
 
@@ -180,7 +184,12 @@ export default function SignUp() {
             <Typography component="h1" variant="h5">
               Sign up
             </Typography>
-            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <Box
+              component="form"
+              id="signupForm"
+              onSubmit={handleSubmit}
+              sx={{ mt: 3 }}
+            >
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField

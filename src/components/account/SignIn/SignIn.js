@@ -131,10 +131,15 @@ export default function SignIn() {
     setValues({ ...values, [prop]: event.target.value });
   };
 
+  const resetForm = () => {
+    document.getElementById("signinForm").reset();
+  };
+
   const handleClose = () => {
-    window.location.reload();
+    resetForm();
     closeSignIn();
   };
+
   const handleClickShowPassword = () => {
     setValues({
       ...values,
@@ -205,6 +210,7 @@ export default function SignIn() {
             <Box
               component="form"
               noValidate
+              id="signinForm"
               onSubmit={handleSubmit}
               sx={{ mt: 1 }}
             >
