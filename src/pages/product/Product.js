@@ -1,55 +1,66 @@
-// import { localStorage } from "es-storage";
+import useLocalStorage from "use-local-storage";
 import { useParams } from "react-router-dom";
-import Header from "../../components/Header";
 import useFetchLive from "../../hooks/useFetchLive";
-import styles from "./product.module.css";
-import Button from "../../components/button/Button";
-import Paper from "../../components/paper/Paper";
-import PhotoFrame from "../../components/PhotoFrame";
 import Img from "react-cool-img";
-import {
-  ModalContext,
-  ShoppingCartContext,
-} from "../../components/context/contexts";
-import { useContext } from "react";
-import AnimateComponents from "../../components/AnimateComponents";
-import Skeleton from "@mui/material/Skeleton";
-import { doc, setDoc } from "firebase/firestore";
+import { ShoppingCartContext } from "../../components/context/contexts";
+import React, { useContext } from "react";
+import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { auth, db } from "../../firebase/app";
-import React from "react";
+import useAuth from "../../hooks/useAuth";
+import { Filter } from "../../components/Functions/Functions";
+import { Container } from "@mui/system";
+import {
+  Button,
+  Grid,
+  List,
+  ListItem,
+  ListItemText,
+  Stack,
+  Typography,
+} from "@mui/material";
+import {
+  DescPaper,
+  PhotoFrame,
+  PriceTag,
+  ProductContainer,
+  ProductTitle,
+} from "./StyledProduct";
+import Price from "../../components/Price";
+import { useSnackbar } from "notistack";
+import ProductSkeleton from "./ProductSkeleton";
 
 const Product = () => {
-  // const [isAddedToCart, setIsAddedToCart] = useState(
-  //   localStorage.get("isAddedToCart") || false
-  // );
+  const [userCart, setUserCart] = useLocalStorage("cart", []);
+  const { signIn } = useAuth();
+  const { enqueueSnackbar } = useSnackbar();
 
   const [products] = useFetchLive("products", []);
   const { productID } = useParams();
-  const { handleShowCart } = useContext(ShoppingCartContext);
-  const { handleShowInfo } = useContext(ModalContext);
-
-  const filteredProduct = products.filter(
-    (product) => product.id === productID
-  );
+  const { openCart } = useContext(ShoppingCartContext);
 
   const addToCart = () => {
-    const addToUserCart = async (item, itemID) => {
-      const userIdRef = doc(db, auth.currentUser.uid, itemID);
-      await setDoc(userIdRef, item)
-        .then(() => handleShowInfo())
+    if (signIn) {
+      const cartRef = doc(db, "customers", auth.currentUser.uid);
+      updateDoc(cartRef, {
+        cart: arrayUnion(productID),
+      })
+        .then(() =>
+          enqueueSnackbar("Product has been added to your cart", {
+            variant: "success",
+          })
+        )
         .catch((err) => console.log(err.code));
-    };
-    filteredProduct.map((product) => {
-      return addToUserCart(product, product.id);
-    });
-    // setIsAddedToCart(true);
-    // localStorage.setObject("cart", cart);
-    // localStorage.set("isAddedToCart", true);
+    } else {
+      if (userCart.includes(productID)) {
+        return null;
+      }
+      setUserCart([...userCart, productID]);
+    }
   };
 
-  const handlePayNow = () => {
+  const payNow = () => {
     addToCart();
-    handleShowCart();
+    openCart();
   };
 
   const handleAddToCart = () => {
@@ -57,194 +68,114 @@ const Product = () => {
   };
 
   return (
-    <AnimateComponents>
-      <section className={styles.container}>
-        {filteredProduct.length > 0 ? (
-          filteredProduct.map((product) => {
+    <ProductContainer pb={2}>
+      <Container>
+        {products.length > 0 ? (
+          Filter(products, productID).map((product) => {
             const productTitle = `${product && product.brand} ${product.model}`;
             return (
-              <div key={product.id}>
-                <Header
-                  element="h1"
-                  title={productTitle}
-                  className={styles.header}
-                />
-                <div className={styles.content}>
-                  <PhotoFrame className={styles.imageFrame}>
+              <Grid container spacing={2} key={product.id}>
+                <Grid item sm={12}>
+                  <ProductTitle
+                    sx={{ mt: "1rem" }}
+                    textAlign="center"
+                    component="h1"
+                    variant="h4"
+                  >
+                    {productTitle}
+                  </ProductTitle>
+                </Grid>
+                <Grid sm={6} item>
+                  <PhotoFrame>
                     <Img
                       src={product.imgSrc}
                       alt={`${product.brand} ${product.model}`}
                     />
                   </PhotoFrame>
-                  <div>
-                    <Paper className={styles.descContainer}>
-                      <Header
-                        element="h4"
-                        title="Product Description"
-                        className={styles.descHeader}
-                      />
-                      <div className={styles.desc}>
-                        {product.processor && (
-                          <p>
-                            <span>Processor:</span> {product.processor}
-                          </p>
-                        )}
-                        {product.ram && product.ram && (
-                          <p>
-                            <span>RAM:</span> {product.ram}
-                          </p>
-                        )}
-                        {product.storage && (
-                          <p>
-                            <span>storage:</span> {product.storage}
-                          </p>
-                        )}
-                        {product.graphics && (
-                          <p>
-                            <span>graphics</span>: {product.graphics}
-                          </p>
-                        )}
-                        {product.os && (
-                          <p>
-                            <span>operating system:</span> {product.os}
-                          </p>
-                        )}
-                      </div>
-                      <div className={styles.priceTag}>
-                        &#8358;
-                        {product.price
-                          .toString()
-                          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                      </div>
-                    </Paper>
-                    <div className={styles.btns}>
+                </Grid>
+                <Grid sm={6} item>
+                  <DescPaper>
+                    <Typography
+                      color="GrayText"
+                      textAlign="center"
+                      component="h2"
+                      variant="h6"
+                    >
+                      Product Description
+                    </Typography>
+                    <List spacing={2}>
+                      {product.processor && (
+                        <ListItem>
+                          <ListItemText
+                            secondary="Processor"
+                            primary={product.processor}
+                          />
+                        </ListItem>
+                      )}
+                      {product.ram && product.ram && (
+                        <ListItem>
+                          <ListItemText secondary="RAM" primary={product.ram} />
+                        </ListItem>
+                      )}
+                      {product.storage && (
+                        <ListItem>
+                          <ListItemText
+                            secondary="Storage"
+                            primary={product.storage}
+                          />
+                        </ListItem>
+                      )}
+                      {product.graphics && (
+                        <ListItem>
+                          <ListItemText
+                            secondary="Graphics"
+                            primary={product.graphics}
+                          />
+                        </ListItem>
+                      )}
+                      {product.os && (
+                        <ListItem>
+                          <ListItemText
+                            secondary="Operating System"
+                            primary={product.os}
+                          />
+                        </ListItem>
+                      )}
+                    </List>
+                    <PriceTag>
+                      <Price amount={product.price} />
+                    </PriceTag>
+                    <Stack
+                      direction="row"
+                      justifyContent="space-evenly"
+                      spacing={2}
+                      mt={4}
+                    >
                       <Button
-                        btnColor="var(--pri-color)"
-                        onClick={handlePayNow}
+                        onClick={payNow}
+                        variant="contained"
+                        color="primary"
                       >
                         Pay Now
                       </Button>
                       <Button
-                        btnColor={"var(--green-white)"}
                         onClick={handleAddToCart}
+                        variant="contained"
+                        color="secondary"
                       >
                         Add to Cart
                       </Button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                    </Stack>
+                  </DescPaper>
+                </Grid>
+              </Grid>
             );
           })
         ) : (
-          <>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Skeleton
-                variant="text"
-                animation="wave"
-                width="40%"
-                height={44.83}
-              />
-            </div>
-
-            <div className={styles.content}>
-              <PhotoFrame>
-                <Skeleton
-                  variant="rectangular"
-                  animation="wave"
-                  className={styles.imageFrame}
-                  width={464}
-                  height="80vh"
-                />
-              </PhotoFrame>
-              <div>
-                <Paper className={styles.descContainer}>
-                  <Skeleton
-                    variant="text"
-                    animation="wave"
-                    className={styles.header}
-                    width="100%"
-                    height={28.16}
-                  />
-
-                  <div className={styles.desc}>
-                    <p>
-                      <Skeleton
-                        variant="text"
-                        animation="wave"
-                        width="100%"
-                        height={22}
-                      />
-                    </p>
-
-                    <p>
-                      <Skeleton
-                        variant="text"
-                        animation="wave"
-                        width="100%"
-                        height={22}
-                      />
-                    </p>
-                    <p>
-                      <Skeleton
-                        variant="text"
-                        animation="wave"
-                        width="100%"
-                        height={22}
-                      />
-                    </p>
-                    <p>
-                      <Skeleton
-                        variant="text"
-                        animation="wave"
-                        width="100%"
-                        height={22}
-                      />
-                    </p>
-                    <p>
-                      <Skeleton
-                        variant="text"
-                        animation="wave"
-                        width="100%"
-                        height={22}
-                      />
-                    </p>
-                  </div>
-                  <div className={styles.priceTag}>
-                    <Skeleton
-                      variant="text"
-                      animation="wave"
-                      width={100}
-                      height={33}
-                    />
-                  </div>
-                </Paper>
-                <div className={styles.btns}>
-                  <Skeleton
-                    variant="text"
-                    animation="wave"
-                    width={137.95}
-                    height={40}
-                  />
-                  <Skeleton
-                    variant="text"
-                    animation="wave"
-                    width={137.95}
-                    height={40}
-                  />
-                </div>
-              </div>
-            </div>
-          </>
+          <ProductSkeleton />
         )}
-      </section>
-    </AnimateComponents>
+      </Container>
+    </ProductContainer>
   );
 };
 
