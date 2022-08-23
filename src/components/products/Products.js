@@ -1,8 +1,6 @@
 import React from "react";
-import styles from "./products.module.css";
 import PropTypes from "prop-types";
 import useAdvancedFetch from "../../hooks/useAdvancedFetch";
-import Header from "../../components/Header";
 import { useEffect, useState } from "react";
 import {
   collection,
@@ -15,14 +13,31 @@ import {
   where,
 } from "firebase/firestore";
 import { db } from "../../firebase/app";
-import AnimateComponents from "../AnimateComponents";
-import Button from "../button/Button";
-import SingleProduct from "./singleProduct/SingleProduct";
-import ProductsSkeleton from "../skeletons/productSkeleton/ProductsSkeleton";
+import SingleProduct from "./SingleProduct";
+import ProductsSkeleton from "./ProductsSkeleton";
 import { Link } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
+import {
+  Box,
+  Button,
+  Card,
+  CardActionArea,
+  CardContent,
+  Container,
+  Grid,
+  Stack,
+  Typography,
+} from "@mui/material";
+import { ArrowForwardIos, ArrowBackIos } from "@mui/icons-material";
 
-const Products = ({ productName, productType, extent, link, linkName }) => {
+const Products = ({
+  productName,
+  productType,
+  extent,
+  link,
+  linkName,
+  key,
+}) => {
   const [next, setNext] = useState();
   const [prev, setPrev] = useState();
   const [gridState, setGridState] = useState("");
@@ -117,50 +132,65 @@ const Products = ({ productName, productType, extent, link, linkName }) => {
   }
 
   return (
-    <AnimateComponents>
-      <section className={styles.container}>
-        <Header element="h2" title={productName} className={styles.header} />
-
-        <div className={styles.grid}>
+    <Container maxWidth="lg">
+      <Box component="section" py={2}>
+        <Typography component="h1" variant="h4" textTransform="uppercase">
+          {productName}
+        </Typography>
+        <Grid container spacing={2} py={2}>
           {products.length > 0 ? (
-            products.map((product) => (
-              <SingleProduct key={product.key} product={product} />
-            ))
+            products.map((product) => <SingleProduct product={product} />)
           ) : (
             <ProductsSkeleton />
           )}
           {link && (
-            <Link
-              to={link}
-              className="bg-white d-flex justify-content-center align-items-center"
-            >
-              <p className="display-6 text-center p-3">
-                See More {linkName} <AiOutlinePlus />
-              </p>
-            </Link>
+            <Grid item xs sm md lg xl>
+              <Card>
+                <CardActionArea>
+                  <Link to={link}>
+                    <CardContent
+                      sx={{
+                        height: 290,
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Typography variant="h6" component="p">
+                        See More {linkName}
+                      </Typography>
+                      <AiOutlinePlus />
+                    </CardContent>
+                  </Link>
+                </CardActionArea>
+              </Card>
+            </Grid>
           )}
-        </div>
+        </Grid>
         {!link && (
-          <div className={styles.btns}>
+          <Stack justifyContent="center" direction="row" spacing={2}>
             <Button
               disabled={lastPrev && true}
-              btnColor="var(--pri-color)"
+              variant="contained"
               onClick={handlePrevGrid}
+              startIcon={<ArrowBackIos />}
             >
               Prev
             </Button>
 
             <Button
               disabled={lastNext ? true : null}
-              btnColor="var(--pri-color)"
+              variant="contained"
               onClick={handleNextGrid}
+              endIcon={<ArrowForwardIos />}
             >
               Next
             </Button>
-          </div>
+          </Stack>
         )}
-      </section>
-    </AnimateComponents>
+      </Box>
+    </Container>
   );
 };
 
