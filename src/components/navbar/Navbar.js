@@ -1,6 +1,3 @@
-import styles from "./navbar.module.css";
-import { BsSearch } from "react-icons/bs";
-import { AiFillShopping } from "react-icons/ai";
 import { useContext, useState } from "react";
 import { mainLinks } from "../../data/links";
 import HamburgerIcon from "../HamburgerIcon/HamburgerIcon";
@@ -9,73 +6,60 @@ import Links from "../links/Links";
 import AccountIcon from "../account/AccountIcon";
 import { ModalContext, ShoppingCartContext } from "../context/contexts";
 import React from "react";
+import { Toolbar } from "@mui/material";
+import MobileNav from "./MobileNav";
+import { StyledBox, StyledIconButton, StyledNavbar } from "./StyledNavbar";
+import { LocalMall, Search } from "@mui/icons-material";
 
-const Navbar = ({ isSearch, setIsSearch }) => {
+const Navbar = ({ isSearch }) => {
   const [mobileNav, setMobileNav] = useState(false);
-
-  const { handleShowSearch } = useContext(ModalContext);
-  const { handleShowCart } = useContext(ShoppingCartContext);
+  const { openSearch } = useContext(ModalContext);
+  const { openCart } = useContext(ShoppingCartContext);
 
   return (
-    <nav className={styles.nav}>
-      <div className={styles.content}>
-        {!isSearch && (
-          <>
+    <>
+      {!isSearch && (
+        <StyledNavbar position="sticky" color="transparent">
+          <Toolbar sx={{ justifyContent: "space-between" }}>
             <HamburgerIcon
               setMenu={setMobileNav}
               isMenu={mobileNav}
               bgColor={"black"}
-              className={styles.hamburgerIcon}
+              className="mobile"
             />
 
-            <Logo width={40} className={styles.logo} />
+            <Logo width={40} />
 
-            <Links className={styles.navList} links={mainLinks} />
+            <Links className="desktop-flex" links={mainLinks} />
 
-            <BsSearch
-              size="1.5rem"
-              style={{ cursor: "pointer" }}
-              onClick={() => handleShowSearch()}
-              className={styles.desktopSearch}
-            />
-            <div className={styles.account}>
-              <AiFillShopping
-                onClick={handleShowCart}
-                fontSize="2rem"
-                cursor="pointer"
-                className={styles.shoppingCart}
-              />
-              <AccountIcon />
-            </div>
-          </>
-        )}
-      </div>
-
-      {mobileNav && (
-        <Links
-          extraItem={
-            <span
-              onClick={handleShowCart}
-              className={styles.mobileShoppingCart}
+            <StyledIconButton
+              size="large"
+              onClick={openSearch}
+              aria-label="search"
+              className="desktop-flex"
             >
-              <AiFillShopping fontSize="1rem" cursor="pointer" />
-              <span>Shopping Cart</span>
-            </span>
-          }
-          extraItem2={
-            <span
-              onClick={() => handleShowSearch()}
-              className={styles.mobileSearch}
-            >
-              <BsSearch size="1rem" style={{ cursor: "pointer" }} />
-              <span>Search</span>
-            </span>
-          }
-          links={mainLinks}
-          className={styles.mobileNav}
-        />
+              <Search />
+            </StyledIconButton>
+
+            <StyledBox>
+              <StyledIconButton
+                size="large"
+                onClick={openCart}
+                aria-label="shopping cart"
+                className="desktop-flex"
+              >
+                <LocalMall />
+              </StyledIconButton>
+
+              <StyledIconButton size="large">
+                <AccountIcon />
+              </StyledIconButton>
+            </StyledBox>
+          </Toolbar>
+        </StyledNavbar>
       )}
-    </nav>
+      <MobileNav sidebar={mobileNav} setSidebar={setMobileNav} />
+    </>
   );
 };
 

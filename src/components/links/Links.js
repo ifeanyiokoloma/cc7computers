@@ -1,7 +1,6 @@
-import { motion } from "framer-motion";
-import { NavLink } from "react-router-dom";
-import styles from "./links.module.css";
 import React from "react";
+import { ListItem, ListItemButton, ListItemText } from "@mui/material";
+import { StyledList, StyledNavLink } from "../navbar/StyledNavbar";
 
 const Links = ({
   links,
@@ -13,32 +12,25 @@ const Links = ({
   className,
 }) => {
   return (
-    <motion.ul
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ ease: "easeInOut", delay: 0.5 }}
-      className={className}
-    >
+    <StyledList className={className}>
       {links.map((link) => (
-        <li className={styles.link} key={link.id}>
-          <NavLink
-            className={({ isActive }) => (isActive ? styles.active : null)}
-            to={`/${link.name}`}
-          >
-            <div className={styles.linkItems}>
-              {link.icon}
-              {link.name}
-            </div>
-          </NavLink>
-        </li>
+        <ListItem key={link.id} disablePadding>
+          <ListItemButton sx={{ textAlign: "center" }}>
+            <ListItemText
+              primary={
+                <StyledNavLink
+                  className={({ isActive }) => (isActive ? "active" : null)}
+                  to={`/${link.name}`}
+                >
+                  {link.icon}
+                  {link.name}
+                </StyledNavLink>
+              }
+            />
+          </ListItemButton>
+        </ListItem>
       ))}
-      {extraItem && <br />}
-      {extraItem && <li>{extraItem}</li>}
-      {extraItem2 && <li>{extraItem2}</li>}
-      {extraItem3 && <li>{extraItem3}</li>}
-      {extraItem4 && <li>{extraItem4}</li>}
-      {extraItem5 && <li>{extraItem5}</li>}
-    </motion.ul>
+    </StyledList>
   );
 };
 

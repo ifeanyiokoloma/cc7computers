@@ -1,18 +1,18 @@
 import { MdAccountCircle } from "react-icons/md";
-import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import LoginBtn from "./LoginBtn";
 import React from "react";
+import { StyledNavLink } from "../navbar/StyledNavbar";
 
-const AccountIcon = () => {
+const AccountIcon = ({ className }) => {
   const { signIn } = useAuth();
 
   return (
     <>
       {signIn && (
-        <Link to="/my-account">
+        <StyledNavLink className={className} to="/my-account">
           <MdAccountCircle cursor="pointer" size="2.5rem" />
-        </Link>
+        </StyledNavLink>
       )}
 
       {!signIn && <LoginBtn />}

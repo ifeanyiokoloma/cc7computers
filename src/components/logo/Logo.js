@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
-import cc7Logo from "../../data/images/cc7.jpg";
+import cc7Logo from "../../data/images/cc7.png";
 import styles from "./logo.module.css";
 import React from "react";
 
-const Logo = ({width, className}) => {
+const Logo = ({ width, className }) => {
   const LogoWidth = {
-    width: width
-  }
+    width: width,
+  };
   return (
     <motion.div
       initial={{ opacity: 0 }}
