@@ -1,17 +1,13 @@
-import styles from "./slideshow.module.css";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
 import useAdvancedFetch from "../../hooks/useAdvancedFetch";
-import { Skeleton } from "@mui/material";
+import { Box, Container, Skeleton, Stack, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import Header from "../Header";
-import Img from "react-cool-img";
-import ProductDesc from "../ProductDesc.js/ProductDesc";
-import { useInView } from "react-intersection-observer";
 import React from "react";
+import Price from "../Price";
+import { StyledBox, StyledImg, StyledStack } from "./StyledSlide";
 
 const Slideshow = () => {
-  const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
   const [computers] = useAdvancedFetch(
     "products",
     "",
@@ -21,26 +17,19 @@ const Slideshow = () => {
     []
   );
   return (
-    <section
-      ref={ref}
-      style={{ opacity: inView ? 1 : 0, transition: "1s ease-in-out" }}
-      className={styles.container}
-    >
-      <Header
-        element="h2"
-        title="New Arrivals"
-        textAlign="center"
-        className={styles.header}
-      />
-      <section className={styles.slideContainer}>
+    <Box component="section">
+      <Container maxWidth="lg">
+        <Typography variant="h4" component="h2">
+          New Arrivals
+        </Typography>
         <Splide
           options={{
-            mediaQuery: "max",
+            mediaQuery: "min",
             rewind: true,
             autoplay: true,
             width: "100%",
             gap: "1rem",
-            height: "85vh",
+            height: "70vh",
             pauseOnHover: true,
             speed: 1000,
             interval: 6000,
@@ -51,47 +40,42 @@ const Slideshow = () => {
             easing: "ease",
             type: "loop",
             padding: "auto",
+            perPage: 1,
             breakpoints: {
-              800: {
+              600: {
                 perPage: 2,
               },
-              425: {
-                perPage: 1,
-              },
             },
-            perPage: 2,
           }}
         >
           {computers.length > 0 ? (
             computers.map((computer) => {
+              const computerLink = `/${computer.type}/${computer.id}`;
               const computerID = `${computer.brand} ${computer.model}`;
               return (
                 <SplideSlide key={computer.id}>
-                  <Link
-                    style={{
-                      display: "flex",
-                      flexFlow: "column",
-                      height: "100%",
-                      cursor: "pointer",
-                      position: "relative",
-                    }}
-                    to={`/${computer.type}/${computer.id}`}
-                  >
-                    <div className={styles.imageContainer}>
-                      <Img
-                        style={{
-                          backgroundColor: "grey",
-                        }}
-                        className={styles.image}
-                        src={computer.imgSrc}
-                        alt={computerID}
-                      />
-                    </div>
-                    <ProductDesc
-                      className={styles.productDesc}
-                      title={computerID}
-                      productPrice={computer.price}
-                    />
+                  <Link to={computerLink}>
+                    <Stack>
+                      <StyledBox component="figure">
+                        <StyledImg
+                          className="image"
+                          src={computer.imgSrc}
+                          alt={computerID}
+                        />
+                      </StyledBox>
+                      <StyledStack p={2}>
+                        <Typography
+                          variant="h6"
+                          component="b"
+                          textTransform="uppercase"
+                        >
+                          {computerID}
+                        </Typography>
+                        <Typography variant="body2">
+                          <Price amount={computer.price} />
+                        </Typography>
+                      </StyledStack>
+                    </Stack>
                   </Link>
                 </SplideSlide>
               );
@@ -102,8 +86,8 @@ const Slideshow = () => {
             </SplideSlide>
           )}
         </Splide>
-      </section>
-    </section>
+      </Container>
+    </Box>
   );
 };
 

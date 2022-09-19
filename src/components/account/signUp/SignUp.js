@@ -20,7 +20,7 @@ import {
   FilledInput,
 } from "@mui/material";
 import { Close, Lock, Visibility, VisibilityOff } from "@mui/icons-material";
-import { ModalContext } from "../../context/contexts";
+import { ModalContext, ShoppingCartContext } from "../../context/contexts";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
@@ -39,6 +39,7 @@ export default function SignUp() {
     loading: false,
   });
   const { enqueueSnackbar } = useSnackbar();
+  const { browserCart } = useContext(ShoppingCartContext);
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -70,7 +71,7 @@ export default function SignUp() {
           gender: gender,
           email: email,
           name: { first: fName, last: lName },
-          cart: [],
+          cart: browserCart ? browserCart : [],
         })
           .then(() => {
             updateProfile(auth.currentUser, {

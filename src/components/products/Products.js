@@ -29,6 +29,7 @@ import {
   Typography,
 } from "@mui/material";
 import { ArrowForwardIos, ArrowBackIos } from "@mui/icons-material";
+import { StyledBox } from "../Styled/Styled";
 
 const Products = ({
   productName,
@@ -132,65 +133,67 @@ const Products = ({
   }
 
   return (
-    <Container maxWidth="lg">
-      <Box component="section" py={2}>
-        <Typography component="h1" variant="h4" textTransform="uppercase">
-          {productName}
-        </Typography>
-        <Grid container spacing={2} py={2}>
-          {products.length > 0 ? (
-            products.map((product) => <SingleProduct product={product} />)
-          ) : (
-            <ProductsSkeleton />
-          )}
-          {link && (
-            <Grid item xs sm md lg xl>
-              <Card>
-                <CardActionArea>
-                  <Link to={link}>
-                    <CardContent
-                      sx={{
-                        height: 290,
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Typography variant="h6" component="p">
-                        See More {linkName}
-                      </Typography>
-                      <AiOutlinePlus />
-                    </CardContent>
-                  </Link>
-                </CardActionArea>
-              </Card>
-            </Grid>
-          )}
-        </Grid>
-        {!link && (
-          <Stack justifyContent="center" direction="row" spacing={2}>
-            <Button
-              disabled={lastPrev && true}
-              variant="contained"
-              onClick={handlePrevGrid}
-              startIcon={<ArrowBackIos />}
-            >
-              Prev
-            </Button>
+    <StyledBox>
+      <Container>
+        <Box component="section" py={2}>
+          <Typography component="h1" variant="h4" textTransform="uppercase">
+            {productName}
+          </Typography>
+          <Grid container spacing={2} py={2}>
+            {products.length > 0 ? (
+              products.map((product) => <SingleProduct product={product} />)
+            ) : (
+              <ProductsSkeleton />
+            )}
+            {link && (
+              <Grid item xs sm md lg xl>
+                <Card>
+                  <CardActionArea>
+                    <Link to={link}>
+                      <CardContent
+                        sx={{
+                          height: 290,
+                          display: "flex",
+                          flexDirection: "column",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <Typography variant="h6" component="p">
+                          See More {linkName}
+                        </Typography>
+                        <AiOutlinePlus />
+                      </CardContent>
+                    </Link>
+                  </CardActionArea>
+                </Card>
+              </Grid>
+            )}
+          </Grid>
+          {!link && (
+            <Stack justifyContent="center" direction="row" spacing={2}>
+              <Button
+                disabled={lastPrev && true}
+                variant="contained"
+                onClick={handlePrevGrid}
+                startIcon={<ArrowBackIos />}
+              >
+                Prev
+              </Button>
 
-            <Button
-              disabled={lastNext ? true : null}
-              variant="contained"
-              onClick={handleNextGrid}
-              endIcon={<ArrowForwardIos />}
-            >
-              Next
-            </Button>
-          </Stack>
-        )}
-      </Box>
-    </Container>
+              <Button
+                disabled={lastNext ? true : null}
+                variant="contained"
+                onClick={handleNextGrid}
+                endIcon={<ArrowForwardIos />}
+              >
+                Next
+              </Button>
+            </Stack>
+          )}
+        </Box>
+      </Container>
+    </StyledBox>
   );
 };
 

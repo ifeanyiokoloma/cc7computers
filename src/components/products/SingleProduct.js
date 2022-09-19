@@ -14,7 +14,7 @@ const SingleProduct = ({ product }) => {
   const productLink = `/${product.type}/${product.id}`;
   const productID = `${product.brand} ${product.model}`;
   return (
-    <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={product.id}>
+    <Grid item xs={12} sm={6} md={4} lg={3} xl={3} key={product.id}>
       <Card sx={{ maxWidth: 345 }}>
         <CardActionArea>
           <Link to={productLink}>

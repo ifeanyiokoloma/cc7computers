@@ -1,4 +1,6 @@
+import { LocalMall } from "@mui/icons-material";
 import {
+  Badge,
   Divider,
   List,
   ListItemButton,
@@ -9,16 +11,18 @@ import React, { useContext } from "react";
 import { AiFillShopping } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
 import { mainLinks } from "../../data/links";
+import useAuth from "../../hooks/useAuth";
 import { ModalContext, ShoppingCartContext } from "../context/contexts";
 import { StyledDrawer, StyledLink } from "./StyledNavbar";
 
-const MobileNav = ({ sidebar, setSidebar }) => {
-  const { openSearch } = useContext(ModalContext);
-  const { openCart } = useContext(ShoppingCartContext);
+const MobileNav = () => {
+  const { openSearch, sidebar, closeSidebar } = useContext(ModalContext);
+  const { openCart, userCartLength, browserCartLength } = useContext(
+    ShoppingCartContext
+  );
 
-  const closeSidebar = () => {
-    setSidebar(false);
-  };
+  const { signIn } = useAuth();
+
   return (
     <StyledDrawer
       anchor="right"
@@ -43,9 +47,20 @@ const MobileNav = ({ sidebar, setSidebar }) => {
           </ListItemButton>
         ))}
         <Divider />
-        <ListItemButton onClick={openCart}>
+        <ListItemButton
+          onClick={() => {
+            openCart();
+            closeSidebar();
+          }}
+        >
           <ListItemIcon>
-            <AiFillShopping fontSize="1rem" cursor="pointer" />
+            <Badge
+              badgeContent={signIn ? userCartLength : browserCartLength}
+              color="primary"
+            >
+              <LocalMall />
+            </Badge>
+            {/* <AiFillShopping fontSize="1rem" cursor="pointer" /> */}
           </ListItemIcon>
           <ListItemText
             sx={{ textTransform: "capitalize" }}

@@ -11,11 +11,17 @@ export const theme = createTheme({
     yellow: {
       main: "rgb(252, 234, 131)",
     },
+    Green: {
+      main: "rgb(124, 180, 129)",
+    },
     lighterGreen: {
       main: "rgb(240, 255, 240)",
     },
-    Green: {
-      main: "rgb(124, 180, 129)",
+    lighterBlue: {
+      main: "rgb(240, 240, 255)",
+    },
+    lighterRed: {
+      main: "rgb(255, 240, 240)",
     },
     imprint: {
       main: "rgba(10, 10, 27, 0.616)",

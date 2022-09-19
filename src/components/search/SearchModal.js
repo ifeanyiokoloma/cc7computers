@@ -1,18 +1,18 @@
 import { ModalContext } from "../context/contexts";
-import styles from "./search.module.css";
-import { BsSearch } from "react-icons/bs";
 import { useContext, useState } from "react";
 import useFetchLive from "../../hooks/useFetchLive";
-import { Modal } from "react-bootstrap";
 import SearchResult from "./searchResult/SearchResult";
 import React from "react";
+import { AppBar, Dialog, IconButton, TextField, Toolbar } from "@mui/material";
+import { Transition } from "../Functions/Functions";
+import { Close, Search } from "@mui/icons-material";
 
 const SearchModal = () => {
   let filtered;
   const [filteredProducts, setFilteredProducts] = useState([]);
   const noSearch = "search for product's name, brand, model or type";
   const [dialogue, setDialogue] = useState(noSearch);
-  const { handleCloseSearch, showSearch } = useContext(ModalContext);
+  const { closeSearch, search } = useContext(ModalContext);
   const [products] = useFetchLive("products", []);
 
   const handleSubmit = (e) => {
@@ -45,44 +45,46 @@ const SearchModal = () => {
   };
 
   return (
-    <Modal
-      fullscreen={
-        true | "sm-down" | "md-down" | "lg-down" | "xl-down" | "xxl-down"
-      }
-      scrollable={true}
-      show={showSearch}
-      onHide={handleCloseSearch}
+    <Dialog
+      fullScreen
+      open={search}
+      onClose={closeSearch}
+      TransitionComponent={Transition}
+      components="form"
+      onSubmit={handleSubmit}
     >
-      <Modal.Header
-        className={styles.form}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ ease: "easeInOut", delay: 0.5 }}
-        onSubmit={handleSubmit}
-        closeButton
-      >
-        <span className={styles.searchIcon}>
-          <BsSearch />
-        </span>
-
-        <input
-          onChange={(e) => handleTyped(e)}
-          name="search"
-          id="search"
-          type="search"
-          placeholder="Search"
-          autoFocus={true}
-          autoComplete="off"
-        />
-      </Modal.Header>
-      <Modal.Body className={styles.searchResult}>
-        <SearchResult
-          filteredProducts={filteredProducts}
-          closeSearch={handleCloseSearch}
-          dialogue={dialogue}
-        />
-      </Modal.Body>
-    </Modal>
+      <AppBar position="static" color="transparent">
+        <Toolbar sx={{ justifyContent: "space-between" }}>
+          <IconButton edge="start" color="primary" aria-label="search">
+            <Search fontSize="large" />
+          </IconButton>
+          <TextField
+            fullWidth
+            label="Search"
+            onChange={(e) => handleTyped(e)}
+            name="search"
+            id="search"
+            type="search"
+            autoFocus={true}
+            autoComplete="off"
+            variant="filled"
+          />
+          <IconButton
+            edge="end"
+            color="primary"
+            onClick={closeSearch}
+            aria-label="close"
+          >
+            <Close fontSize="large" />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+      <SearchResult
+        filteredProducts={filteredProducts}
+        closeSearch={closeSearch}
+        dialogue={dialogue}
+      />
+    </Dialog>
   );
 };
 

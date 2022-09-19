@@ -1,10 +1,15 @@
-import Img from "react-cool-img";
+import React from "react";
 import Price from "../../Price";
-import styles from "./cart.module.css";
-import { AiOutlineClose } from "react-icons/ai";
 import { auth, db } from "../../../firebase/app";
 import { deleteDoc, doc } from "firebase/firestore";
-import React from "react";
+import { Card } from "react-bootstrap";
+import {
+  CardContent,
+  CardMedia,
+  ListItem,
+  Stack,
+  Typography,
+} from "@mui/material";
 
 const SingleCartItem = ({ product }) => {
   async function handleDeleteProduct(id) {
@@ -15,31 +20,57 @@ const SingleCartItem = ({ product }) => {
   const { brand, model, imgSrc, price, id } = product;
   const name = `${brand} ${model}`;
   return (
-    <section className={styles.singleProduct}>
-      <div className={styles.productBox}>
-        <div className={styles.imageBox}>
-          <Img src={imgSrc} alt={name} />
-        </div>
-        <div className={styles.name}>
-          <h6>{brand}</h6>
-          <p className={styles.model}>{model}</p>
-        </div>
-      </div>
+    <ListItem>
+      <Card>
+        <Stack direction="row">
+          <CardMedia
+            component="img"
+            src={imgSrc}
+            alt={`${name} image`}
+            sx={{ width: 150, height: 150 }}
+          />
+          <CardContent>
+            <Typography textTransform="uppercase" variant="h6" color="GrayText">
+              {brand}
+            </Typography>
+            <Typography
+              textTransform="uppercase"
+              variant="subtitle2"
+              color="GrayText"
+            >
+              {model}
+            </Typography>
+            <Typography
+              textTransform="uppercase"
+              color="primary"
+              variant="subtitle1"
+              mt={3}
+            >
+              <Price amount={price} />
+            </Typography>
+          </CardContent>
+        </Stack>
+      </Card>
+    </ListItem>
+    // <section className={styles.singleProduct}>
+    //   <div className={styles.productBox}>
+    //     <div className={styles.imageBox}>
+    //       <Img src={imgSrc} alt={name} />
+    //     </div>
+    //     <div className={styles.name}>
+    //       <h6>{brand}</h6>
+    //       <p className={styles.model}>{model}</p>
+    //     </div>
+    //   </div>
 
-      <Price
-        amount={price}
-        size="1.5rem"
-        weight="bold"
-        txtColor="var(--red-color)"
-        align="center"
-      />
-      <AiOutlineClose
-        className={styles.close}
-        // color="var(--red-color)"
-        title="Delete Product"
-        onClick={() => handleDeleteProduct(id)}
-      />
-    </section>
+    //   {/* <Price amount={price} /> */}
+    //   <AiOutlineClose
+    //     className={styles.close}
+    //     // color="var(--red-color)"
+    //     title="Delete Product"
+    //     onClick={() => handleDeleteProduct(id)}
+    //   />
+    // </section>
   );
 };
 

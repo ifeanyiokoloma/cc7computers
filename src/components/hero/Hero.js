@@ -1,75 +1,87 @@
-import { Link } from "react-router-dom";
-import styles from "./hero.module.css";
-import { useInView } from "react-intersection-observer";
-import Header from "../Header";
 import React from "react";
+import {
+  StyledContainer,
+  StyledHero,
+  StyledLink,
+  StyledStack,
+} from "./StyledHero";
+import { Box, Stack, Typography } from "@mui/material";
+import Img from "react-cool-img";
 
 const Hero = ({ page, imgName, pageData, btn }) => {
-  const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
   return (
-    <section
-      ref={ref}
-      style={{ opacity: inView ? 1 : 0, transition: "1s ease-in-out" }}
-      className={styles.container}
-    >
+    <StyledHero>
       <picture>
         <source
-          className={styles.img}
+          className="img"
           media="(max-width: 320px)"
           srcSet={`./images/heroes/${page}/${imgName}320.jpg`}
         />
         <source
-          className={styles.img}
+          className="img"
           media="(max-width: 375px)"
           srcSet={`./images/heroes/${page}/${imgName}375.jpg`}
         />
         <source
-          className={styles.img}
+          className="img"
           media="(max-width: 425px)"
           srcSet={`./images/heroes/${page}/${imgName}425.jpg`}
         />
         <source
-          className={styles.img}
+          className="img"
           media="(max-width: 768px)"
           srcSet={`./images/heroes/${page}/${imgName}768.jpg`}
         />
         <source
-          className={styles.img}
+          className="img"
           media="(max-width: 1024px)"
           srcSet={`./images/heroes/${page}/${imgName}1024.jpg`}
         />
         <source
-          className={styles.img}
+          className="img"
           media="(max-width: 1440px)"
           srcSet={`./images/heroes/${page}/${imgName}1440.jpg`}
         />
         <source
-          className={styles.img}
+          className="img"
           media="(max-width: 2560px)"
           srcSet={`./images/heroes/${page}/${imgName}2560.jpg`}
         />
-        <img
-          className={styles.img}
+        <Img
+          className="img"
           srcSet={`./images/heroes/${page}/${imgName}2560.jpg`}
           alt="Computer Operator"
         />
       </picture>
-      <div className={styles.content}>
-        <article className={styles.article}>
-          <Header element="h1" title={pageData.heading} />
-          <p className={styles.paragraph}>{pageData.paragraph}</p>
-        </article>
-        <div className={styles.buttons}>
+
+      <StyledStack alignItems="center" justifyContent="center" spacing={2}>
+        <Box component="article">
+          <StyledContainer maxWidth="sm">
+            <Typography variant="h4" color="whitesmoke" component="h1">
+              {pageData.heading}
+            </Typography>
+            <Typography variant="subtitle1" color="GrayText" component="p">
+              {pageData.paragraph}
+            </Typography>
+          </StyledContainer>
+        </Box>
+        <Stack spacing={2} direction={{ xs: "column", sm: "row" }}>
           {pageData.btns &&
-            pageData.btns.map((btn) => (
-              <Link className="myBtn" key={btn.key} to={btn.link}>
+            pageData.btns.map((btn, index) => (
+              <StyledLink
+                color={index === 0 ? "primary" : "secondary"}
+                variant="contained"
+                size="large"
+                key={btn.key}
+                to={btn.link}
+              >
                 {btn.item}
-              </Link>
+              </StyledLink>
             ))}
           {btn && btn}
-        </div>
-      </div>
-    </section>
+        </Stack>
+      </StyledStack>
+    </StyledHero>
   );
 };
 

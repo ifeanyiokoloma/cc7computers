@@ -1,9 +1,9 @@
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase/app";
 import { useNavigate } from "react-router-dom";
-import Button from "../button/Button";
 import React from "react";
 import { useSnackbar } from "notistack";
+import { Button } from "@mui/material";
 
 const LogOutBtn = ({ className }) => {
   const { enqueueSnackbar } = useSnackbar();
@@ -22,7 +22,7 @@ const LogOutBtn = ({ className }) => {
   };
 
   return (
-    <Button btnColor="var(--red-color)" onClick={logOut}>
+    <Button variant="contained" color="secondary" onClick={logOut}>
       Logout
     </Button>
   );

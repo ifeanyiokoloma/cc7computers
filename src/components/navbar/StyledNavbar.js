@@ -78,4 +78,5 @@ export const StyledIconButton = styled(IconButton)(
 export const StyledBox = styled(Box)`
   display: flex;
   align-items: center;
+  gap: 1rem;
 `;

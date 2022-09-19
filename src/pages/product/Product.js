@@ -18,19 +18,14 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import {
-  DescPaper,
-  PhotoFrame,
-  PriceTag,
-  ProductContainer,
-  ProductTitle,
-} from "./StyledProduct";
+import { DescPaper, PhotoFrame, PriceTag, ProductTitle } from "./StyledProduct";
 import Price from "../../components/Price";
 import { useSnackbar } from "notistack";
 import ProductSkeleton from "./ProductSkeleton";
+import { StyledBox } from "../../components/Styled/Styled";
 
 const Product = () => {
-  const [userCart, setUserCart] = useLocalStorage("cart", []);
+  const [browserCart, setBrowserCart] = useLocalStorage("cart", []);
   const { signIn } = useAuth();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -51,10 +46,10 @@ const Product = () => {
         )
         .catch((err) => console.log(err.code));
     } else {
-      if (userCart.includes(productID)) {
+      if (browserCart.includes(productID)) {
         return null;
       }
-      setUserCart([...userCart, productID]);
+      setBrowserCart([...browserCart, productID]);
     }
   };
 
@@ -68,7 +63,7 @@ const Product = () => {
   };
 
   return (
-    <ProductContainer pb={2}>
+    <StyledBox pb={2}>
       <Container>
         {products.length > 0 ? (
           Filter(products, productID).map((product) => {
@@ -175,7 +170,7 @@ const Product = () => {
           <ProductSkeleton />
         )}
       </Container>
-    </ProductContainer>
+    </StyledBox>
   );
 };
 

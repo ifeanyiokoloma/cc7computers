@@ -3,16 +3,13 @@ import { ModalContext } from "../context/contexts";
 import React from "react";
 
 const ModalProvider = ({ children }) => {
-  const [showVerifyUser, setShowVerifyUser] = useState(false);
-  const [showEmailForm, setShowEmailForm] = useState(false);
-  const [showNameForm, setShowNameForm] = useState(false);
-  const [showSearch, setShowSearch] = useState(false);
-  const [showInfo, setShowInfo] = useState(false);
   const [signUp, setSignUp] = useState(false);
   const [signIn, setSignIn] = useState(false);
   const [forgetPwd, setForgetPwd] = useState(false);
   const [response, setResponse] = useState(false);
+  const [search, setSearch] = useState(false);
   const [message, setMessage] = useState("");
+  const [sidebar, setSidebar] = useState(false);
 
   // Create Response close/open Function
   const openResponse = () => {
@@ -50,58 +47,34 @@ const ModalProvider = ({ children }) => {
     setSignIn(false);
   };
 
-  // Show Modal Functions
-  function handleShowSearch() {
-    setShowSearch(true);
-  }
-  function handleShowVerifyUser() {
-    setShowVerifyUser(true);
-  }
-  function handleShowEmailForm() {
-    setShowEmailForm(true);
-  }
-  function handleShowNameForm() {
-    setShowNameForm(true);
-  }
-  function handleShowInfo() {
-    setShowInfo(true);
-  }
+  // Create Search close/open Function
+  const openSearch = () => {
+    setSearch(true);
+  };
 
-  // Close Modal Functions
-  function handleCloseSearch() {
-    setShowSearch(false);
-  }
-  function handleCloseVerifyUser() {
-    setShowVerifyUser(false);
-  }
-  function handleCloseEmailForm() {
-    setShowEmailForm(false);
-  }
-  function handleCloseNameForm() {
-    setShowNameForm(false);
-  }
-  function handleCloseInfo() {
-    setShowInfo(false);
-  }
+  const closeSearch = () => {
+    setSearch(false);
+  };
+
+  // Create Search close/open Function
+  const openSidebar = () => {
+    setSidebar(true);
+  };
+
+  const closeSidebar = () => {
+    setSidebar(false);
+  };
+
+  const toggleSidebar = () => {
+    setSidebar(!sidebar);
+  };
 
   return (
     <ModalContext.Provider
       value={{
-        showVerifyUser,
-        showEmailForm,
-        showNameForm,
-        showSearch,
-        showInfo,
-        handleShowSearch,
-        handleShowVerifyUser,
-        handleShowEmailForm,
-        handleShowNameForm,
-        handleShowInfo,
-        handleCloseVerifyUser,
-        handleCloseEmailForm,
-        handleCloseNameForm,
-        handleCloseSearch,
-        handleCloseInfo,
+        search,
+        openSearch,
+        closeSearch,
         openSignUp,
         openSignIn,
         closeSignUp,
@@ -116,6 +89,11 @@ const ModalProvider = ({ children }) => {
         response,
         openResponse,
         closeResponse,
+        sidebar,
+        setSidebar,
+        openSidebar,
+        closeSidebar,
+        toggleSidebar,
       }}
     >
       {children}

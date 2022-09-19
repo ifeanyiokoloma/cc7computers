@@ -1,8 +1,10 @@
 import { Box, Paper, styled, Typography } from "@mui/material";
 
-export const ProductContainer = styled(Box)`
-  background-color: rgb(236, 236, 245);
-`;
+export const ProductContainer = styled(Box)(
+  ({ theme }) => `
+  background-color: ${theme.palette.lighterBlue.main};
+`
+);
 
 export const ProductTitle = styled(Typography)`
   text-shadow: 0.7px 0.7px rgba(255, 255, 255, 0.8);
