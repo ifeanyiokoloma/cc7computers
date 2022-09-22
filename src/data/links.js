@@ -24,3 +24,39 @@ export const mainLinks = [
     id: uuidv4(),
   },
 ];
+
+export const business = [
+  {
+    name: "Computers",
+    link: "computers",
+    id: uuidv4(),
+  },
+  {
+    name: "Accessories",
+    link: "accessories",
+    id: uuidv4(),
+  },
+  {
+    name: "Services",
+    link: "services",
+    id: uuidv4(),
+  },
+];
+
+export const company = [
+  {
+    name: "Contact Us",
+    link: "contact",
+    id: uuidv4(),
+  },
+  {
+    name: "About Us",
+    link: "about",
+    id: uuidv4(),
+  },
+  {
+    name: "Our Team",
+    link: "team",
+    id: uuidv4(),
+  },
+];

@@ -5,24 +5,17 @@ import LogOutBtn from "./LogOutBtn";
 import React from "react";
 import { Button } from "@mui/material";
 
-const LoginBtn = ({ margin, size }) => {
+const LoginBtn = () => {
   const { signIn } = useAuth();
-  // const login = {
-  //   fontWeight: 600,
-  // };
 
   const { openSignIn } = useContext(ModalContext);
 
   return (
     <>
-      {signIn && <LogOutBtn />}
-      {!signIn && (
-        <Button
-          variant="contained"
-          onClick={() => openSignIn()}
-          type="button"
-          size={size}
-        >
+      {signIn ? (
+        <LogOutBtn />
+      ) : (
+        <Button variant="contained" onClick={() => openSignIn()}>
           Login
         </Button>
       )}

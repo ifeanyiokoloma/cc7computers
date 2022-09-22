@@ -1,9 +1,7 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { ModalContext, ShoppingCartContext } from "../../context/contexts";
 import SingleCartItem from "./SingleCartItem";
-import styles from "./cart.module.css";
 import { AiFillShopping } from "react-icons/ai";
-import PaystackBtn from "../../payment/PaystackBtn";
 import Price from "../../Price";
 import useAuth from "../../../hooks/useAuth";
 import React from "react";
@@ -16,27 +14,18 @@ import {
   List,
   Grid,
   Button,
-  Stack,
-  Paper,
   Container,
-  SvgIcon,
 } from "@mui/material";
 import { Filter, sum, Transition } from "../../Functions/Functions";
-import { Close, Palette } from "@mui/icons-material";
+import { Close } from "@mui/icons-material";
 import { StyledNavbar } from "../../navbar/StyledNavbar";
 import useFetchLive from "../../../hooks/useFetchLive";
-import useLocalStorage from "use-local-storage";
 import { v4 as uuidv4 } from "uuid";
 import { usePaystackPayment } from "react-paystack";
-import { useEffect } from "react";
-import { collection, onSnapshot, query, where } from "firebase/firestore";
-import { db } from "../../../firebase/app";
-import { DescPaper } from "../../../pages/product/StyledProduct";
 import { StyledPaper } from "./StyledCart";
 import { PaystackIcon } from "./PaystackIcon";
 
 const CartModal = () => {
-  const [CartProducts, setCartProducts] = useState([]);
   const { signIn, user, loading } = useAuth();
 
   const [products] = useFetchLive("products", []);

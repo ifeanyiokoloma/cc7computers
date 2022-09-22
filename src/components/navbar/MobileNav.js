@@ -8,7 +8,6 @@ import {
   ListItemText,
 } from "@mui/material";
 import React, { useContext } from "react";
-import { AiFillShopping } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
 import { mainLinks } from "../../data/links";
 import useAuth from "../../hooks/useAuth";

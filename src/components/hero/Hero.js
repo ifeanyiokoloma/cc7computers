@@ -60,7 +60,7 @@ const Hero = ({ page, imgName, pageData, btn }) => {
             <Typography variant="h4" color="whitesmoke" component="h1">
               {pageData.heading}
             </Typography>
-            <Typography variant="subtitle1" color="GrayText" component="p">
+            <Typography variant="subtitle1" color="whitesmoke" component="p">
               {pageData.paragraph}
             </Typography>
           </StyledContainer>

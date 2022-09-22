@@ -1,20 +1,29 @@
 import React from "react";
 import Price from "../../Price";
 import { auth, db } from "../../../firebase/app";
-import { deleteDoc, doc } from "firebase/firestore";
+import { arrayRemove, doc, updateDoc } from "firebase/firestore";
 import { Card } from "react-bootstrap";
 import {
+  Button,
   CardContent,
   CardMedia,
   ListItem,
   Stack,
   Typography,
 } from "@mui/material";
+import { useSnackbar } from "notistack";
 
 const SingleCartItem = ({ product }) => {
-  async function handleDeleteProduct(id) {
-    const productRef = doc(db, auth.currentUser.uid, id);
-    await deleteDoc(productRef);
+  const { enqueueSnackbar } = useSnackbar();
+  async function removeProduct(productID) {
+    const cartRef = doc(db, "customers", auth.currentUser.uid);
+    updateDoc(cartRef, {
+      cart: arrayRemove(productID),
+    }).then(() => {
+      enqueueSnackbar("Product has been removed from your cart", {
+        variant: "success",
+      });
+    });
   }
 
   const { brand, model, imgSrc, price, id } = product;
@@ -48,29 +57,17 @@ const SingleCartItem = ({ product }) => {
             >
               <Price amount={price} />
             </Typography>
+            <Button
+              onClick={() => removeProduct(id)}
+              variant="contained"
+              color="secondary"
+            >
+              Remove
+            </Button>
           </CardContent>
         </Stack>
       </Card>
     </ListItem>
-    // <section className={styles.singleProduct}>
-    //   <div className={styles.productBox}>
-    //     <div className={styles.imageBox}>
-    //       <Img src={imgSrc} alt={name} />
-    //     </div>
-    //     <div className={styles.name}>
-    //       <h6>{brand}</h6>
-    //       <p className={styles.model}>{model}</p>
-    //     </div>
-    //   </div>
-
-    //   {/* <Price amount={price} /> */}
-    //   <AiOutlineClose
-    //     className={styles.close}
-    //     // color="var(--red-color)"
-    //     title="Delete Product"
-    //     onClick={() => handleDeleteProduct(id)}
-    //   />
-    // </section>
   );
 };
 
