@@ -1,3 +1,8 @@
+:root {
+  --bs-primary: rgb(45, 133, 221);
+  --bs-secondary: rgb(236, 24, 23);
+}
+
 a {
   text-decoration: none;
 }

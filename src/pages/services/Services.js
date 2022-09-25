@@ -1,29 +1,42 @@
 import Hero from "../../components/hero/Hero";
 import Skills from "../../components/skills/Skills";
-import TypoBG from "../../components/TypoBG";
 import { services } from "../../data/articles/articles";
-import styles from "./services.module.css";
-import { RiComputerLine } from "react-icons/ri";
-import Article from "../../components/article/Article";
 import React from "react";
+import { Paper, Stack, Typography } from "@mui/material";
+import { Container } from "@mui/system";
 
 const Services = () => {
   return (
     <>
       <Hero page="services" imgName="office" pageData={services} />
-      <TypoBG>
-        <Article
-          title="Computer General Services"
-          element="h2"
-          icon={<RiComputerLine className={styles.typoIcon} />}
+      <Container maxWidth="sm">
+        <Stack
+          sx={{ minHeight: "100vmin" }}
+          justifyContent="center"
+          alignItems="center"
         >
-          Research has shown that 70% of system damage/malfunctions are as a
-          result of non-professional handling of computers. Therefore,{" "}
-          <em>CC7</em> upholds professionalism basically when it comes to
-          Computer System Repair and Software Installation and Maintenance.
-        </Article>
-        <Skills />
-      </TypoBG>
+          <Paper sx={{ p: 4 }}>
+            <Stack
+              direction="column"
+              spacing={2}
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Typography variant="h5">Computer General Services</Typography>
+              <Typography>
+                Research has shown that 70% of system damage/malfunctions are as
+                a result of non-professional handling of computers.
+              </Typography>
+              <Typography>
+                Therefore, CC7 upholds professionalism basically when it comes
+                to Computer System Repair and Software Installation and
+                Maintenance.
+              </Typography>
+            </Stack>
+          </Paper>
+        </Stack>
+      </Container>
+      <Skills />
     </>
   );
 };

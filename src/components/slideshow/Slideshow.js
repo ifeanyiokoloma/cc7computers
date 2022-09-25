@@ -57,11 +57,7 @@ const Slideshow = () => {
                   <Link to={computerLink}>
                     <Stack>
                       <StyledBox component="figure">
-                        <StyledImg
-                          className="image"
-                          src={computer.imgSrc}
-                          alt={computerID}
-                        />
+                        <StyledImg src={computer.imgSrc} alt={computerID} />
                       </StyledBox>
                       <StyledStack p={2}>
                         <Typography

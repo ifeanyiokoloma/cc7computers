@@ -1,85 +1,68 @@
-import styles from "./skills.module.css";
-import Header from "../../components/Header";
-import Img from "react-cool-img";
 import React from "react";
+import {
+  Box,
+  Container,
+  Grid,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  ListSubheader,
+  Paper,
+  Stack,
+  Typography,
+} from "@mui/material";
+import { StyledBox, StyledImg } from "./StyledSkills";
+import { skills } from "../../data/skills";
+import { Circle } from "@mui/icons-material";
 
 const Skills = () => {
   return (
-    <section className={styles.skills}>
-      <Header
-        title="Computer Trainning"
-        element="h3"
-        boxClass={styles.header}
-      />
-      <p className="text-center">We offer these courses:</p>
-      <section>
-        <Header
-          boxClass={styles.header}
-          title="Ic3 Digital Literacy"
-          title2="Digital Literacy (Office Centric)"
-          element="h4"
-          element2="h6"
-        />
+    <StyledBox>
+      <Container maxWidth="md">
+        <Stack spacing={2}>
+          <Box p={2}>
+            <Typography textTransform="uppercase" variant="h4" component="h2">
+              Computer Trainning
+            </Typography>
+            <Typography component="p">
+              <b>We offer these courses:</b>
+            </Typography>
+          </Box>
 
-        <Img
-          className={styles.image}
-          src="/images/skills/ic3.png"
-          alt="ic3 logo"
-        />
-        <ul className={styles.list}>
-          <li>Core Computer Basics</li>
-          <li>Software Technologies</li>
-          <li>Office Application Softwares</li>
-          <li>Calculation Softwares and Living online</li>
-        </ul>
-      </section>
-
-      <section>
-        <Header
-          boxClass={styles.header}
-          title="Comptia A+"
-          title2="Computer Technician (Windows Centric)"
-          element="h4"
-          element2="h6"
-        />
-        <Img
-          className={styles.image}
-          src="/images/skills/a+.png"
-          alt="comptia a+ logo"
-        />
-        <ul className={styles.list}>
-          <li>Computer Peripherals</li>
-          <li>Desktop Engineering</li>
-          <li>Laptop Engineering</li>
-          <li>Software Installation</li>
-          <li>Software Upgrading</li>
-          <li>Network Maintenance</li>
-        </ul>
-      </section>
-      <section>
-        <Header
-          boxClass={styles.header}
-          title="Comptia N+"
-          title2="Network Technician (Cisco Centric)"
-          element="h4"
-          element2="h6"
-        />
-
-        <Img
-          className={styles.image}
-          src="/images/skills/n+.png"
-          alt="comptia n+ logo"
-        />
-        <ul className={styles.list}>
-          <li>Introduction to Network, Networking, Routing and Switching</li>
-          <li>Wireless/Wired Networking</li>
-          <li>IP Addressing</li>
-          <li>IP Subnetting</li>
-          <li>Cyber Security and Authentication</li>
-          <li>Networking Hardwares etc</li>
-        </ul>
-      </section>
-    </section>
+          {skills.map((skill) => (
+            <Stack spacing={2}>
+              <Paper p={2}>
+                <Grid container spacing={2} p={2}>
+                  <Grid item xs={12} sm={6}>
+                    <StyledImg src={skill.img} alt="" />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <List
+                      dense
+                      subheader={
+                        <>
+                          <ListSubheader>{skill.title}</ListSubheader>
+                        </>
+                      }
+                    >
+                      {skill.list.map((item) => (
+                        <ListItem>
+                          <ListItemIcon>
+                            <Circle fontSize="small" />
+                          </ListItemIcon>
+                          <ListItemText>{item}</ListItemText>
+                        </ListItem>
+                      ))}
+                    </List>
+                  </Grid>
+                </Grid>
+              </Paper>
+            </Stack>
+          ))}
+        </Stack>
+      </Container>
+    </StyledBox>
   );
 };
 
