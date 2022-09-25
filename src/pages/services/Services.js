@@ -2,8 +2,9 @@ import Hero from "../../components/hero/Hero";
 import Skills from "../../components/skills/Skills";
 import { services } from "../../data/articles/articles";
 import React from "react";
-import { Paper, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { Container } from "@mui/system";
+import { StyledPaper } from "./StyledServices";
 
 const Services = () => {
   return (
@@ -15,7 +16,7 @@ const Services = () => {
           justifyContent="center"
           alignItems="center"
         >
-          <Paper sx={{ p: 4, my: 4 }}>
+          <StyledPaper sx={{ p: 4, my: 4 }}>
             <Stack
               direction="column"
               spacing={2}
@@ -33,7 +34,7 @@ const Services = () => {
                 Maintenance.
               </Typography>
             </Stack>
-          </Paper>
+          </StyledPaper>
         </Stack>
       </Container>
       <Skills />

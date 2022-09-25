@@ -6,6 +6,16 @@
 a {
   text-decoration: none;
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-transform: uppercase;
+}
+
 /*body {
   /* margin: 0; */
 /* font-family: "Noto Sans", sans-serif;
@@ -27,15 +37,7 @@ p {
   letter-spacing: 0.09rem;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: bolder;
-  text-transform: uppercase;
-}
+
 
 .h6 {
   font-size: 2rem;

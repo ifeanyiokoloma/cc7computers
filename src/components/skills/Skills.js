@@ -8,13 +8,13 @@ import {
   ListItemIcon,
   ListItemText,
   ListSubheader,
-  Paper,
   Stack,
   Typography,
 } from "@mui/material";
 import { StyledBox, StyledImg } from "./StyledSkills";
 import { skills } from "../../data/skills";
 import { Circle } from "@mui/icons-material";
+import { StyledPaper } from "../../pages/services/StyledServices";
 
 const Skills = () => {
   return (
@@ -22,7 +22,7 @@ const Skills = () => {
       <Container maxWidth="md">
         <Stack spacing={2}>
           <Box p={2}>
-            <Typography textTransform="uppercase" variant="h4" component="h2">
+            <Typography variant="h5" component="h2">
               Computer Trainning
             </Typography>
             <Typography component="p">
@@ -32,7 +32,7 @@ const Skills = () => {
 
           {skills.map((skill) => (
             <Stack spacing={2}>
-              <Paper p={2}>
+              <StyledPaper p={2}>
                 <Grid container spacing={2} p={2}>
                   <Grid item xs={12} sm={6}>
                     <StyledImg src={skill.img} alt="" />
@@ -57,7 +57,7 @@ const Skills = () => {
                     </List>
                   </Grid>
                 </Grid>
-              </Paper>
+              </StyledPaper>
             </Stack>
           ))}
         </Stack>
