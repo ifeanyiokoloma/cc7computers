@@ -4,7 +4,7 @@ import { services } from "../../data/articles/articles";
 import React from "react";
 import { Stack, Typography } from "@mui/material";
 import { Container } from "@mui/system";
-import { StyledPaper } from "./StyledServices";
+import { StyledPaper } from "../../components/Styled/Styled";
 
 const Services = () => {
   return (

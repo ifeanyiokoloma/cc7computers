@@ -11,14 +11,14 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { StyledBox, StyledImg } from "./StyledSkills";
+import { StyledImg } from "./StyledSkills";
 import { skills } from "../../data/skills";
 import { Circle } from "@mui/icons-material";
-import { StyledPaper } from "../../pages/services/StyledServices";
+import { StyledPaper } from "../Styled/Styled";
 
 const Skills = () => {
   return (
-    <StyledBox>
+    <Box>
       <Container maxWidth="md">
         <Stack spacing={2}>
           <Box p={2}>
@@ -62,7 +62,7 @@ const Skills = () => {
           ))}
         </Stack>
       </Container>
-    </StyledBox>
+    </Box>
   );
 };
 
