@@ -15,7 +15,7 @@ const Services = () => {
           justifyContent="center"
           alignItems="center"
         >
-          <Paper sx={{ p: 4 }}>
+          <Paper sx={{ p: 4, my: 4 }}>
             <Stack
               direction="column"
               spacing={2}
