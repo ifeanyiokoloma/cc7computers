@@ -43,7 +43,8 @@ const Contact = () => {
               </StyledStack>
             </StyledPaper>
           </Box>
-
+        </Container>
+        <Container maxWidth="lg">
           <Stack
             justifyContent="center"
             sx={{ height: "100vh", width: "100%" }}
@@ -71,6 +72,8 @@ const Contact = () => {
               </Box>
             </Paper>
           </Stack>
+        </Container>
+        <Container maxWidth="sm">
           <Feedback />
         </Container>
       </Box>
