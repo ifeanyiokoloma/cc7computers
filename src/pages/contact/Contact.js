@@ -36,7 +36,7 @@ const Contact = () => {
 
                 <Button variant="text">
                   <Typography variant="h5">
-                    <a href="tel:+2347036389506">+234 703 638 9506</a>
+                    <a href="tel:+2347036389506">+234 905 760 9004</a>
                   </Typography>
                 </Button>
               </StyledStack>
