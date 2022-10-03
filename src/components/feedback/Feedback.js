@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
-import styles from "./emailUs.module.css";
+import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 
 const EmailUs = () => {
   const form = useRef();
@@ -26,26 +26,41 @@ const EmailUs = () => {
   };
 
   return (
-    <form className={styles.container} ref={form} onSubmit={sendEmail}>
-      <fieldset>
-        <legend>Email Us</legend>
+    <Box component="form" ref={form} onSubmit={sendEmail}>
+      <Stack spacing={2}>
+        <Typography variant="h4">Email Us</Typography>
+        <TextField
+          required
+          label="Name"
+          variant="filled"
+          type="text"
+          name="user_name"
+        />
 
-        <p>
-          <label>Name:</label>
-          <input type="text" name="user_name" />
-        </p>
-        <p>
-          <label>Email:</label>
-          <input type="email" name="user_email" />
-        </p>
-        <p className="d-flex flex-column">
-          <label>Message:</label>
-          <textarea name="message" />
-        </p>
+        <TextField
+          required
+          label="Email"
+          variant="filled"
+          type="email"
+          name="user_email"
+        />
 
-        <button type="submit">Send</button>
-      </fieldset>
-    </form>
+        <TextField
+          multiline
+          variant="filled"
+          label="Message"
+          rows={5}
+          name="message"
+          required
+        />
+
+        <Box>
+          <Button variant="contained" type="submit">
+            Send
+          </Button>
+        </Box>
+      </Stack>
+    </Box>
   );
 };
 
