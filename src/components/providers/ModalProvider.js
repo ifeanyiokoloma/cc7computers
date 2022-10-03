@@ -56,7 +56,7 @@ const ModalProvider = ({ children }) => {
     setSearch(false);
   };
 
-  // Create Search close/open Function
+  // Create Sidebar close/open Function
   const openSidebar = () => {
     setSidebar(true);
   };
