@@ -1,6 +1,6 @@
 import { Button, Container, Stack, styled } from "@mui/material";
 
-export const StyledHero = styled("section")(
+export const StyledHero = styled("header")(
   ({ theme }) => `
     height: calc(100vh - 120px);
     position: relative;

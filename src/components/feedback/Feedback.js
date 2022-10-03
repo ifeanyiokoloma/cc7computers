@@ -28,7 +28,9 @@ const EmailUs = () => {
   return (
     <Box component="form" ref={form} onSubmit={sendEmail}>
       <Stack spacing={2}>
-        <Typography variant="h4">Email Us</Typography>
+        <Typography variant="h5" component="h2">
+          Email Us
+        </Typography>
         <TextField
           required
           label="Name"

@@ -46,7 +46,12 @@ const Footer = () => {
             </Stack>
 
             <Box component="nav">
-              <List dense subheader={<ListSubheader>Business</ListSubheader>}>
+              <List
+                dense
+                subheader={
+                  <ListSubheader component="h2">Business</ListSubheader>
+                }
+              >
                 {business.map((link) => (
                   <ListItem>
                     <ListItemText>
@@ -58,7 +63,12 @@ const Footer = () => {
             </Box>
 
             <Box component="nav">
-              <List dense subheader={<ListSubheader>Company</ListSubheader>}>
+              <List
+                dense
+                subheader={
+                  <ListSubheader component="h2">Company</ListSubheader>
+                }
+              >
                 {company.map((link) => (
                   <ListItem>
                     <ListItemText>

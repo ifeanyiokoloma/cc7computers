@@ -55,7 +55,7 @@ const Hero = ({ page, imgName, pageData, btn }) => {
       </picture>
 
       <StyledStack alignItems="center" justifyContent="center" spacing={2}>
-        <Box component="article">
+        <Box>
           <StyledContainer maxWidth="sm">
             <Typography variant="h4" color="whitesmoke" component="h1">
               {pageData.heading}
