@@ -2,16 +2,11 @@ import React from "react";
 import Price from "../../Price";
 import { auth, db } from "../../../firebase/app";
 import { arrayRemove, doc, updateDoc } from "firebase/firestore";
-import { Card } from "react-bootstrap";
-import {
-  Button,
-  CardContent,
-  CardMedia,
-  ListItem,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Button, Grid, ListItem, Stack, Typography } from "@mui/material";
 import { useSnackbar } from "notistack";
+import Img from "react-cool-img";
+import { Box } from "@mui/system";
+import { StyledCard } from "./StyledCart";
 
 const SingleCartItem = ({ product }) => {
   const { enqueueSnackbar } = useSnackbar();
@@ -29,44 +24,56 @@ const SingleCartItem = ({ product }) => {
   const { brand, model, imgSrc, price, id } = product;
   const name = `${brand} ${model}`;
   return (
-    <ListItem>
-      <Card>
-        <Stack direction="row">
-          <CardMedia
-            component="img"
-            src={imgSrc}
-            alt={`${name} image`}
-            sx={{ width: 150, height: 150 }}
-          />
-          <CardContent>
-            <Typography textTransform="uppercase" variant="h6" color="GrayText">
-              {brand}
-            </Typography>
-            <Typography
-              textTransform="uppercase"
-              variant="subtitle2"
-              color="GrayText"
-            >
-              {model}
-            </Typography>
-            <Typography
-              textTransform="uppercase"
-              color="primary"
-              variant="subtitle1"
-              mt={3}
-            >
-              <Price amount={price} />
-            </Typography>
-            <Button
-              onClick={() => removeProduct(id)}
-              variant="contained"
-              color="secondary"
-            >
-              Remove
-            </Button>
-          </CardContent>
-        </Stack>
-      </Card>
+    <ListItem sx={{ px: 0 }}>
+      <StyledCard>
+        <Grid container>
+          <Grid item xs={6}>
+            <Img src={imgSrc} alt={`${name} image`} />
+          </Grid>
+          <Grid item xs={6} p={2}>
+            <Stack height="100%" spacing={1} justifyContent="center">
+              <Box>
+                <Typography
+                  textTransform="uppercase"
+                  variant="h6"
+                  color="GrayText"
+                >
+                  {brand}
+                </Typography>
+                <Typography
+                  textTransform="uppercase"
+                  variant="subtitle2"
+                  color="GrayText"
+                  sx={{
+                    textOverflow: "ellipsis",
+                    overflow: "hidden",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {model}
+                </Typography>
+              </Box>
+              <Typography
+                textTransform="uppercase"
+                color="primary"
+                variant="subtitle1"
+                mt={3}
+              >
+                <Price amount={price} />
+              </Typography>
+              <Box>
+                <Button
+                  onClick={() => removeProduct(id)}
+                  variant="contained"
+                  color="secondary"
+                >
+                  Remove
+                </Button>
+              </Box>
+            </Stack>
+          </Grid>
+        </Grid>
+      </StyledCard>
     </ListItem>
   );
 };

@@ -70,7 +70,7 @@ const CartModal = () => {
       TransitionComponent={Transition}
       components="section"
     >
-      <StyledNavbar>
+      <StyledNavbar position="static">
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <IconButton
             edge="start"
@@ -93,59 +93,65 @@ const CartModal = () => {
         </Toolbar>
       </StyledNavbar>
       <Container maxWidth="md">
-        <Box sx={{ height: "100%", mt: "4rem" }}>
+        <Box sx={{ height: "100%", mt: "1rem" }}>
           {loading ? (
             <Typography variant="h1">Loading</Typography>
           ) : (
             <Grid container spacing={2}>
               <Grid xs={12} item>
                 <StyledPaper>
-                  <Grid container>
-                    <Grid item rowSpacing={2} column={2} xs={12} md={6}>
-                      <Typography variant="subtitle1">
-                        Payable Amount
-                      </Typography>
-                      <Typography variant="h4">
+                  <Grid container rowSpacing={2} columnSpacing={5}>
+                    <Grid item xs={12} sm={6}>
+                      <Typography>Payable Amount</Typography>
+                      <Typography variant="h3">
                         <Price amount={total || 0} />
                       </Typography>
                     </Grid>
-                    <Grid item xs={12} md={6}>
-                      <Typography variant="subtitle1">Pay With...</Typography>
-                      <Button
-                        onClick={() => {
-                          if (!signIn) {
-                            openSignUp();
-                          } else {
-                            initializePayment(onSuccess, onClose);
-                          }
-                        }}
-                        variant="contained"
-                        color="inherit"
-                        size="large"
-                      >
-                        <PaystackIcon
-                          sx={{
-                            fontSize: "5rem",
-                            height: ".6em",
-                            width: "1.2em",
+                    <Grid item xs={12} sm={6}>
+                      <Typography>Pay With...</Typography>
+                      <Box>
+                        <Button
+                          onClick={() => {
+                            if (!signIn) {
+                              openSignUp();
+                            } else {
+                              initializePayment(onSuccess, onClose);
+                            }
                           }}
-                        />
-                      </Button>
+                          variant="contained"
+                          color="inherit"
+                        >
+                          <PaystackIcon
+                            sx={{
+                              fontSize: "4rem",
+                              height: ".6em",
+                              width: "1.2em",
+                            }}
+                          />
+                        </Button>
+                      </Box>
                     </Grid>
                   </Grid>
                 </StyledPaper>
               </Grid>
               <Grid xs={12} item>
                 <List>
-                  {currentCart.length > 0 ? (
-                    currentCart.map((productID) =>
-                      Filter(products, productID).map((product) => (
-                        <SingleCartItem key={product.id} product={product} />
-                      ))
-                    )
-                  ) : (
-                    <h2>Your Cart is Empty</h2>
-                  )}
+                  <Grid container spacing={{ xs: 2, sm: 4 }}>
+                    {currentCart.length > 0 ? (
+                      currentCart.map((productID) =>
+                        Filter(products, productID).map((product) => (
+                          <Grid item xs={12} sm={6}>
+                            <SingleCartItem
+                              key={product.id}
+                              product={product}
+                            />
+                          </Grid>
+                        ))
+                      )
+                    ) : (
+                      <h2>Your Cart is Empty</h2>
+                    )}
+                  </Grid>
                 </List>
               </Grid>
 
