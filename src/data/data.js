@@ -11,7 +11,7 @@ export const computer = [
   { name: "graphics", type: "text", id: uuidv4() },
   { name: "os", type: "text", id: uuidv4() },
   { name: "quantity", type: "number", id: uuidv4() },
-  { name: "image", type: "file", id: uuidv4() },
+  // { name: "image", type: "file", id: uuidv4() },
 ];
 
 export const accessory = [
@@ -20,7 +20,7 @@ export const accessory = [
   { name: "model", type: "text", id: uuidv4() },
   { name: "price", type: "number", id: uuidv4() },
   { name: "quantity", type: "number", id: uuidv4() },
-  { name: "image", type: "file", id: uuidv4() },
+  // { name: "image", type: "file", id: uuidv4() },
 ];
 
 export const employees = [
@@ -36,5 +36,3 @@ export const employees = [
 ];
 
 export const login = [{}];
-
-
