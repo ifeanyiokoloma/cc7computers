@@ -24,9 +24,13 @@ import { v4 as uuidv4 } from "uuid";
 import { usePaystackPayment } from "react-paystack";
 import { StyledPaper } from "./StyledCart";
 import { PaystackIcon } from "./PaystackIcon";
+import { doc, updateDoc, increment } from "firebase/firestore";
+import { db } from "../../../firebase/app";
+import { useSnackbar } from "notistack";
 
 const CartModal = () => {
   const { signIn, user, loading } = useAuth();
+  const { enqueueSnackbar } = useSnackbar();
 
   const [products] = useFetchLive("products", []);
 
@@ -53,13 +57,27 @@ const CartModal = () => {
   // you can call this function anything
   const onSuccess = (reference) => {
     // Implementation for whatever you want to do with reference and after success call.
-    console.log(reference);
+    // eslint-disable-next-line
+    currentCart.map((id) => {
+      const productRef = doc(db, "products", id);
+      updateDoc(productRef, {
+        sold: increment(1),
+        quantity: increment(-1),
+        buyer: user.uid,
+        reference,
+      }).then(() => {
+        enqueueSnackbar("Payment Successful", { variant: "success" });
+      });
+    });
   };
 
   // you can call this function anything
   const onClose = () => {
     // implementation for  whatever you want to do when the Paystack dialog closed.
-    console.log("closed");
+    enqueueSnackbar(
+      "Other methods of payment will be implemented soon, bear with us",
+      { variant: "info" }
+    );
   };
 
   return (
@@ -154,19 +172,6 @@ const CartModal = () => {
                   </Grid>
                 </List>
               </Grid>
-
-              {/* <Grid item>
-              <Button
-                onClick={() => {
-                  initializePayment(onSuccess, onClose);
-                }}
-                variant="contained"
-              >
-                <Typography variant="h6" textTransform="uppercase">
-                  Pay <Price amount={total || 0} />
-                </Typography>
-              </Button>
-            </Grid> */}
             </Grid>
           )}
         </Box>
